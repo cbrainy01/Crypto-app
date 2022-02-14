@@ -11,7 +11,7 @@ class App extends React.Component {
   }
 
   handleCurrencyChange = (newCurrency) => {
-    this.setState({currency: newCurrency})
+    this.setState({ currency: newCurrency })
   }
 
   render() { 
