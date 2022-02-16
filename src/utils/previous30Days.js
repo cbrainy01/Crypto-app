@@ -38,11 +38,14 @@ export function previous30Days() {
     const dayToEndOfPrev = range(startPoint, daysInPrevMonth);
 
     function datify(arr, currMonth, prevMonth) {
-        // check if current month is jan
-        // limits: arr nums cant go over 31
-        // currMonth cant be less than -1
-        // prevMonth cant be less than -2
-        // how do I throw informative errors for the above?
+        try{
+            if(arr[arr.length - 1] > 31) throw ("more days than possible in a month")
+            if(currMonth < -1) throw ("currMonth cant be less than -1")
+            if(prevMonth < -2) throw ("prevMonth cant be less than -2")
+        }
+        catch(err) {
+            console.error(err)
+        }
         const currentMonth = currMonth < 0 ? 11 : currMonth;
         const mth =
             currentMonth + 1 < 10 && currentMonth >= 0
@@ -54,7 +57,7 @@ export function previous30Days() {
             return `${mth}-${dy}-${yr}`;
         });
     }
-
+    
     const dToBWithDates = datify(dayToBeginningOfMonth, month, month - 1);
     const dToEWithDates = datify(dayToEndOfPrev, month - 1, month - 2);
     const labelDataDates = [...dToEWithDates, ...dToBWithDates]
@@ -62,3 +65,4 @@ export function previous30Days() {
     const labelData = [...dayToEndOfPrev, ...dayToBeginningOfMonth];
     return labelData
 }
+

@@ -8,7 +8,6 @@ import { previous30Days } from 'utils/previous30Days'
 import { formatOverviewNumber } from 'utils/formatNumber';
 
 export class PriceChart extends React.Component {
-  
     state = {
         isLoading: false,
         error: null,
