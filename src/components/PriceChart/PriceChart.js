@@ -27,7 +27,8 @@ export class PriceChart extends React.Component {
           this.setState({ isLoading: false, priceData: priceData, todaysPrice: response.data.prices[0][1] });
         } 
         catch (err) {
-          this.setState({ isLoading: false, error: err });
+            console.error(err)
+            this.setState({ isLoading: false, error: err });
         }
     };
 
