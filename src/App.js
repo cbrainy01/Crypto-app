@@ -19,9 +19,15 @@ class App extends React.Component {
       <Router>
         <Navbar handleCurrencyChange={this.handleCurrencyChange} currency={this.state.currency}/>
         <Switch>
-          <Route exact path="/portfolio" component={Portfolio}/>
-          <Route exact path="/coinpage" component={CoinPage}/>
-          <Route exact path="/" component={CoinList}/>
+          <Route exact path="/portfolio">
+            <Portfolio/>
+          </Route>
+          <Route exact path="/coinpage">
+            <CoinPage/>
+          </Route>
+          <Route exact path="/">
+            <CoinList currency={this.state.currency}/>
+          </Route>
         </Switch>
       </Router>
   )};
