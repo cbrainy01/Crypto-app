@@ -1,5 +1,5 @@
 import React from "react";
-import BitcoinOverview from "components/BitcoinOverview/index";
+import { BitcoinOverview } from "components";
 
 export default class CoinList extends React.Component {
 
@@ -7,7 +7,7 @@ export default class CoinList extends React.Component {
         return (
         <div>
             CoinList page
-            <BitcoinOverview currency={ this.props.currency }/>      
+            <BitcoinOverview currency={this.props.currency}/>      
         </div>)
     }
 }
