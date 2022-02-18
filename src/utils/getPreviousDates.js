@@ -60,15 +60,12 @@ export default function getPreviousDates(start, months) {
         return arrOfDates.slice(-7); 
     }
     else {
-        while (months > 0) {
-            const { newDate, arrOfDates } = prev30Days(startDate);
-            store = [...arrOfDates, ...store];
-            startDate = newDate;
-            months--;
-        }
-        return store;
-    }
-    
-    
-    
-  }
+      while (months > 0) {
+          const { newDate, arrOfDates } = prev30Days(startDate);
+          store = [...arrOfDates, ...store];
+          startDate = newDate;
+          months--;
+      }
+      return store;
+    } 
+}

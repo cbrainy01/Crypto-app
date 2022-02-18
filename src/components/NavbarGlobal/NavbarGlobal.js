@@ -2,10 +2,7 @@ import React from 'react'
 import { formatNumber } from 'utils'
 import { StyledNavbarGlobal } from './NavbarGlobal.styles'
 
-
 export class NavbarGlobal extends React.Component {
-  
-
     render() {
     const currency = this.props.currency
     let data = this.props.globalData

@@ -13,6 +13,7 @@ export class BitcoinOverview extends React.Component {
         return (
             <StyledBitcoinOverview>
                 <h1>Bitcoin Overview</h1>
+                <PriceChart currency={this.props.currency.toString()} timeSpan={this.state.timeSpan} />
                 <select onChange={this.handleChange}>
                     <option value={1}>1m</option>
                     <option value={"1week"}>1w</option>
@@ -20,8 +21,7 @@ export class BitcoinOverview extends React.Component {
                     <option value={6}>6m</option>
                     <option value={12}>1y</option>
                 </select>
-                <PriceChart currency={this.props.currency.toString()} timeSpan={this.state.timeSpan} />
-                <VolumeChart currency={this.props.currency} timeSpan={this.state.timeSpan} />
+                <VolumeChart currency={this.props.currency.toString()} timeSpan={this.state.timeSpan} />
             </StyledBitcoinOverview>
         )
   }

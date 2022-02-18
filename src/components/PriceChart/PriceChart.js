@@ -1,9 +1,8 @@
 import React from 'react';
 import axios from "axios";
 import Chart from "chart.js/auto";
-import wordedDate from 'utils/wordedDate';
 import { Line } from "react-chartjs-2";
-import { getPreviousDates, formatOverviewNumber, startDate } from "utils";
+import { getPreviousDates, formatOverviewNumber, startDate, wordedDate } from "utils";
 import { StyledPriceChart } from './PriceChart.styles';
 
 export class PriceChart extends React.Component {
@@ -39,7 +38,7 @@ export class PriceChart extends React.Component {
             const response = await axios(
                 `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
             );
-            const priceData = response.data.prices.map((price) => price[1]).slice(1, (span + 1) );
+            const priceData = response.data.prices.map((price) => price[1]).slice(1, (span + 1));
             const todaysPrice = response.data.prices[0][1]
             this.setState({ isLoading: false, priceData: priceData, todaysPrice: todaysPrice });
         } 
