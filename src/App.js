@@ -10,7 +10,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    const currency = localStorage.getItem("currency", "usd") || "usd"
+    const currency = localStorage.getItem("currency") || "usd"
     this.setState({currency: currency})
   }
   

@@ -39,9 +39,10 @@ export default class Navbar extends React.Component {
     render() {
         return(
             <StyledNavbar>
-                <StyledLink to={`/`}>CoinList</StyledLink>
+                <StyledLink to={"/"}>CoinList</StyledLink>
                 <StyledLink to="/coinpage">Coinpage</StyledLink>
                 <StyledLink to="/portfolio">Portfolio</StyledLink>
+                {/* make dropdown a component of its own */}
                 <select onChange={this.handleChange}>
                     <option value={"usd"}>USD</option>
                     <option value={"btc"}>BTC</option>

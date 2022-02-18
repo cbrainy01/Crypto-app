@@ -3,8 +3,7 @@ import axios from "axios";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
 import { StyledVolumeChart } from './VolumeChart.styles'
-import { previous30Days } from 'utils/getPreviousDates'
-import { formatOverviewNumber, wordedDate } from "utils";
+import { formatOverviewNumber, wordedDate, getPreviousDates, startDate } from "utils";
 
 export class VolumeChart extends React.Component {
     state = {
@@ -53,7 +52,7 @@ export class VolumeChart extends React.Component {
         <div>Todays date: { wordedDate(new Date) }</div>
         <Bar
           data={{
-            labels: previous30Days(),
+            labels: getPreviousDates(startDate(), "1"),
             datasets: [
               {
                 data: this.state.volumeData,
