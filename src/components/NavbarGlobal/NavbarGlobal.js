@@ -1,6 +1,6 @@
 import React from 'react'
 import { StyledNavbarGlobal } from './NavbarGlobal.styles'
-import { formatNumber } from 'utils/formatNumber'
+import { formatNumber } from 'utils'
 
 export class NavbarGlobal extends React.Component {
   

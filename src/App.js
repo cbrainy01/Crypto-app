@@ -1,17 +1,22 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import React from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "components";
 import {CoinList, CoinPage, Portfolio} from "pages";
 import './App.css';
 
 class App extends React.Component {
-
   state = {
     currency: "usd"
   }
 
+  componentDidMount() {
+    const currency = localStorage.getItem("currency", "usd") || "usd"
+    this.setState({currency: currency})
+  }
+  
   handleCurrencyChange = (newCurrency) => {
-    this.setState({ currency: newCurrency })
+    localStorage.setItem("currency", newCurrency)
+    this.setState({currency: newCurrency})
   }
 
   render() { 

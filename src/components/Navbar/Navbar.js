@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import NavbarGlobal from "components/NavbarGlobal";
+import { NavbarGlobal } from "components";
 import { StyledNavbar, StyledLink } from "./Navbar.styles";
 
 export default class Navbar extends React.Component {
