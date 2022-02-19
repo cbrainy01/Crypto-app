@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "components";
-import {CoinList, CoinPage, Portfolio} from "pages";
+import { CoinList, CoinPage, Portfolio } from "pages";
+import { getCurrencySymbol } from "utils";
 import './App.css';
 
 class App extends React.Component {
@@ -11,12 +12,13 @@ class App extends React.Component {
 
   componentDidMount() {
     const currency = localStorage.getItem("currency") || "usd"
-    this.setState({currency: currency})
+    this.setState({ currency: currency })
   }
   
   handleCurrencyChange = (newCurrency) => {
+    const currencySymbol = getCurrencySymbol(newCurrency)
     localStorage.setItem("currency", newCurrency)
-    this.setState({currency: newCurrency})
+    this.setState({ currency: newCurrency })
   }
 
   render() { 

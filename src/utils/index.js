@@ -4,3 +4,5 @@ export { default as formatMonth } from "./formatMonth";
 export { default as startDate } from "./startDate"
 export { default as wordedDate } from "./wordedDate"
 export { default as getPreviousDates} from "./getPreviousDates"
+export { default as getCurrencySymbol } from "./getCurrencySymbol"
+export { default as progressBar } from "./progressBar"

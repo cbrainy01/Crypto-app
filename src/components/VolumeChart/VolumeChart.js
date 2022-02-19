@@ -39,11 +39,7 @@ export class VolumeChart extends React.Component {
           );
           const volumeData = response.data.total_volumes.map((volume) => volume[1]).slice( 1, (span + 1));
           const todaysVolume = response.data.total_volumes[0][1]
-          this.setState({
-            isLoading: false,
-            volumeData: volumeData,
-            todaysVolume: todaysVolume
-          });
+          this.setState({ isLoading: false, volumeData: volumeData, todaysVolume: todaysVolume });
         } catch (err) {
           console.error("error: ", err);
           this.setState({ isLoading: false, error: err });
