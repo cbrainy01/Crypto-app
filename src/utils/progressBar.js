@@ -12,10 +12,11 @@ const Progress = styled.div`
     width: ${(props) => props.progress};
 `
 
-function ProgressBar(progress, barColor, progressColor, width, height) {
+export default function ProgressBar(progress, barColor, progressColor, width, height) {
     return(
         <Bar width={width} height={height} barColor={barColor}>
             <Progress progress={progress} progressColor={progressColor}></Progress>
         </Bar>
     )
 }
+
