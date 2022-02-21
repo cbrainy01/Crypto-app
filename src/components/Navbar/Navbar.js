@@ -1,10 +1,11 @@
 import React from "react";
 import axios from "axios";
 import { NavbarGlobal } from "components";
+import { StyledNavigation }  from "./StyledNavigation";
 import { StyledNavbar, StyledLink } from "./Navbar.styles";
 
+
 export default class Navbar extends React.Component {
-    
     state = {
         isLoading: false,
         error: null,
@@ -39,17 +40,18 @@ export default class Navbar extends React.Component {
     render() {
         return(
             <StyledNavbar>
-                <StyledLink to={"/"}>CoinList</StyledLink>
-                <StyledLink to="/coinpage">Coinpage</StyledLink>
-                <StyledLink to="/portfolio">Portfolio</StyledLink>
-                {/* make dropdown a component of its own */}
-                <select onChange={this.handleChange}>
-                    <option value={"usd"}>USD</option>
-                    <option value={"btc"}>BTC</option>
-                    <option value={"eth"}>ETH</option>
-                    <option value={"eur"}>EUR</option>
-                    <option value={"gbp"}>GBP</option>
-                </select>
+                <StyledNavigation>
+                    <StyledLink to={"/"}>CoinList</StyledLink>
+                    <StyledLink to="/portfolio">Portfolio</StyledLink>
+                    <select onChange={this.handleChange}>
+                        <option value={"usd"}>USD</option>
+                        <option value={"btc"}>BTC</option>
+                        <option value={"eth"}>ETH</option>
+                        <option value={"eur"}>EUR</option>
+                        <option value={"gbp"}>GBP</option>
+                    </select>
+                    <button onClick={ () => this.props.handleThemeChange() } >change theme</button>
+                </StyledNavigation>
                 <NavbarGlobal currency={this.props.currency} globalData={this.state.globalData}/>
             </StyledNavbar>
         )

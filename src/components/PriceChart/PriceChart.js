@@ -76,8 +76,10 @@ export class PriceChart extends React.Component {
                     }}
 
                     options={{
+                        
                         scales: {
                             y: {
+                                grid: {display: false},
                                 ticks: {
                                     callback: function(value, index, ticks) {
                                         return value;
@@ -85,6 +87,7 @@ export class PriceChart extends React.Component {
                                 }
                             },
                             x: {
+                                grid: {display: false},
                                 ticks: {
                                     callback: function(val, index) {
                                     const day = this.getLabelForValue(val).split("-")[1]

@@ -1,5 +1,5 @@
 import React from 'react'
-import { formatNumber } from 'utils'
+import { formatNumber, progressBar } from 'utils'
 import { StyledNavbarGlobal } from './NavbarGlobal.styles'
 
 export class NavbarGlobal extends React.Component {
@@ -9,9 +9,8 @@ export class NavbarGlobal extends React.Component {
     return( 
         this.props.globalData && 
         <StyledNavbarGlobal>
-            <h2>Navbar global</h2>
-            <div>active currencies: {data.active_cryptocurrencies}</div>
-            <div>markets: {data.markets}</div>
+            <div>Coins {data.active_cryptocurrencies}</div>
+            <div>Exchange {data.markets}</div>
             <div>total market cap: {formatNumber(data.total_market_cap[currency])}</div>
             <div>total volume: {formatNumber(data.total_volume[currency])}</div>
             <div>market cap % bitcoin: {Math.round(data.market_cap_percentage["btc"])}%</div>
