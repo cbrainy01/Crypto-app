@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 import { NavbarGlobal } from "components";
-import { StyledNavbar, StyledLink } from "./Navbar.styles";
+import { StyledNavbar, StyledLink, LeftNavbar, RightNavbar, LinkContainer, SearchContainer, DropdownContainer, CurrencyDropdown, ThemeToggleContainer } from "./Navbar.styles";
 
 export default class Navbar extends React.Component {
     
@@ -37,21 +37,43 @@ export default class Navbar extends React.Component {
     }
 
     render() {
-        return(
+        return (
+          <div>
             <StyledNavbar>
-                <StyledLink to={"/"}>CoinList</StyledLink>
-                <StyledLink to="/coinpage">Coinpage</StyledLink>
-                <StyledLink to="/portfolio">Portfolio</StyledLink>
-                {/* make dropdown a component of its own */}
-                <select onChange={this.handleChange}>
-                    <option value={"usd"}>USD</option>
-                    <option value={"btc"}>BTC</option>
-                    <option value={"eth"}>ETH</option>
-                    <option value={"eur"}>EUR</option>
-                    <option value={"gbp"}>GBP</option>
-                </select>
-                <NavbarGlobal currency={this.props.currency} globalData={this.state.globalData}/>
+              <LeftNavbar>
+                <LinkContainer>
+                  <StyledLink to={"/"}>CoinList</StyledLink>
+                </LinkContainer>
+                <LinkContainer>
+                  <StyledLink to="/portfolio">Portfolio</StyledLink>
+                </LinkContainer>
+              </LeftNavbar>
+              <RightNavbar>
+                <SearchContainer>
+                    <p>icon</p>
+                    <input placeholder="Search..."/>
+                </SearchContainer>
+                <DropdownContainer>
+                  <p>$</p>
+                  <CurrencyDropdown>
+                    <select onChange={this.handleChange}>
+                      <option value={"usd"}>USD</option>
+                      <option value={"btc"}>BTC</option>
+                      <option value={"eth"}>ETH</option>
+                      <option value={"eur"}>EUR</option>
+                      <option value={"gbp"}>GBP</option>
+                    </select>
+                    {/* arrowdown svg*/}
+                  </CurrencyDropdown>
+                </DropdownContainer>
+                <ThemeToggleContainer>{/* theme svg */}</ThemeToggleContainer>
+              </RightNavbar>
             </StyledNavbar>
-        )
+            <NavbarGlobal
+              currency={this.props.currency}
+              globalData={this.state.globalData}
+            />
+          </div>
+        );
     }
 }
