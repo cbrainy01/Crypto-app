@@ -1,13 +1,16 @@
 import React from "react";
+import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "components";
 import { CoinList, CoinPage, Portfolio } from "pages";
 import { getCurrencySymbol } from "utils";
+import { GlobalStyle, Container, darkTheme, lightTheme } from "styling";
 import './App.css';
 
 class App extends React.Component {
   state = {
-    currency: "usd"
+    currency: "usd",
+    isBlacked: true,
   }
 
   componentDidMount() {
@@ -21,23 +24,36 @@ class App extends React.Component {
     this.setState({ currency: newCurrency })
   }
 
+  handleThemeChange = () => {
+    this.setState({ isBlacked: !this.state.isBlacked }) 
+  }
+
   render() { 
-    return(
-      <Router>
-        <Navbar handleCurrencyChange={this.handleCurrencyChange} currency={this.state.currency}/>
-        <Switch>
-          <Route exact path="/portfolio">
-            <Portfolio/>
-          </Route>
-          <Route exact path="/coinpage">
-            <CoinPage/>
-          </Route>
-          <Route exact path="/">
-            <CoinList currency={this.state.currency}/>
-          </Route>
-        </Switch>
-      </Router>
-    )
+    return (
+      <ThemeProvider theme={this.state.isBlacked ? darkTheme : lightTheme}>
+        <Container>
+          <GlobalStyle />
+          <Router>
+            <Navbar
+              handleThemeChange={this.handleThemeChange}
+              handleCurrencyChange={this.handleCurrencyChange}
+              currency={this.state.currency}
+            />
+            <Switch>
+              <Route exact path="/portfolio">
+                <Portfolio />
+              </Route>
+              <Route exact path="/coinpage">
+                <CoinPage />
+              </Route>
+              <Route exact path="/">
+                <CoinList currency={this.state.currency} />
+              </Route>
+            </Switch>
+          </Router>
+        </Container>
+      </ThemeProvider>
+    );
   };
 }
 

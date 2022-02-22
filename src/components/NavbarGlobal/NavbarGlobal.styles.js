@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const StyledNavbarGlobal = styled.div`
-    background: black;
-    color: white;
+    background: ${(props) => props.theme.main };
+    color: ${(props) => props.theme.color };
     width: 47%;
     height: 55px;
     display: flex;

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 export const StyledNavbar = styled.div`
     display: flex;
-    background: #e0ca67;
+    background: ${(props) => props.theme.main };
     width: 100%;
     padding-block: 4px;
 `
@@ -16,11 +16,11 @@ export const RightNavbar= styled.div`
     display: flex;
 `
 export const LinkContainer= styled.div`
-    background: grey;
+    background: ${(props) => props.text === "coinlist" ?  props.theme.inner : props.theme.main};
     border-radius: 10px;
 `
 export const StyledLink = styled(Link)`
-    color: red;
+    color: ${(props) => props.theme.color};
     height: 38px;
     width: 100px;
     align-items: center;
@@ -31,17 +31,16 @@ export const StyledLink = styled(Link)`
 `
 export const SearchContainer= styled.div`
     display: flex;
-    background: pink;
+    background: ${(props) => props.theme.inner};
     border-radius: 10px;
     height: 38px;
     align-items: center;
     justify-content: space-around;
-    // background: ${(props) => props.theme.inner};
     input {
         width: 80%;
         outline: none;
         border: none;
-        background: pink;
+        background: ${(props) => props.theme.inner};
         height: 90%;
     }
 `
@@ -52,15 +51,16 @@ export const DropdownContainer= styled.div`
     justify-content: center;
     height: 38px;
     width: 100px;
-    background: green;
+    background: ${(props) => props.theme.inner};
 
     select {
         border: none;
         outline: none;
-        background: green;
+        background: ${(props) => props.theme.inner};
+        color: ${(props) => props.theme.color};
     }
     p {
-        background: white;
+        background: pink;
         border-radius: 50%;
         width: 20px;
         text-align: center;
@@ -69,7 +69,7 @@ export const DropdownContainer= styled.div`
 `
 export const ThemeToggleContainer= styled.div`
     border-radius: 10px;
-    background: grey;
+    background: ${(props) => props.theme.inner};
     align-items: center;
     justify-content: center;
     height: 38px;

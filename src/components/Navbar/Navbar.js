@@ -41,10 +41,10 @@ export default class Navbar extends React.Component {
           <div>
             <StyledNavbar>
               <LeftNavbar>
-                <LinkContainer>
+                <LinkContainer text="coinlist">
                   <StyledLink to={"/"}>CoinList</StyledLink>
                 </LinkContainer>
-                <LinkContainer>
+                <LinkContainer text="portfolio">
                   <StyledLink to="/portfolio">Portfolio</StyledLink>
                 </LinkContainer>
               </LeftNavbar>
@@ -63,16 +63,12 @@ export default class Navbar extends React.Component {
                       <option value={"eur"}>EUR</option>
                       <option value={"gbp"}>GBP</option>
                     </select>
-                    {/* arrowdown svg*/}
                   </CurrencyDropdown>
                 </DropdownContainer>
-                <ThemeToggleContainer>{/* theme svg */}</ThemeToggleContainer>
+                <ThemeToggleContainer onClick={ () => this.props.handleThemeChange() }>theme</ThemeToggleContainer>
               </RightNavbar>
             </StyledNavbar>
-            <NavbarGlobal
-              currency={this.props.currency}
-              globalData={this.state.globalData}
-            />
+            <NavbarGlobal currency={this.props.currency} globalData={this.state.globalData}/>
           </div>
         );
     }
