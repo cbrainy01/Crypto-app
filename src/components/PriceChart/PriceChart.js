@@ -59,51 +59,72 @@ export class PriceChart extends React.Component {
 
     render() {
         return (
-            <StyledPriceChart>
-                Price Chart
-                <div>Price</div>
-                <div>Todays price: { formatOverviewNumber(this.state.todaysPrice) }</div>
-                <div>Todays date: { wordedDate(new Date) }</div>
-                <p>Timespan: {this.props.timeSpan}</p>
-                <Line
-                    data={{
-                        labels: getPreviousDates(startDate(), this.props.timeSpan),
-                        datasets: [{
-                            data: this.state.priceData,
-                            borderColor: "rgb(255, 99, 132)",
-                            backgroundColor: "rgba(255, 99, 132, 0.5)"
-                        }],    
-                    }}
-
-                    options={{
-                        scales: {
-                            y: {
-                                ticks: {
-                                    callback: function(value, index, ticks) {
-                                        return value;
-                                    }
-                                }
-                            },
-                            x: {
-                                ticks: {
-                                    callback: function(val, index) {
-                                    const day = this.getLabelForValue(val).split("-")[1]
-                                    return day
-                                    },
-                                }
-                            }
-                        },
-                        plugins: {
-                            tooltip: {
-                                callbacks: {
-                                title: function(context) { return `Price: ${context[0].formattedValue}` },
-                                label: function(context) { return `date: ${context.label}` } },
-                            }
-                        }
-                    }}
-                />
-            </StyledPriceChart>
-        )
+          <StyledPriceChart>
+            Price Chart
+            <h3>Price</h3>
+            <div>
+              Todays price: {formatOverviewNumber(this.state.todaysPrice)}
+            </div>
+            <div>Todays date: {wordedDate(new Date())}</div>
+            <Line
+              data={{
+                labels: getPreviousDates(startDate(), this.props.timeSpan),
+                datasets: [
+                  {
+                    data: this.state.priceData,
+                    borderColor: "rgb(255, 99, 132)",
+                    backgroundColor: "rgba(255, 99, 132, 0.5)",
+                    fill: {
+                      target: "origin",
+                      below: "red",
+                    },
+                  },
+                ],
+              }}
+              options={{
+                elements: {
+                  point: { radius: 0 },
+                },
+                scales: {
+                  y: {
+                    display: false,
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      callback: function (value, index, ticks) {
+                        return;
+                      },
+                    },
+                  },
+                  x: {
+                    grid: {
+                      display: false,
+                    },
+                    ticks: {
+                      callback: function (val, index) {
+                        const day = this.getLabelForValue(val).split("-")[1];
+                        return day;
+                      },
+                    },
+                  },
+                },
+                plugins: {
+                  tooltip: {
+                    callbacks: {
+                      title: function (context) {
+                        return `Price: ${context[0].formattedValue}`;
+                      },
+                      label: function (context) {
+                        return `date: ${context.label}`;
+                      },
+                    },
+                  },
+                },
+              }}
+            />
+          </StyledPriceChart>
+        );
     }
 }
 
