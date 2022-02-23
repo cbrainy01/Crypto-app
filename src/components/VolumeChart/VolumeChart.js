@@ -59,53 +59,64 @@ export class VolumeChart extends React.Component {
     render() {
       return (
         <StyledVolumeChart>
-            VolumeChart
-            <div>Volume 24h</div>
-            <div>Todays volume: { formatOverviewNumber(this.state.todaysVolume) }</div>
-            <div>Todays date: { wordedDate(new Date) }</div>
-            <Bar
-              data={{
-                labels: getPreviousDates(startDate(), this.props.timeSpan),
-                datasets: [
-                  {
-                    data: this.state.volumeData,
-                    borderColor: 'rgb(53, 162, 235)',
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                  }
-                ]
-              }}
-
-              options={{
-                scales: {
-                  y: {
-                      ticks: {
-                          callback: function(value, index, ticks) {
-                            return value;
-                          }
-                      }
-                  },
-                  x: {
-                      ticks: {
-                          callback: function(val, index) {
-                            const day = this.getLabelForValue(val).split("-")[1]
-                            return day
-                          },
-                      }
-                  }
+          VolumeChart
+          <h3>Volume 24h</h3>
+          <div>
+            Todays volume: {formatOverviewNumber(this.state.todaysVolume)}
+          </div>
+          <div>Todays date: {wordedDate(new Date())}</div>
+          <Bar
+            data={{
+              labels: getPreviousDates(startDate(), this.props.timeSpan),
+              datasets: [
+                {
+                  data: this.state.volumeData,
+                  borderColor: "rgb(53, 162, 235)",
+                  backgroundColor: "rgba(53, 162, 235, 0.5)",
                 },
-                plugins: {
-                  tooltip: {
-                      callbacks: {
-                        title: function(context) { return `Price: ${context[0].formattedValue}` },
-                        label: function(context) { return `date: ${context.label}` }
-                      },
-                  }
-                }
-              }}
-            
-            />
+              ],
+            }}
+            options={{
+              scales: {
+                y: {
+                  display: false,
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    callback: function (value, index, ticks) {
+                      return value;
+                    },
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    callback: function (val, index) {
+                      const day = this.getLabelForValue(val).split("-")[1];
+                      return day;
+                    },
+                  },
+                },
+              },
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    title: function (context) {
+                      return `Price: ${context[0].formattedValue}`;
+                    },
+                    label: function (context) {
+                      return `date: ${context.label}`;
+                    },
+                  },
+                },
+              },
+            }}
+          />
         </StyledVolumeChart>
-      )
+      );
     }
 }
 
