@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 export const StyledNavbar = styled.div`
     display: flex;
     background: ${(props) => props.theme.main };
     width: 100%;
     padding-block: 4px;
 `
+
 export const LeftNavbar= styled.div`
     display: flex;
     margin-left: 50px;
@@ -15,10 +17,12 @@ export const LeftNavbar= styled.div`
 export const RightNavbar= styled.div`
     display: flex;
 `
+
 export const LinkContainer= styled.div`
     background: ${(props) => props.text === "coinlist" ?  props.theme.inner : props.theme.main};
     border-radius: 10px;
 `
+
 export const StyledLink = styled(Link)`
     color: ${(props) => props.theme.color};
     height: 38px;
@@ -29,6 +33,7 @@ export const StyledLink = styled(Link)`
     display: flex;
     text-decoration: none;
 `
+
 export const SearchContainer= styled.div`
     display: flex;
     background: ${(props) => props.theme.inner};
@@ -44,6 +49,7 @@ export const SearchContainer= styled.div`
         height: 90%;
     }
 `
+
 export const DropdownContainer= styled.div`
     display: flex;
     border-radius: 10px;
@@ -67,6 +73,7 @@ export const DropdownContainer= styled.div`
         font-weight: 600;
     }
 `
+
 export const ThemeToggleContainer= styled.div`
     border-radius: 10px;
     background: ${(props) => props.theme.inner};
@@ -75,4 +82,5 @@ export const ThemeToggleContainer= styled.div`
     height: 38px;
     width: 47px;
 `
+
 export const CurrencyDropdown = styled.div``

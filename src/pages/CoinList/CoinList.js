@@ -1,12 +1,13 @@
 import React from "react";
-import { BitcoinOverview } from "components";
+import { BitcoinOverview, Coins } from "components";
 
 export default class CoinList extends React.Component {
     render() {
         return (
             <div>
                 CoinList page
-                <BitcoinOverview currency={this.props.currency}/>      
+                <BitcoinOverview currency={this.props.currency}/>
+                <Coins/>      
             </div>
         )
     }
