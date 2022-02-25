@@ -1,6 +1,5 @@
 import React from "react";
-import { BitcoinOverview } from "components";
-import { Timespan } from "components";
+import { BitcoinOverview, Timespan, Coins } from "components";
 
 export default class CoinList extends React.Component {
     state={
@@ -16,7 +15,8 @@ export default class CoinList extends React.Component {
             <div>
                 CoinList page
                 <BitcoinOverview timeSpan={this.state.timeSpan} currency={this.props.currency}/>
-                <Timespan handleTimespanChange={this.handleTimespanChange}/>     
+                <Timespan handleTimespanChange={this.handleTimespanChange}/>
+                <Coins currency={this.props.currency}/>     
             </div>
         )
     }
