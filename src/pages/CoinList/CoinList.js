@@ -6,7 +6,7 @@ export default class CoinList extends React.Component {
         return (
             <div>
                 CoinList page
-                <BitcoinOverview currency={this.props.currency}/>      
+                <BitcoinOverview currency={this.props.currency} currencySymbol={this.props.currencySymbol}/>      
             </div>
         )
     }

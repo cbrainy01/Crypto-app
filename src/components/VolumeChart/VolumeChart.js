@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { formatOverviewNumber, wordedDate, getPreviousDates, startDate } from "utils";
+import { formatOverviewNumber, wordedDate, getPreviousDates, startDate, getCurrencySymbol } from "utils";
 import { StyledVolumeChart } from './VolumeChart.styles'
 
 export class VolumeChart extends React.Component {
@@ -57,11 +57,12 @@ export class VolumeChart extends React.Component {
     }
  
     render() {
+      const currencySymbol = getCurrencySymbol(this.props.currency)
       return (
         <StyledVolumeChart>
             VolumeChart
             <div>Volume 24h</div>
-            <div>Todays volume: { formatOverviewNumber(this.state.todaysVolume) }</div>
+            <div>Todays volume: {currencySymbol}{ formatOverviewNumber(this.state.todaysVolume) }</div>
             <div>Todays date: { wordedDate(new Date) }</div>
             <Bar
               data={{

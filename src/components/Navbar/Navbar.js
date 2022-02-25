@@ -1,7 +1,10 @@
 import React from "react";
 import axios from "axios";
 import { NavbarGlobal } from "components";
+import { getCurrencySymbol } from "utils";
 import { StyledNavbar, StyledLink, LeftNavbar, RightNavbar, LinkContainer, SearchContainer, DropdownContainer, CurrencyDropdown, ThemeToggleContainer } from "./Navbar.styles";
+import SearchIcon from "../../icons/SearchIcon.svg"
+import Theme from "../../icons/Theme.svg"
 
 export default class Navbar extends React.Component {
     
@@ -50,11 +53,11 @@ export default class Navbar extends React.Component {
               </LeftNavbar>
               <RightNavbar>
                 <SearchContainer>
-                    <p>icon</p>
+                    <img src={SearchIcon} alt="search icon"/>
                     <input placeholder="Search..."/>
                 </SearchContainer>
                 <DropdownContainer>
-                  <p>$</p>
+                  <p>{getCurrencySymbol(this.props.currency)}</p>
                   <CurrencyDropdown>
                     <select onChange={this.handleChange}>
                       <option value={"usd"}>USD</option>
@@ -65,7 +68,9 @@ export default class Navbar extends React.Component {
                     </select>
                   </CurrencyDropdown>
                 </DropdownContainer>
-                <ThemeToggleContainer onClick={ () => this.props.handleThemeChange() }>theme</ThemeToggleContainer>
+                <ThemeToggleContainer onClick={ () => this.props.handleThemeChange() }>
+                  <img src={Theme} alt="theme change icon"/>
+                </ThemeToggleContainer>
               </RightNavbar>
             </StyledNavbar>
             <NavbarGlobal currency={this.props.currency} globalData={this.state.globalData}/>
