@@ -43,12 +43,12 @@ class App extends React.Component {
               <Route
                 exact
                 path="/portfolio"
-                component={(props) => <Portfolio {...props} />}
+                component={(props) => <Portfolio {...props} currency={this.state.currency} />}
               />
               <Route
                 exact
                 path="/coinpage/:coin"
-                component={(props) => <CoinPage {...props} />}
+                component={(props) => <CoinPage {...props} currency={this.state.currency} />}
               />
               <Route
                 exact
