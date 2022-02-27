@@ -40,15 +40,23 @@ class App extends React.Component {
               currency={this.state.currency}
             />
             <Switch>
-              <Route exact path="/portfolio">
-                <Portfolio />
-              </Route>
-              <Route exact path="/coinpage">
-                <CoinPage />
-              </Route>
-              <Route exact path="/">
-                <CoinList currency={this.state.currency} />
-              </Route>
+              <Route
+                exact
+                path="/portfolio"
+                component={(props) => <Portfolio {...props} />}
+              />
+              <Route
+                exact
+                path="/coinpage/:coin"
+                component={(props) => <CoinPage {...props} />}
+              />
+              <Route
+                exact
+                path="/"
+                component={(props) => (
+                  <CoinList {...props} currency={this.state.currency} />
+                )}
+              />
             </Switch>
           </Router>
         </Container>

@@ -12,7 +12,7 @@ export const SortingContainer = styled.div`
 `
 
 export const CoinsContainer = styled.div`
-    background: red;
+    background: purple;
 `
 
 export const SortControl = styled.div`

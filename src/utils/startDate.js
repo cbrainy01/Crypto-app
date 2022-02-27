@@ -1,4 +1,5 @@
 import formatMonth from "./formatMonth"
+
 export default function startDate() {
     const d = new Date();
     const year = d.getFullYear();

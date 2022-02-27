@@ -33,6 +33,7 @@ export default class Navbar extends React.Component {
     }
 
     handleChange = (e) => {
+      // TODO: Use ref to change sign before dropdown.
         this.props.handleCurrencyChange(e.target.value)
     }
 
