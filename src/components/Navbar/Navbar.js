@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { getCurrencySymbol } from "utils";
 import { NavbarGlobal } from "components";
 import { StyledNavbar, StyledLink, LeftNavbar, RightNavbar, LinkContainer, SearchContainer, DropdownContainer, CurrencyDropdown, ThemeToggleContainer } from "./Navbar.styles";
 
@@ -55,7 +56,7 @@ export default class Navbar extends React.Component {
                     <input placeholder="Search..."/>
                 </SearchContainer>
                 <DropdownContainer>
-                  <p>$</p>
+                  <p>{getCurrencySymbol(this.props.currency)}</p>
                   <CurrencyDropdown>
                     <select onChange={this.handleChange}>
                       <option value={"usd"}>USD</option>

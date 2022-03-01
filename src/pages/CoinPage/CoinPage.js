@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { ErrorDisplay } from "components";
+import { CoinPageChart, ErrorDisplay } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
 import { CoinDescription, CoinLinks, CoinLink, CoinSummary, StyledCoinPage, SummaryA, SummaryB, SummaryC, Bar } from "./CoinPage.styles";
 import Link from "icons/Link.svg"
@@ -21,7 +21,7 @@ export default class CoinPage extends React.Component {
     this.setState({ isLoading: true });
     try {
       const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${this.props.match.params.coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false`
+        `https://api.coingecko.com/api/v3/coins/${this.props.match.params.coin}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`
       );
       this.setState({ isLoading: false, coinData: data });
     } catch (err) {
@@ -232,6 +232,7 @@ export default class CoinPage extends React.Component {
                 </CoinLink>
               </div>
             </CoinLinks>
+            <CoinPageChart data={this.state.coinData.market_data.sparkline_7d.price}/>
           </StyledCoinPage>
         )}
       </div>
