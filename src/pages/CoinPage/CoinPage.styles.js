@@ -50,15 +50,17 @@ export const SummaryC = styled.div`
 
 export const Bar = styled.div`
   width: 49.2%;
-  border-radius: 2px;
+  border-radius: 8px;
   height: 0.4%;
   background: blue;
   display: flex;
+  overflow: hidden;
   div:nth-child(1) {
-    border-radius: 2px;
+    border-radius: 8px;
     background: green;
     width: ${(props) => props.volume}%;
     height: 15px;
+    overflow: hidden;
   }
 
   div:nth-child(2) {

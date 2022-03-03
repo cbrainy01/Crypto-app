@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { CoinPageChart, ErrorDisplay } from "components";
+import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
 import { CoinDescription, CoinLinks, CoinLink, CoinSummary, StyledCoinPage, SummaryA, SummaryB, SummaryC, Bar } from "./CoinPage.styles";
 import Link from "icons/Link.svg"
@@ -47,6 +47,9 @@ export default class CoinPage extends React.Component {
   render() {
     const data = this.state.coinData;
     const currency = this.props.currency;
+    const currencySymbol = getCurrencySymbol(this.props.currency);
+    const keys = this.state.coinData && Object.keys(this.state.coinData.market_data)
+    console.log("keys: ", keys)
     const circulating = Math.round(
       (data?.market_data.circulating_supply / data?.market_data.max_supply) *
         100
@@ -81,7 +84,7 @@ export default class CoinPage extends React.Component {
                 <section>
                   <div>
                     <span>
-                      {getCurrencySymbol(currency)}
+                      {currencySymbol}
                       {data.market_data.current_price[currency]}
                     </span>
                     <span>
@@ -99,7 +102,7 @@ export default class CoinPage extends React.Component {
                     </span>
                     <span>
                       <p>
-                        All Time High: {getCurrencySymbol(currency)}
+                        All Time High: {currencySymbol}
                         {data.market_data.ath[currency]}
                       </p>
                       <p>{data.market_data.ath_date[currency]}</p>
@@ -111,7 +114,7 @@ export default class CoinPage extends React.Component {
                     </span>
                     <span>
                       <p>
-                        All Time Low: {getCurrencySymbol(currency)}
+                        All Time Low: {currencySymbol}
                         {data.market_data.atl[currency]}
                       </p>
                       <p>{data.market_data.atl_date[currency]}</p>
@@ -125,7 +128,7 @@ export default class CoinPage extends React.Component {
                     <img src={Plus} alt="plus" />
                     <p>Market cap: </p>
                     <p>
-                      {getCurrencySymbol(currency)}
+                      {currencySymbol}
                       {formatNumber(data.market_data.market_cap[currency])}
                     </p>
                     <p>
@@ -138,7 +141,7 @@ export default class CoinPage extends React.Component {
                     <img src={Plus} alt="plus" />
                     <p>Fully Diluted Valuation: </p>
                     <p>
-                      {getCurrencySymbol(currency)}
+                      {currencySymbol}
                       {formatNumber(
                         data.market_data.fully_diluted_valuation[currency]
                       )}
@@ -146,13 +149,13 @@ export default class CoinPage extends React.Component {
                   </div>
                   <div>
                     <img src={Plus} alt="plus" />
-                    <p>Volume 24h: {getCurrencySymbol(currency)}</p>
+                    <p>Volume 24h: {currencySymbol}</p>
                   </div>
                   <div>
                     <img src={Plus} alt="plus" />
                     <p>Total Volume</p>
                     <p>
-                      {data.market_data.total_volume["btc"]}{" "}
+                      {data.market_data.total_volume.btc}
                       {data.symbol.toUpperCase()}
                     </p>
                   </div>
@@ -160,7 +163,7 @@ export default class CoinPage extends React.Component {
                     <img src={Plus} alt="plus" />
                     <p>Circulating Supply</p>
                     <p>
-                      {data.market_data.circulating_supply}{" "}
+                      {data.market_data.circulating_supply}
                       {data.symbol.toUpperCase()}
                     </p>
                   </div>
@@ -232,6 +235,7 @@ export default class CoinPage extends React.Component {
                 </CoinLink>
               </div>
             </CoinLinks>
+            <CurrencyExchange coin={this.state.coinData.symbol} currentPrice={this.state.coinData.market_data.current_price[this.props.currency]} currency={this.props.currency}/>
             <CoinPageChart data={this.state.coinData.market_data.sparkline_7d.price}/>
           </StyledCoinPage>
         )}
