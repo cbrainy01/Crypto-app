@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
+import { CoinPageChart, CurrencyExchange, ErrorDisplay, SummaryData } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
 import { CoinDescription, CoinLinks, CoinLink, CoinSummary, StyledCoinPage, SummaryA, SummaryB, SummaryC, Bar } from "./CoinPage.styles";
 import Link from "icons/Link.svg"
@@ -58,6 +58,10 @@ export default class CoinPage extends React.Component {
       (data?.market_data.total_volume["btc"] / data?.market_data.max_supply) *
         100
     );
+    const symbol= this.state.coinData?.symbol.toUpperCase()
+    
+    const summaryCData = [data?.market_data.total_volume.btc, data?.market_data.circulating_supply, data?.market_data.max_supply]
+    const renderSummary = summaryCData.map( (data) => <SummaryData data={data} symbol={symbol} ></SummaryData>)
     return (
       <div>
         {this.state.isLoading && <h1>...Loading</h1>}
@@ -122,6 +126,7 @@ export default class CoinPage extends React.Component {
                   </div>
                 </section>
               </SummaryB>
+              {/* TODO: */}
               <SummaryC>
                 <section>
                   <div>
@@ -151,7 +156,8 @@ export default class CoinPage extends React.Component {
                     <img src={Plus} alt="plus" />
                     <p>Volume 24h: {currencySymbol}</p>
                   </div>
-                  <div>
+                  {renderSummary}
+                  {/* <div>
                     <img src={Plus} alt="plus" />
                     <p>Total Volume</p>
                     <p>
@@ -166,14 +172,14 @@ export default class CoinPage extends React.Component {
                       {data.market_data.circulating_supply}
                       {data.symbol.toUpperCase()}
                     </p>
-                  </div>
-                  <div>
+                  </div> */}
+                  {/* <div>
                     <img src={Plus} alt="plus" />
                     <p>Max Supply</p>
                     <p>
                       {data.market_data.max_supply} {data.symbol.toUpperCase()}
                     </p>
-                  </div>
+                  </div> */}
                   <div>
                     <Bar circulating={circulating} volume={volume}>
                       <div></div>
