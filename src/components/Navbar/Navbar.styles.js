@@ -40,6 +40,7 @@ export const SearchContainer= styled.div`
         width: 80%;
         outline: none;
         border: none;
+        color: red;
         background: ${(props) => props.theme.inner};
         height: 90%;
     }

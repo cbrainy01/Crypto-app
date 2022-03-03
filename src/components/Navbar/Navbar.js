@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-import { NavbarGlobal } from "components";
+import { NavbarGlobal, CoinSearch } from "components";
 import { StyledNavbar, StyledLink, LeftNavbar, RightNavbar, LinkContainer, SearchContainer, DropdownContainer, CurrencyDropdown, ThemeToggleContainer } from "./Navbar.styles";
 
 export default class Navbar extends React.Component {
@@ -52,7 +52,7 @@ export default class Navbar extends React.Component {
               <RightNavbar>
                 <SearchContainer>
                     <p>icon</p>
-                    <input placeholder="Search..."/>
+                    <CoinSearch history={this.props.history} />
                 </SearchContainer>
                 <DropdownContainer>
                   <p>$</p>
