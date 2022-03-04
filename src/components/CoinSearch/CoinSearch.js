@@ -1,7 +1,6 @@
-import React, { useRef } from "react";
+import React from "react";
 import debounce from "lodash.debounce";
 import axios from "axios";
-import { history } from "utils";
 import { InputField } from "./CoinSearch.styles";
 import { SearchResults, Result, ResultLink } from "./CoinSearch.styles";
 
@@ -26,7 +25,7 @@ export class CoinSearch extends React.Component {
     }
   };
 
-  handleChange = (e) => {
+  handleChange = () => {
     const value = this.state.inputField.current.value;
     if (value === "") {
       this.setState({ searchResults: [], query: value });
@@ -41,9 +40,6 @@ export class CoinSearch extends React.Component {
     this.setState({ searchResults: [] });
   };
 
-  handleCoinSelect = (e) => {
-    history.push(`/coinpage/${e.target.value}`);
-  };
   render() {
     return (
       <div>
