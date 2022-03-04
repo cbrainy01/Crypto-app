@@ -156,8 +156,7 @@ export default class CoinPage extends React.Component {
                     <img src={Plus} alt="plus" />
                     <p>Volume 24h: {currencySymbol}</p>
                   </div>
-                  {renderSummary}
-                  {/* <div>
+                  <div>
                     <img src={Plus} alt="plus" />
                     <p>Total Volume</p>
                     <p>
@@ -172,14 +171,15 @@ export default class CoinPage extends React.Component {
                       {data.market_data.circulating_supply}
                       {data.symbol.toUpperCase()}
                     </p>
-                  </div> */}
-                  {/* <div>
+                  </div>
+                  <div>
                     <img src={Plus} alt="plus" />
                     <p>Max Supply</p>
                     <p>
                       {data.market_data.max_supply} {data.symbol.toUpperCase()}
                     </p>
-                  </div> */}
+                  </div>
+                  {/* {renderSummary} */}
                   <div>
                     <Bar circulating={circulating} volume={volume}>
                       <div></div>
