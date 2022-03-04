@@ -1,53 +1,80 @@
-import React from 'react';
+import React, { useRef } from "react";
 import debounce from "lodash.debounce";
-import axios from 'axios';
-import { history } from 'utils';
-import { InputField } from './CoinSearch.styles';
-
+import axios from "axios";
+import { history } from "utils";
+import { InputField } from "./CoinSearch.styles";
+import { SearchResults, Result, ResultLink } from "./CoinSearch.styles";
 
 export class CoinSearch extends React.Component {
-    state = {
-        query: "",
-        isLoading: false,
-        error: null,
-        searchResults: [],
-    }
-    
-    getQueryMatches = async() => {
-        try {
-            const resp = await axios(`https://crypto-app-server.herokuapp.com/coins/${this.state.query}`);
-            console.log("resp: ", resp)
-            this.setState({ searchResults: resp.data })
-        } catch (error) {
-            
-        }
-    }
+  state = {
+    query: "",
+    isLoading: false,
+    error: null,
+    searchResults: [],
+    inputField: React.createRef(),
+  };
 
-    handleChange = (e) => {
-      if(e.target.value === "") {this.setState({ searchResults: [], query: e.target.value }); return} 
-        this.setState({ query: e.target.value })
-        this.getQueryMatches()
-        console.log(e.target.value)
-        console.log("in handler")
+  getQueryMatches = async () => {
+    this.setState({ isLoading: true });
+    try {
+      const resp = await axios(
+        `https://crypto-app-server.herokuapp.com/coins/${this.state.query}`
+      );
+      this.setState({ searchResults: resp.data, isLoading: false });
+    } catch (error) {
+      this.setState({ isLoading: false, error: "no matches found" });
     }
+  };
 
-    handleCoinSelect = (e) => {history.push(`/coinpage/${e.target.value}`)}
-    render() {
-        console.log("props: ", this.props)
+  handleChange = (e) => {
+    const value = this.state.inputField.current.value;
+    if (value === "") {
+      this.setState({ searchResults: [], query: value });
+      return;
+    }
+    this.setState({ query: value });
+    this.getQueryMatches();
+  };
+
+  searchCleanup = () => {
+    this.state.inputField.current.value = "";
+    this.setState({ searchResults: [] });
+  };
+
+  handleCoinSelect = (e) => {
+    history.push(`/coinpage/${e.target.value}`);
+  };
+  render() {
     return (
       <div>
         <InputField
-          onChange={debounce(this.handleChange, 1500)}
+          ref={this.state.inputField}
+          onChange={debounce(this.handleChange, 200)}
           placeholder="...Search"
         />
-        <select onChange={this.handleCoinSelect}>
-          {this.state.searchResults.map((result) => (
-            <option value={result.name}>{result.name}</option>
-          ))}
-        </select>
+        {this.state.isLoading ? (
+          <Result>...Loading</Result>
+        ) : (
+          <SearchResults>
+            {this.state.searchResults?.map((result) => {
+              return (
+                <Result key={result.id}>
+                  <ResultLink
+                    onClick={() => {
+                      this.searchCleanup();
+                    }}
+                    to={`/coinpage/${result.id}`}
+                  >
+                    {result.name}
+                  </ResultLink>
+                </Result>
+              );
+            })}
+          </SearchResults>
+        )}
       </div>
     );
   }
 }
 
-export default CoinSearch
+export default CoinSearch;
