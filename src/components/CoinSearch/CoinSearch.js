@@ -6,19 +6,18 @@ import { SearchResults, Result, ResultLink } from "./CoinSearch.styles";
 
 export class CoinSearch extends React.Component {
   state = {
-    query: "",
     isLoading: false,
     error: null,
     searchResults: [],
   };
 
   inputField = React.createRef();
-  
-  getQueryMatches = async () => {
+
+  getQueryMatches = async (queryValue) => {
     this.setState({ isLoading: true });
     try {
       const resp = await axios(
-        `https://crypto-app-server.herokuapp.com/coins/${this.state.query}`
+        `https://crypto-app-server.herokuapp.com/coins/${queryValue}`
       );
       this.setState({ searchResults: resp.data, isLoading: false });
     } catch (error) {
@@ -29,11 +28,10 @@ export class CoinSearch extends React.Component {
   handleChange = () => {
     const value = this.inputField.current.value;
     if (value === "") {
-      this.setState({ searchResults: [], query: value });
+      this.setState({ searchResults: [] });
       return;
     }
-    this.setState({ query: value });
-    this.getQueryMatches();
+    this.getQueryMatches(value);
   };
 
   searchCleanup = () => {
