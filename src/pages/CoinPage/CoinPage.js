@@ -1,6 +1,6 @@
 import axios from "axios";
 import React from "react";
-import { CoinPageChart, CurrencyExchange, ErrorDisplay, SummaryData } from "components";
+import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
 import { CoinDescription, CoinLinks, CoinLink, CoinSummary, StyledCoinPage, SummaryA, SummaryB, SummaryC, Bar } from "./CoinPage.styles";
 import Link from "icons/Link.svg"
@@ -48,8 +48,6 @@ export default class CoinPage extends React.Component {
     const data = this.state.coinData;
     const currency = this.props.currency;
     const currencySymbol = getCurrencySymbol(this.props.currency);
-    const keys = this.state.coinData && Object.keys(this.state.coinData.market_data)
-    console.log("keys: ", keys)
     const circulating = Math.round(
       (data?.market_data.circulating_supply / data?.market_data.max_supply) *
         100
@@ -58,10 +56,7 @@ export default class CoinPage extends React.Component {
       (data?.market_data.total_volume["btc"] / data?.market_data.max_supply) *
         100
     );
-    const symbol= this.state.coinData?.symbol.toUpperCase()
     
-    const summaryCData = [data?.market_data.total_volume.btc, data?.market_data.circulating_supply, data?.market_data.max_supply]
-    const renderSummary = summaryCData.map( (data) => <SummaryData data={data} symbol={symbol} ></SummaryData>)
     return (
       <div>
         {this.state.isLoading && <h1>...Loading</h1>}
@@ -126,7 +121,6 @@ export default class CoinPage extends React.Component {
                   </div>
                 </section>
               </SummaryB>
-              {/* TODO: */}
               <SummaryC>
                 <section>
                   <div>
@@ -158,7 +152,7 @@ export default class CoinPage extends React.Component {
                   </div>
                   <div>
                     <img src={Plus} alt="plus" />
-                    <p>Total Volume</p>
+                    <p>Total Volume: </p>
                     <p>
                       {data.market_data.total_volume.btc}
                       {data.symbol.toUpperCase()}
@@ -166,7 +160,7 @@ export default class CoinPage extends React.Component {
                   </div>
                   <div>
                     <img src={Plus} alt="plus" />
-                    <p>Circulating Supply</p>
+                    <p>Circulating Supply: </p>
                     <p>
                       {data.market_data.circulating_supply}
                       {data.symbol.toUpperCase()}
@@ -174,12 +168,11 @@ export default class CoinPage extends React.Component {
                   </div>
                   <div>
                     <img src={Plus} alt="plus" />
-                    <p>Max Supply</p>
+                    <p>Max Supply: </p>
                     <p>
                       {data.market_data.max_supply} {data.symbol.toUpperCase()}
                     </p>
                   </div>
-                  {/* {renderSummary} */}
                   <div>
                     <Bar circulating={circulating} volume={volume}>
                       <div></div>
