@@ -6,7 +6,6 @@ import { CoinList, CoinPage, Portfolio } from "pages";
 import { getCurrencySymbol } from "utils";
 import { GlobalStyle, Container, darkTheme, lightTheme } from "styling";
 import './App.css';
-import { history } from 'utils';
 
 class App extends React.Component {
   state = {
@@ -39,7 +38,6 @@ class App extends React.Component {
               handleThemeChange={this.handleThemeChange}
               handleCurrencyChange={this.handleCurrencyChange}
               currency={this.state.currency}
-              history={history}
             />
             <Switch>
               <Route

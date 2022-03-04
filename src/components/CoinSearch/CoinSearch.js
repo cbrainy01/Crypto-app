@@ -10,9 +10,10 @@ export class CoinSearch extends React.Component {
     isLoading: false,
     error: null,
     searchResults: [],
-    inputField: React.createRef(),
   };
 
+  inputField = React.createRef();
+  
   getQueryMatches = async () => {
     this.setState({ isLoading: true });
     try {
@@ -26,7 +27,7 @@ export class CoinSearch extends React.Component {
   };
 
   handleChange = () => {
-    const value = this.state.inputField.current.value;
+    const value = this.inputField.current.value;
     if (value === "") {
       this.setState({ searchResults: [], query: value });
       return;
@@ -36,7 +37,7 @@ export class CoinSearch extends React.Component {
   };
 
   searchCleanup = () => {
-    this.state.inputField.current.value = "";
+    this.inputField.current.value = "";
     this.setState({ searchResults: [] });
   };
 
@@ -44,7 +45,7 @@ export class CoinSearch extends React.Component {
     return (
       <div>
         <InputField
-          ref={this.state.inputField}
+          ref={this.inputField}
           onChange={debounce(this.handleChange, 200)}
           placeholder="...Search"
         />

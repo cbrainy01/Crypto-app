@@ -55,7 +55,7 @@ export default class Navbar extends React.Component {
           <RightNavbar>
             <SearchContainer>
               <p>icon</p>
-              <CoinSearch history={this.props.history} />
+              <CoinSearch/>
             </SearchContainer>
             <DropdownContainer>
               <p>$</p>
