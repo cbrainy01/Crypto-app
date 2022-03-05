@@ -37,6 +37,9 @@ export default class CoinPage extends React.Component {
     if (prevProps.currency !== this.props.currency) {
       this.getCoinData();
     }
+    else if(prevProps.match.params.coin !== this.props.match.params.coin) {
+      this.getCoinData();
+    }
   };
 
   handleClipboardCopy = (e) => {
