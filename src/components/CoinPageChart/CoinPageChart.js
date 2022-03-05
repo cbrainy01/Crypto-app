@@ -1,5 +1,6 @@
 import React from 'react'
 import { Line } from "react-chartjs-2";
+import { getPreviousHours } from 'utils';
 import { StyledCoinPageChart } from './CoinPageChart.styles'
 
 export class CoinPageChart extends React.Component {
@@ -13,7 +14,7 @@ export class CoinPageChart extends React.Component {
 
   render() {
     const lineData = this.props.data.slice(-this.state.timespan);
-    const labels = [...Array(lineData.length + 1).keys()].slice(1);
+    const labels = getPreviousHours(this.state.timespan).reverse();
     return (
       <StyledCoinPageChart>
         CoinPageChart
@@ -36,7 +37,7 @@ export class CoinPageChart extends React.Component {
           }}
           options={{
             elements: {
-              point: { radius: 0 },
+              point: { radius: 3, backgroundColor: "limegreen" },
             },
             scales: {
               y: {
