@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
 export const StyledNavbar = styled.div`
     display: flex;
     background: ${(props) => props.theme.main };
@@ -40,6 +41,7 @@ export const SearchContainer= styled.div`
         width: 80%;
         outline: none;
         border: none;
+        color: ${(props) => props.theme.color};
         background: ${(props) => props.theme.inner};
         height: 90%;
     }
@@ -76,3 +78,4 @@ export const ThemeToggleContainer= styled.div`
     width: 47px;
 `
 export const CurrencyDropdown = styled.div``
+
