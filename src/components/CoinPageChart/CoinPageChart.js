@@ -9,8 +9,8 @@ export class CoinPageChart extends React.Component {
   };
 
   handleTimespanChange = (e) => {
-    this.setState({ timespan: e.target.value });
-  };
+    this.setState({timespan: e.target.value})
+  }
 
   render() {
     const lineData = this.props.data.slice(-this.state.timespan);
@@ -18,13 +18,13 @@ export class CoinPageChart extends React.Component {
     return (
       <StyledCoinPageChart>
         CoinPageChart
-        <select onChange={this.handleTimespanChange}>
-          <option value={12}>12h</option>
-          <option value={24}>1d</option>
-          <option value={72}>3d</option>
-          <option value={120}>5d</option>
-          <option value={168}>7d</option>
-        </select>
+        <div >
+          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 12} value={12} name="12h"/>12h
+          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 24} value={24} name="1d"/>1d
+          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 72} value={72} name="3d"/>3d
+          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 120} value={120} name="5d"/>5d
+          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 168} value={168} name="7d"/>7d
+        </div>
         <Line
           data={{
             labels: labels,

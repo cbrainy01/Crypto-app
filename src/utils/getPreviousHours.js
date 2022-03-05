@@ -10,11 +10,9 @@ function getHours(datesArray, initialHour, initialMeridian, span) {
     const dateNTime = `${hour} ${meridian}, ${datesArray[day]}`;
     store.push(dateNTime);
     if (hour == 1 && meridian === "PM") {
-      console.log("goint to am");
       hour = 12;
       meridian = "AM";
     } else if (hour == 1 && meridian === "AM") {
-      console.log("going to previous day");
       hour = 12;
       meridian = "PM";
       day = day - 1;
