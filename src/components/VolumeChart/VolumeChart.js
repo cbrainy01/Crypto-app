@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import Chart from "chart.js/auto";
 import { Bar } from "react-chartjs-2";
-import { formatOverviewNumber, wordedDate, getPreviousDates, startDate } from "utils";
+import { formatOverviewNumber, wordedDate, getPreviousDates, startDate, getCurrencySymbol } from "utils";
 import { StyledVolumeChart } from './VolumeChart.styles'
 
 export class VolumeChart extends React.Component {
@@ -57,24 +57,44 @@ export class VolumeChart extends React.Component {
     }
  
     render() {
+      const currencySymbol = getCurrencySymbol(this.props.currency)
       return (
         <StyledVolumeChart>
-          VolumeChart
-          <h3>Volume 24h</h3>
-          <div>
-            Todays volume: {formatOverviewNumber(this.state.todaysVolume)}
-          </div>
-          <div>Todays date: {wordedDate(new Date())}</div>
-          <Bar
-            data={{
-              labels: getPreviousDates(startDate(), this.props.timeSpan),
-              datasets: [
-                {
-                  data: this.state.volumeData,
-                  borderColor: "rgb(53, 162, 235)",
-                  backgroundColor: "rgba(53, 162, 235, 0.5)",
+            VolumeChart
+            <div>Volume 24h</div>
+            <div>Todays volume: {currencySymbol}{ formatOverviewNumber(this.state.todaysVolume) }</div>
+            <div>Todays date: { wordedDate(new Date) }</div>
+            <Bar
+              data={{
+                labels: getPreviousDates(startDate(), this.props.timeSpan),
+                datasets: [
+                  {
+                    data: this.state.volumeData,
+                    borderColor: 'rgb(53, 162, 235)',
+                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
+                  }
+                ]
+              }}
+
+              options={{
+                scales: {
+                  y: {
+                      ticks: {
+                          callback: function(value, index, ticks) {
+                            return value;
+                          }
+                      }
+                  },
+                  x: {
+                      ticks: {
+                          callback: function(val, index) {
+                            const day = this.getLabelForValue(val).split("-")[1]
+                            return day
+                          },
+                      }
+                  }
                 },
-              ],
+              
             }}
             options={{
               scales: {

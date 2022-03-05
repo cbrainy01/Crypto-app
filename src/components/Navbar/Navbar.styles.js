@@ -62,9 +62,10 @@ export const DropdownContainer= styled.div`
         color: ${(props) => props.theme.color};
     }
     p {
-        background: pink;
+        background: black;
         border-radius: 50%;
         width: 20px;
+        color: limegreen;
         text-align: center;
         font-weight: 600;
     }
@@ -72,10 +73,13 @@ export const DropdownContainer= styled.div`
 export const ThemeToggleContainer= styled.div`
     border-radius: 10px;
     background: ${(props) => props.theme.inner};
-    align-items: center;
+    display: flex;
     justify-content: center;
     height: 38px;
     width: 47px;
+    img {
+        margin: auto;
+    }
 `
 export const CurrencyDropdown = styled.div``
 

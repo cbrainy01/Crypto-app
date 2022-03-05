@@ -34,7 +34,7 @@ export default class CoinPage extends React.Component {
   };
 
   componentDidUpdate = (prevProps) => {
-    if (prevProps.currency !== this.props.currency) {
+    if (prevProps.currency !== this.props.currency || prevProps.match.params.coin !== this.props.match.params.coin) {
       this.getCoinData();
     }
   };

@@ -2,7 +2,7 @@ import React from 'react';
 import axios from "axios";
 import Chart from "chart.js/auto";
 import { Line } from "react-chartjs-2";
-import { getPreviousDates, formatOverviewNumber, startDate, wordedDate } from "utils";
+import { getPreviousDates, formatOverviewNumber, startDate, wordedDate, getCurrencySymbol } from "utils";
 import { StyledPriceChart } from './PriceChart.styles';
 
 export class PriceChart extends React.Component {
@@ -58,6 +58,7 @@ export class PriceChart extends React.Component {
     }
 
     render() {
+        const currencySymbol = getCurrencySymbol(this.props.currency)
         return (
           <StyledPriceChart>
             Price Chart

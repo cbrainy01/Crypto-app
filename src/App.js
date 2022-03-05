@@ -15,7 +15,8 @@ class App extends React.Component {
 
   componentDidMount() {
     const currency = localStorage.getItem("currency") || "usd"
-    this.setState({ currency: currency })
+    const isBlacked = localStorage.getItem("isBlacked") || true
+    this.setState({ currency: currency, isBlacked: isBlacked })
   }
   
   handleCurrencyChange = (newCurrency) => {
@@ -25,7 +26,8 @@ class App extends React.Component {
   }
 
   handleThemeChange = () => {
-    this.setState({ isBlacked: !this.state.isBlacked }) 
+    this.setState({ isBlacked: !this.state.isBlacked })
+    localStorage.setItem("isBlacked", true)
   }
 
   render() { 
