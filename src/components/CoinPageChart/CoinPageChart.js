@@ -1,7 +1,7 @@
 import React from 'react'
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from 'utils';
-import { StyledCoinPageChart } from './CoinPageChart.styles'
+import { RadioButton, RadioContainer, StyledCoinPageChart } from './CoinPageChart.styles'
 
 export class CoinPageChart extends React.Component {
   state = {
@@ -17,14 +17,13 @@ export class CoinPageChart extends React.Component {
     const labels = getPreviousHours(this.state.timespan).reverse();
     return (
       <StyledCoinPageChart>
-        CoinPageChart
-        <div >
-          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 12} value={12} name="12h"/>12h
-          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 24} value={24} name="1d"/>1d
-          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 72} value={72} name="3d"/>3d
-          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 120} value={120} name="5d"/>5d
-          <input onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 168} value={168} name="7d"/>7d
-        </div>
+        <RadioContainer>
+          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 12} value={12} name="12h"/>12h
+          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 24} value={24} name="1d"/>1d
+          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 72} value={72} name="3d"/>3d
+          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 120} value={120} name="5d"/>5d
+          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 168} value={168} name="7d"/>7d
+        </RadioContainer>
         <Line
           data={{
             labels: labels,
