@@ -5,6 +5,7 @@ const Bar = styled.div`
     height: ${(props) => props.height}px;
     background-color: ${(props) => props.barColor};
     border-radius: 10px;
+    overflow: hidden;
 `
 const Progress = styled.div`
     border-radius: 10px;
