@@ -22,14 +22,14 @@ export class CurrencyExchange extends React.Component {
       const exchangeValue = userCurrencyInput / this.props.currentPrice;
       this.setState({
         currencyInput: e.target.value,
-        coinInput: exchangeValue,
+        coinInput: exchangeValue.toFixed(5),
       });
     } else if (this.state.focus === "coin") {
       const userCoinInput = e.target.value;
       const exchangeValue = this.props.currentPrice * userCoinInput;
       this.setState({
         coinInput: e.target.value,
-        currencyInput: exchangeValue,
+        currencyInput: exchangeValue.toFixed(5),
       });
     }
   };
