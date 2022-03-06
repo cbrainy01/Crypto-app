@@ -1,7 +1,7 @@
 import React from 'react'
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from 'utils';
-import { RadioButton, RadioContainer, StyledCoinPageChart } from './CoinPageChart.styles'
+import { RadioButton, RadioContainer, StyledCoinPageChart, RadioLabel } from './CoinPageChart.styles'
 
 export class CoinPageChart extends React.Component {
   state = {
@@ -18,11 +18,56 @@ export class CoinPageChart extends React.Component {
     return (
       <StyledCoinPageChart>
         <RadioContainer>
-          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 12} value={12} name="12h"/>12h
-          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 24} value={24} name="1d"/>1d
-          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 72} value={72} name="3d"/>3d
-          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 120} value={120} name="5d"/>5d
-          <RadioButton onChange={this.handleTimespanChange} type="radio" checked={this.state.timespan == 168} value={168} name="7d"/>7d
+          <RadioLabel>
+            <RadioButton
+              onChange={this.handleTimespanChange}
+              type="radio"
+              checked={this.state.timespan == 12}
+              value={12}
+              name="12h"
+            />
+            <div></div>12h
+          </RadioLabel>
+          <RadioLabel>
+            <RadioButton
+              onChange={this.handleTimespanChange}
+              type="radio"
+              checked={this.state.timespan == 24}
+              value={24}
+              name="1d"
+            />
+            <div></div>1d
+          </RadioLabel>
+          <RadioLabel>
+            <RadioButton
+              onChange={this.handleTimespanChange}
+              type="radio"
+              checked={this.state.timespan == 72}
+              value={72}
+              name="3d"
+            />
+            <div></div>3d
+          </RadioLabel>
+          <RadioLabel>
+            <RadioButton
+              onChange={this.handleTimespanChange}
+              type="radio"
+              checked={this.state.timespan == 120}
+              value={120}
+              name="5d"
+            />
+            <div></div>5d
+          </RadioLabel>
+          <RadioLabel>
+            <RadioButton
+              onChange={this.handleTimespanChange}
+              type="radio"
+              checked={this.state.timespan == 168}
+              value={168}
+              name="7d"
+            />
+            <div></div>7d
+          </RadioLabel>
         </RadioContainer>
         <Line
           data={{
