@@ -78,7 +78,7 @@ export default class Navbar extends React.Component {
                 <DropdownContainer>
                   <p>{getCurrencySymbol(this.props.currency)}</p>
                   <CurrencyDropdown>
-                    <select onChange={this.handleChange}>
+                    <select value={this.props.currency} onChange={this.handleChange}>
                       <option value={"usd"}>USD</option>
                       <option value={"btc"}>BTC</option>
                       <option value={"eth"}>ETH</option>
