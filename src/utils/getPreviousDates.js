@@ -1,11 +1,11 @@
 import formatMonth from "./formatMonth"
 
-function leapYearCheck(year) {
+export function leapYearCheck(year) {
   const bool = (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
   return bool ? 29 : 28;
 }
 
-function prev30Days(dt) {
+export function prev30Days(dt) {
     // dt format = "01-17-2022";
     const year = parseInt(dt.slice(-4), 10);
     const month = parseInt(dt.slice(0, 2), 10) - 1;
