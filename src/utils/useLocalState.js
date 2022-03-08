@@ -2,7 +2,7 @@ import { useState } from "react";
 
 export default function useLocalState(key, initialValue) {
   const storedValue = localStorage.getItem(key) || initialValue;
-
+ 
   const [state, setState] = useState(JSON.parse(storedValue));
 
   const updateState = (value) => {
