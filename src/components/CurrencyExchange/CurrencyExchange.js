@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ExchangeContainer,
   ExchangeBar,
@@ -7,56 +7,52 @@ import {
 } from "./CurrencyExchange.styles";
 import Exchange from "icons/Exchange.svg";
 
-export class CurrencyExchange extends React.Component {
-  state = {
-    focus: null,
-    currencyInput: 0.0,
-    coinInput: 0.0,
-  };
+export function CurrencyExchange(props) {
+  const { currentPrice, currency, coin } = props;
 
-  handleChange = (e) => {
+  const [focus, setFocus] = useState(null);
+  const [currencyInput, setCurrencyInput] = useState(0.0);
+  const [coinInput, setCoinInput] = useState(0.0);
+
+  const handleChange = (e) => {
     if (isNaN(e.target.value)) {
       return;
-    } else if (this.state.focus === "currency") {
+    } else if (focus === "currency") {
       const userCurrencyInput = e.target.value;
-      const exchangeValue = userCurrencyInput / this.props.currentPrice;
-      this.setState({
-        currencyInput: e.target.value,
-        coinInput: exchangeValue,
-      });
-    } else if (this.state.focus === "coin") {
+      const exchangeValue = userCurrencyInput / currentPrice;
+
+      setCurrencyInput(e.target.value);
+      setCoinInput(exchangeValue);
+    } else if (focus === "coin") {
       const userCoinInput = e.target.value;
-      const exchangeValue = this.props.currentPrice * userCoinInput;
-      this.setState({
-        coinInput: e.target.value,
-        currencyInput: exchangeValue,
-      });
+      const exchangeValue = currentPrice * userCoinInput;
+
+      setCoinInput(e.target.value);
+      setCurrencyInput(exchangeValue);
     }
   };
 
-  render() {
-    return (
-      <ExchangeContainer>
-        <ExchangeBar>
-          <CurrencyFill>{this.props.currency}</CurrencyFill>
-          <InputBar
-            onFocus={() => this.setState({ focus: "currency" })}
-            value={this.state.currencyInput}
-            onChange={this.handleChange}
-          ></InputBar>
-        </ExchangeBar>
-        <img alt="exchange" src={Exchange} />
-        <ExchangeBar>
-          <CurrencyFill>{this.props.coin}</CurrencyFill>
-          <InputBar
-            onFocus={() => this.setState({ focus: "coin" })}
-            value={this.state.coinInput}
-            onChange={this.handleChange}
-          ></InputBar>
-        </ExchangeBar>
-      </ExchangeContainer>
-    );
-  }
+  return (
+    <ExchangeContainer>
+      <ExchangeBar>
+        <CurrencyFill>{currency}</CurrencyFill>
+        <InputBar
+          onFocus={() => setFocus("currency")}
+          value={currencyInput}
+          onChange={handleChange}
+        ></InputBar>
+      </ExchangeBar>
+      <img alt="exchange" src={Exchange} />
+      <ExchangeBar>
+        <CurrencyFill>{coin}</CurrencyFill>
+        <InputBar
+          onFocus={() => setFocus("coin")}
+          value={coinInput}
+          onChange={handleChange}
+        ></InputBar>
+      </ExchangeBar>
+    </ExchangeContainer>
+  );
 }
 
 export default CurrencyExchange;
