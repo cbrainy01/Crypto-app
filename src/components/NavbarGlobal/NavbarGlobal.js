@@ -3,7 +3,7 @@ import { formatNumber, progressBar, getCurrencySymbol } from 'utils'
 import { StyledNavbarGlobal, MarketData1, MarketData2, MarketData3, MarketData4, MarketData5, MarketData6, MarketDataContainer, NavbarGlobalContainer } from './NavbarGlobal.styles'
 import Bitcoin from "../../icons/Bitcoin.svg"
 import Bullet from "../../icons/Bullet.svg"
-import Ethereum from "../../icons/Ethereum.svg"
+import Eth from "../../icons/Eth.svg"
   
 export class NavbarGlobal extends React.Component {
     render() {
@@ -39,7 +39,7 @@ export class NavbarGlobal extends React.Component {
                         <div>{progressBar(Math.round(globalData.market_cap_percentage["btc"]), "blue", "red", 55, "14")}</div>
                     </MarketData5>
                     <MarketData6>
-                        <img src={Ethereum} alt="ethereum"/>
+                        <img src={Eth} alt="ethereum"/>
                         <div>{Math.round(globalData.market_cap_percentage["eth"])}%</div>
                         <div>{progressBar(Math.round(globalData.market_cap_percentage["eth"]), "blue", "red", 55, "14")}</div>
                     </MarketData6>
