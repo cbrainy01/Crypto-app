@@ -1,26 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { BitcoinOverview, Timespan, Coins } from "components";
 
-export default class CoinList extends React.Component {
-  state = {
-    timeSpan: "1",
+export default function CoinList(props) {
+  const [timeSpan, setTimeSpan] = useState("1");
+
+  const handleTimespanChange = (newTimespan) => {
+    setTimeSpan(newTimespan);
   };
 
-  handleTimespanChange = (newTimespan) => {
-    this.setState({ timeSpan: newTimespan });
-  };
-
-  render() {
-    return (
-      <div>
-        CoinList page
-        <BitcoinOverview
-          timeSpan={this.state.timeSpan}
-          currency={this.props.currency}
-        />
-        <Timespan handleTimespanChange={this.handleTimespanChange} />
-        <Coins {...this.props} />
-      </div>
-    );
-  }
+  return (
+    <div>
+      CoinList page
+      <BitcoinOverview timeSpan={timeSpan} currency={props.currency} />
+      <Timespan handleTimespanChange={handleTimespanChange} />
+      <Coins {...props} />
+    </div>
+  );
 }
