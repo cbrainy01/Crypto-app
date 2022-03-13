@@ -17,7 +17,10 @@ import Ethereum from "../../icons/Eth.svg";
 
 export function NavbarGlobal({ currency, globalData }) {
   const currencySymbol = getCurrencySymbol(currency);
-
+    // console.log("TST: ", formatNumber(globalData.total_market_cap[currency]))
+//     console.log("TST: ", globalData.total_market_cap[currency])
+//     console.log("curr: ", currency.length)
+//   console.log("globalData: ", globalData)
   return (
     globalData && (
       <StyledNavbarGlobal>

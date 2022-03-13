@@ -12,12 +12,10 @@ function App() {
   const [isBlacked, setIsBlacked] = useLocalState("isBlacked", true);
 
   const handleCurrencyChange = (newCurrency) => {
-    localStorage.setItem("currency", newCurrency);
     setCurrency(newCurrency);
   };
 
   const handleThemeChange = () => {
-    localStorage.setItem("isBlacked", !isBlacked);
     setIsBlacked(!isBlacked);
   };
 
