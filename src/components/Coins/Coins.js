@@ -19,9 +19,16 @@ import {
   SortBy,
   StyledTable,
   TableHead,
-  TableBody,
-  TH,
-  TR,
+  CoinsBox,
+  IndexHeader,
+  IdHeader,
+  PriceHeader,
+  HourHeader,
+  DayHeader,
+  VolumeHeader,
+  CirculatingHeader,
+  WeekHeader,
+  SparklineHeader,
 } from "./Coins.styles";
 
 export function Coins(props) {
@@ -72,7 +79,7 @@ export function Coins(props) {
   }, [props.currency]);
 
   const fetchMoreCoins = () => {
-    if (coinsData?.length > 30) {
+    if (coinsData?.length > 20) {
       setHasMore(false);
       return;
     }
@@ -88,7 +95,9 @@ export function Coins(props) {
   };
 
   return (
+  <CoinsContainer>
     <StyledCoins>
+      
       <SortingContainer>
         <SortControl>
           <img src={topDownArrow} alt="ethereum" />
@@ -104,12 +113,11 @@ export function Coins(props) {
           <img src={ArrowRight} />
         </DisplayCountControl>
       </SortingContainer>
-      <CoinsContainer>
+      <CoinsBox>
         <StyledTable>
           <TableHead>
-            <TR>
-              <TH>#</TH>
-              <TH>
+              <IndexHeader>#</IndexHeader>
+              <IdHeader>
                 <span>Name</span>
                 <img
                   onClick={handleSortChange}
@@ -117,8 +125,8 @@ export function Coins(props) {
                   alt="sortbutton"
                   data-value={"name"}
                 />
-              </TH>
-              <TH>
+              </IdHeader>
+              <PriceHeader>
                 <span>Price</span>
                 <img
                   onClick={handleSortChange}
@@ -126,22 +134,20 @@ export function Coins(props) {
                   alt="sortbutton"
                   data-value={"current_price"}
                 />
-              </TH>
-              <TH>
+              </PriceHeader>
+              <HourHeader>
                 <span>1h</span> <img src={TornadoSort} alt="sortbutton" />
-              </TH>
-              <TH>
+              </HourHeader>
+              <DayHeader>
                 <span>24h</span> <img src={TornadoSort} alt="sortbutton" />
-              </TH>
-              <TH>
+              </DayHeader>
+              <WeekHeader>
                 <span>7d</span> <img src={TornadoSort} alt="sortbutton" />
-              </TH>
-              <TH>24h Vol / Market Cap</TH>
-              <TH>Circulating /Total Sup</TH>
-              <TH>Last 7d</TH>
-            </TR>
+              </WeekHeader>
+              <VolumeHeader>24h Vol / Market Cap</VolumeHeader>
+              <CirculatingHeader>Circulating /Total Sup</CirculatingHeader>
+              <SparklineHeader>Last 7d</SparklineHeader>
           </TableHead>
-          <TableBody>
             <InfiniteScroll
               dataLength={coinsData ? coinsData.length : 10}
               next={fetchMoreCoins}
@@ -159,10 +165,11 @@ export function Coins(props) {
                 />
               ))}
             </InfiniteScroll>
-          </TableBody>
         </StyledTable>
-      </CoinsContainer>
+      </CoinsBox>
+     
     </StyledCoins>
+    </CoinsContainer>
   );
 }
 

@@ -1,97 +1,117 @@
-import React from 'react'
-import { CoinChart } from 'components'
-import { formatNumber, getCurrencySymbol, renderPercentChange, getPercentage } from 'utils'
-import Bullet from "icons/Bullet.svg"
-import { StyledCoin, TH, TD, ProgressDisplay, MarketCap } from './Coin.styles'
+import React, { useState } from "react";
+import { CoinChart } from "components";
+import {
+  formatNumber,
+  getCurrencySymbol,
+  renderPercentChange,
+  getPercentage,
+} from "utils";
+import Bullet from "icons/Bullet.svg";
+import {
+  CirculationA,
+  CirculationB,
+  HourChange,
+  DayChange,
+  CoinId,
+  Circulation,
+  CoinPrice,
+  StyledCoin,
+  Index,
+  TD,
+  ProgressDisplay,
+  MarketCap,
+  WeekChange,
+  Volume,
+  VolumeA,
+  VolumeB,
+  Progress,
+  StyledSparkline,
+} from "./Coin.styles";
 
+export function Coin(props) {
+  const handleCoinSelect = () => {
+    const selectedCoin = props.coinData.id;
+    props.history.push(`/coinpage/${selectedCoin}`);
+  };
 
+  const data = props.coinData;
+  const index = props.index;
+  const currencySymbol = getCurrencySymbol(props.currency);
+  return (
+    <StyledCoin>
+      <Index>{index}</Index>
+      <CoinId>
+        <img src={data.image} alt={data.name} />
+        <div onClick={handleCoinSelect}>
+          {data.name}({data.symbol})
+        </div>
+      </CoinId>
+      <CoinPrice>
+        {currencySymbol}
+        {data.current_price.toString().indexOf(".") == -1
+          ? data.current_price
+          : data.current_price.toFixed(2)}
+      </CoinPrice>
+      <HourChange>
+        {renderPercentChange(data.price_change_percentage_1h_in_currency) ||
+          "-"}
+      </HourChange>
+      <DayChange>
+        {renderPercentChange(data.price_change_percentage_24h_in_currency) ||
+          "-"}
+      </DayChange>
+      <WeekChange>
+        {renderPercentChange(data.price_change_percentage_7d_in_currency) ||
+          "-"}
+      </WeekChange>
+      <Volume>
+        <section>
+          <VolumeA>
+            <img src={Bullet} alt="bullet point" />
+            <span>{formatNumber(data.total_volume)}</span>
+          </VolumeA>
+          <VolumeB>
+            <img src={Bullet} alt="bullet point" />
+            <span>{formatNumber(data.market_cap)}</span>
+          </VolumeB>
+        </section>
 
-export class Coin extends React.Component {
+        <section>
+          <ProgressDisplay
+            percentage={getPercentage(data.total_volume, data.market_cap)}
+          >
+            <div></div>
+          </ProgressDisplay>
+        </section>
+      </Volume>
 
-  handleCoinSelect = () => {
-    const selectedCoin = this.props.coinData.id
-    this.props.history.push(`/coinpage/${selectedCoin}`)
-  }
-
-  render() {
-    const data = this.props.coinData
-    const index = this.props.index
-    const currencySymbol = getCurrencySymbol(this.props.currency)
-    return (
-      <StyledCoin>
-        <TH>{index}</TH>
-        <TD>
-          <div>
-            <img src={data.image} alt={data.name} />
-            <p onClick={this.handleCoinSelect}>
-              {data.name}({data.symbol})
-            </p>
-          </div>
-        </TD>
-        <TD>
-          {currencySymbol}
-          {data.current_price}
-        </TD>
-        <TD>
-          {renderPercentChange(data.price_change_percentage_1h_in_currency) || "-"}
-        </TD>
-        <TD>
-          {renderPercentChange(data.price_change_percentage_24h_in_currency) || "-"}
-        </TD>
-        <TD>
-          {renderPercentChange(data.price_change_percentage_7d_in_currency) || "-"}
-        </TD>
-        <TD>
-          <MarketCap>
-            <div>
-              <span>
-                <img src={Bullet} alt="bullet point" />
-              </span>
-              <span>{formatNumber(data.total_volume)}</span>
-              <span>
-                <img src={Bullet} alt="bullet point" />
-              </span>
-              <span>{formatNumber(data.market_cap)}</span>
-            </div>
-            <div>
-              <ProgressDisplay
-                percentage={getPercentage(data.total_volume, data.market_cap)}
-              >
-                <div></div>
-              </ProgressDisplay>
-            </div>
-          </MarketCap>
-        </TD>
-        <TD>
-          <MarketCap>
-            <div>
-              <span>
-                <img src={Bullet} alt="bullet point" />
-              </span>
-              <span>{formatNumber(data.circulating_supply)}</span>
-              <span>
-                <img src={Bullet} alt="bullet point" />
-              </span>
-              <span>{formatNumber(data.total_supply)}</span>
-            </div>
-            <div>
-              <ProgressDisplay
-                percentage={getPercentage(
-                  data.circulating_supply,
-                  data.total_supply
-                )}
-              >
-                <div></div>
-              </ProgressDisplay>
-            </div>
-          </MarketCap>
-        </TD>
-        <TD>
-          <CoinChart prices={data["sparkline_in_7d"].price.slice().reverse()} />
-        </TD>
-      </StyledCoin>
-    );
-  }
+      <Circulation>
+        <section>
+          <CirculationA>
+            <img src={Bullet} alt="bullet point" />
+            <span>{formatNumber(data.circulating_supply)}</span>
+          </CirculationA>
+          <CirculationB>
+            <img src={Bullet} alt="bullet point" />
+            <span>{formatNumber(data.total_supply)}</span>
+          </CirculationB>
+        </section>
+        <section>
+          <ProgressDisplay
+            percentage={getPercentage(
+              data.circulating_supply,
+              data.total_supply
+            )}
+          >
+            <div></div>
+          </ProgressDisplay>
+        </section>
+      </Circulation>
+      <StyledSparkline>
+        <CoinChart prices={data["sparkline_in_7d"].price.slice().reverse()} />
+      </StyledSparkline>
+    </StyledCoin>
+  );
 }
 
-export default Coin
+export default Coin;
