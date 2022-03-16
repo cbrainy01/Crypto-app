@@ -1,4 +1,19 @@
 import styled from "styled-components";
+import SVG from "react-inlinesvg";
+import InfiniteScroll from "react-infinite-scroll-component";
+
+export const TornadoIcon = styled(SVG)`
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  & path {
+    fill: ${(props) => props.theme.color};
+  }
+`
+
+export const ScrollComponent = styled(InfiniteScroll)`
+  all: unset;
+`
 
 export const CoinsContainer = styled.div`
   margin: 0 auto;
@@ -44,7 +59,7 @@ export const RankingSort = styled.div``;
 
 export const SortBy = styled.div``;
 export const StyledTable = styled.div`
-  overflow: hidden;
+  // overflow-x: scroll;
 `;
 
 export const IndexHeader = styled.span`

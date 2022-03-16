@@ -29,14 +29,14 @@ import {
 } from "./Coin.styles";
 
 export function Coin(props) {
+  const { index, currency } = props;
+  const data = props.coinData;
   const handleCoinSelect = () => {
-    const selectedCoin = props.coinData.id;
+    const selectedCoin = data.id;
     props.history.push(`/coinpage/${selectedCoin}`);
   };
 
-  const data = props.coinData;
-  const index = props.index;
-  const currencySymbol = getCurrencySymbol(props.currency);
+  const currencySymbol = getCurrencySymbol(currency);
   return (
     <StyledCoin>
       <Index>{index}</Index>
