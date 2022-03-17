@@ -19,6 +19,8 @@ export const NavbarGlobalContainer = styled.div`
   align-items: center;
   border-radius: 0px 0px 6px 6px;
   margin: 0 auto;
+  overflow: hidden;
+
 `;
 
 export const MarketData1 = styled.div`
