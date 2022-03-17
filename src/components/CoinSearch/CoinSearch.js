@@ -45,7 +45,7 @@ export class CoinSearch extends React.Component {
         <InputField
           ref={this.inputField}
           onChange={debounce(this.handleChange, 200)}
-          placeholder="...Search"
+          placeholder="Search..."
         />
         {this.state.isLoading ? (
           <Result>...Loading</Result>

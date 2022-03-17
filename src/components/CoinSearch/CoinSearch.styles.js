@@ -5,10 +5,8 @@ export const InputField = styled.input``
 
 export const SearchResults = styled.div`
     background: #2c2f36;
-    top: 10%;
     position: absolute;
     border-radius: 6px;
-    height: 140px;
     overflow: hidden;
 `
 
