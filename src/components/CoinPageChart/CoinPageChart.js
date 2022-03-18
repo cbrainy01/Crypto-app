@@ -86,11 +86,6 @@ export function CoinPageChart(props) {
         }}
         options={{
           elements: {
-            point: { radius: 3, backgroundColor: "limegreen" },
-          },
-        }}
-        options={{
-          elements: {
             point: { radius: 0 },
           },
           scales: {

@@ -20,8 +20,11 @@ export const NavbarGlobalContainer = styled.div`
   border-radius: 0px 0px 6px 6px;
   margin: 0 auto;
   overflow: hidden;
-
 `;
+
+export const NavbarGlobalWrap = styled.div`
+  margin: 0 auto;
+`
 
 export const MarketData1 = styled.div`
   margin-right: 21px;

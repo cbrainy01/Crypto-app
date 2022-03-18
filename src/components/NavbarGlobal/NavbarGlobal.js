@@ -10,6 +10,7 @@ import {
   MarketData6,
   NavbarGlobalContainer,
   ProgressBar,
+  NavbarGlobalWrap,
 } from "./NavbarGlobal.styles";
 import Bitcoin from "icons/Bitcoin.svg";
 import Bullet from "icons/Bullet.svg";
@@ -22,6 +23,7 @@ export function NavbarGlobal({ currency, globalData }) {
   return (
     globalData && (
       <StyledNavbarGlobal>
+        <NavbarGlobalWrap>
         <NavbarGlobalContainer>
           <MarketData1>
             <p>Coins</p>
@@ -76,6 +78,7 @@ export function NavbarGlobal({ currency, globalData }) {
             </ProgressBar>
           </MarketData6>
         </NavbarGlobalContainer>
+        </NavbarGlobalWrap>
       </StyledNavbarGlobal>
     )
   );
