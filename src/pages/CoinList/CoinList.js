@@ -10,7 +10,6 @@ export default function CoinList(props) {
 
   return (
     <div>
-      CoinList page
       <BitcoinOverview timeSpan={timeSpan} currency={props.currency} />
       <Timespan handleTimespanChange={handleTimespanChange} />
       <Coins {...props} />

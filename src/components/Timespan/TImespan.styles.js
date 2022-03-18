@@ -1,24 +1,37 @@
 import styled from "styled-components";
 
 export const StyledTimespan = styled.div`
-    display: flex;
-    margin: 0 auto;
-    width: 50%;
-    padding: 15px 6px;
-    justify-content: space-evenly;
-    background: grey;
+   padding-left: 265px;
+   padding-right: 265px;
+   height: 50px;
+   overflow: hidden;
+//    margin-bottom: 60px;
+   margin: 0 auto 60px auto;
+`
+export const TimespanContainer = styled.div`
+ width: 100%;
+ display: flex;
+ flex-flow: row;
+ justify-content: space-evenly;
+ justify-content: space-around;
+ align-items: center;
+overflow: hidden;
+    // margin: 0 auto;
+    padding: 7px 6px;
+    
+    background: ${(props) => props.theme.main};
     border-radius: 10px;
     color: white;
     div {
-        background: blue;
-        padding: 4px 14px;
+        background: ${(props) => props.theme.inner};
+        padding: 4px 8px;
         border-radius: 10px
     }
     div:active {
         background: red;
     }
     div:hover {
-        background: green;
+        background: #2172E5;
         cursor: pointer;
     }
     div:focus {

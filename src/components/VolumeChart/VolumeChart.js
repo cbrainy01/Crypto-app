@@ -9,7 +9,7 @@ import {
   startDate,
   getCurrencySymbol,
 } from "utils";
-import { StyledVolumeChart } from "./VolumeChart.styles";
+import { BarChartContainer, OverviewInfo, StyledVolumeChart } from "./VolumeChart.styles";
 
 export function VolumeChart(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -63,42 +63,23 @@ export function VolumeChart(props) {
   const currencySymbol = getCurrencySymbol(props.currency);
   return (
     <StyledVolumeChart>
-      VolumeChart
-      <div>Volume 24h</div>
-      <div>
-        Todays volume: {currencySymbol}
-        {formatOverviewNumber(todaysVolume)}
-      </div>
-      <div>Todays date: {wordedDate(new Date())}</div>
+      <OverviewInfo>
+      <p>Volume 24h</p>
+      <div>{currencySymbol}{formatOverviewNumber(todaysVolume)}</div>
+      <p>{wordedDate(new Date())}</p>
+      </OverviewInfo>
+      <BarChartContainer>
       <Bar
         data={{
           labels: getPreviousDates(startDate(), props.timeSpan),
           datasets: [
             {
               data: volumeData,
-              borderColor: "rgb(53, 162, 235)",
-              backgroundColor: "rgba(53, 162, 235, 0.5)",
+              borderColor: "#2172E5",
+              backgroundColor: "#2172E5",
+              borderRadius: 2,
             },
           ],
-        }}
-        options={{
-          scales: {
-            y: {
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value;
-                },
-              },
-            },
-            x: {
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
-                },
-              },
-            },
-          },
         }}
         options={{
           scales: {
@@ -122,6 +103,9 @@ export function VolumeChart(props) {
                   const day = this.getLabelForValue(val).split("-")[1];
                   return day;
                 },
+                font: {
+                  size: 6,
+                }
               },
             },
           },
@@ -136,9 +120,11 @@ export function VolumeChart(props) {
                 },
               },
             },
+            legend: { display: false },
           },
         }}
       />
+      </BarChartContainer>
     </StyledVolumeChart>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyledTimespan } from './TImespan.styles'
+import { StyledTimespan, TimespanContainer  } from './TImespan.styles'
 
 export function Timespan({handleTimespanChange}) {
 
@@ -7,11 +7,13 @@ export function Timespan({handleTimespanChange}) {
 
     return (
         <StyledTimespan>
-          <div onClick={handleClick} data-value={"1week"}>1w</div>
-          <div onClick={handleClick} data-value={1}>1m</div>
-          <div onClick={handleClick} data-value={3}>3m</div>
-          <div onClick={handleClick} data-value={6}>6m</div>
-          <div onClick={handleClick} data-value={12}>1y</div> 
+          <TimespanContainer>
+            <div onClick={handleClick} data-value={"1week"}>1w</div>
+            <div onClick={handleClick} data-value={1}>1m</div>
+            <div onClick={handleClick} data-value={3}>3m</div>
+            <div onClick={handleClick} data-value={6}>6m</div>
+            <div onClick={handleClick} data-value={12}>1y</div>
+          </TimespanContainer> 
         </StyledTimespan>
     )
 }
