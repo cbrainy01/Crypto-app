@@ -15,7 +15,6 @@ import {
   NavbarContainer,
 } from "./Navbar.styles";
 import SearchIcon from "../../icons/SearchIcon.svg";
-import Uptick from "icons/Uptick.svg"
 import Theme from "../../icons/Theme.svg";
 
 export default function Navbar(props) {
@@ -71,7 +70,6 @@ export default function Navbar(props) {
                 <option value={"gbp"}>GBP</option>
               </select>
             </CurrencyDropdown>
-            <img src={Uptick} />
           </DropdownContainer>
           <ThemeToggleContainer onClick={() => props.handleThemeChange()}>
             <img src={Theme} alt="theme change icon" />
