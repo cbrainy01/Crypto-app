@@ -7,11 +7,15 @@ import {
   CoinLinks,
   CoinLink,
   CoinSummary,
+  ImgContainer,
   StyledCoinPage,
   SummaryA,
   SummaryB,
   SummaryC,
   Bar,
+  YourSummary,
+  CoinPageContainer,
+  CoinName,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -68,14 +72,17 @@ export default function CoinPage(props) {
       {error && <ErrorDisplay />}
       {coinData && (
         <StyledCoinPage>
-          <h1>Your Summary:</h1>
+          <CoinPageContainer>
+          <YourSummary>Your Summary</YourSummary>
           <CoinSummary>
             <SummaryA>
               <section>
-                <img src={coinData.image.small} alt={coinData.name} />
-                <div>
+                <ImgContainer>
+                  <img src={coinData.image.small} alt={coinData.name} />
+                </ImgContainer>
+                <CoinName>
                   {coinData.name}({coinData.symbol.toUpperCase()})
-                </div>
+                </CoinName>
                 <div>
                   <img src={Link} alt="link icon" />
                   <a href={coinData.links.homepage[0]}>
@@ -240,6 +247,7 @@ export default function CoinPage(props) {
               </CoinLink>
             </div>
           </CoinLinks>
+          </CoinPageContainer> 
           <CurrencyExchange
             coin={coinData.symbol}
             currentPrice={coinData.market_data.current_price[currency]}

@@ -84,25 +84,6 @@ export function VolumeChart(props) {
         options={{
           scales: {
             y: {
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value;
-                },
-              },
-            },
-            x: {
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
-                },
-              },
-            },
-          },
-        }}
-        options={{
-          scales: {
-            y: {
               display: false,
               grid: {
                 display: false,

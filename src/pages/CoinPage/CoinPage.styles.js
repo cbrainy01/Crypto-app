@@ -1,35 +1,65 @@
 import styled from "styled-components";
 
 export const StyledCoinPage = styled.div`
-  margin-top: 4.1%;
+  margin-top: 40px;
   a:link {
     text-decoration: none;
     color: ${(props) => props.theme.color};
   }
-  h1 {
-    margin-left: 13.4%;
-  }
 `;
 
+export const CoinPageContainer = styled.div`
+  padding-left: 150px;
+  padding-right: 118px;
+`
+
+export const YourSummary = styled.p`
+  font-size: 11px;
+  margin-bottom: 25px;
+`
+
 export const CoinSummary = styled.div`
-  margin-top: 2.6%;
+  // margin-top: 2.6%;
   display: flex;
-  margin-left: 13.4%;
-  margin-right: 12.3%;
-  margin-bottom: 2.6%;
+  flex-flow: row;
+  font-size: 9px; 
+  // margin-left: 13.4%;
+  // margin-right: 12.3%;
+  // margin-bottom: 2.6%;
 `;
 
 export const SummaryA = styled.div`
-  border-radius: 12px;
-  background: ${(props) => props.theme.main};
+  border-radius: 6px;
+  width: 129px;
+  background : ${(props) => props.theme.main};
   section {
     padding: 18px 36px;
   }
-  margin-right: 3.8%;
+  
+  margin-right: 36px;
 `;
 
+export const ImgContainer = styled.div`
+  margin: 0 auto;
+  width: 52px;
+  height: 51px;
+  background: ${(props) => props.theme.inner};
+  padding: 14px;
+  margin-bottom: 3px;
+  img {
+    width: 22x;
+    height: 22px;
+  }
+`
+export const CoinName = styled.div`
+  font-size: 12px;
+  margin: 0 auto;
+`
+
 export const SummaryB = styled.div`
-  border-radius: 12px;
+  border-radius: 6px;
+  width: 232px;
+  height: 190px;
   background: ${(props) => props.theme.main};
   section {
     padding: 18px 36px;
@@ -38,7 +68,9 @@ export const SummaryB = styled.div`
 `;
 
 export const SummaryC = styled.div`
-  border-radius: 12px;
+  border-radius: 6px;
+  width: 273px;
+  height: 190px;
   background: ${(props) => props.theme.main};
   section {
     padding: 18px 36px;
