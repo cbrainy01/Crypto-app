@@ -105,7 +105,8 @@ export function VolumeChart(props) {
                 },
                 font: {
                   size: 6,
-                }
+                },
+                maxRotation: 0,
               },
             },
           },

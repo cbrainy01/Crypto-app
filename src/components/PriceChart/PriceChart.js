@@ -9,13 +9,20 @@ import {
   wordedDate,
   getCurrencySymbol,
 } from "utils";
-import { LineChartContainer, OverviewInfo, StyledPriceChart } from "./PriceChart.styles";
+import {
+  LineChartContainer,
+  OverviewInfo,
+  StyledPriceChart,
+} from "./PriceChart.styles";
 
 export function PriceChart(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [priceData, setPriceData] = useState([]);
   const [todaysPrice, setTodaysPrice] = useState(null);
+  const [chartData, setChartData] = useState({ datasets: [] });
+  const chartRef = useRef(null);
+  const currencySymbol = getCurrencySymbol(props.currency);
 
   const getMarketChartData = async () => {
     try {
@@ -47,6 +54,25 @@ export function PriceChart(props) {
         .map((price) => price[1])
         .slice(1, span + 1);
       const todaysPrice = response.data.prices[0][1];
+
+      const chart = chartRef.current;
+      if (chart) {
+        const chartData = {
+          labels: getPreviousDates(startDate(), props.timeSpan),
+          datasets: [
+            {
+              data: priceData,
+              borderColor: "#00FF5F8F",
+              backgroundColor: createGradient(chart.ctx),
+              fill: {
+                target: "origin",
+              },
+            },
+          ],
+        };
+        setChartData(chartData);
+      }
+
       setIsLoading(false);
       setPriceData(priceData);
       setTodaysPrice(todaysPrice);
@@ -57,145 +83,80 @@ export function PriceChart(props) {
     }
   };
 
+  function createGradient(ctx) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 100);
+    gradient.addColorStop(0, "#00FF5F8F");
+    gradient.addColorStop(0.15, "#FFFFFF32");
+    gradient.addColorStop(1, "#00FF5F00 ");
+    return gradient;
+  }
+
   useEffect(() => {
     getMarketChartData();
   }, [props.currency, props.timeSpan]);
-
-  const currencySymbol = getCurrencySymbol(props.currency);
-  // transparent linear-gradient(180deg, #00FF5F8F 0%, #FFFFFF32 0%, #00FF5F00 100%) 0% 0% no-repeat padding-box;
-  // const gradient = chart.createLinearGradient(0, 0, 0, 100)
-  // gradient.addColorStop(0, "#00FF5F8F")
-  // gradient.addColorStop(0, "#FFFFFF32")
-  // gradient.addColorStop(1, "#00FF5F00 ")
-  // const myChartRef = useRef()
-  // const myChartRef = React.createRef()
-// TODO:
-  // const myChartRef = useRef()
-  // console.log("ref: ", myChartRef)
-  // console.log("tst: ", myChartRef.current?.firstChild)
-  // const gradient = myChartRef.current?.firstChild.canvas
-  // TODO:
-  // const gradient = myChartRef.chartInstance.ctx.createLinearGradient(0, 0, 0, 100)
-  // gradient.addColorStop(0, "#00FF5F8F")
-  // gradient.addColorStop(0, "#FFFFFF32")
-  // gradient.addColorStop(1, "#00FF5F00 ")
-
-  const data = (canvas) => {
-    const ctx = canvas.getContext("2d");
-    console.log("ctx: ", ctx)
-    let gradient = ctx.createLinearGradient(0, 0, 0, 100);
-    gradient.addColorStop(0, "#00FF5F8F")
-    gradient.addColorStop(0, "#FFFFFF32")
-    gradient.addColorStop(1, "#00FF5F00 ")
-
-    return {
-      // labels: getPreviousDates(startDate(), props.timeSpan),
-      labels: [0,2,5,7,6,4],
-      datasets: [
-        {
-          // data: priceData,
-          data: [
-            { x: 4, y: 37779 },
-            { x: 5, y: 377434 },
-            { x: 6, y: 37734 },
-            { x: 7, y: 37766 },
-          ],
-          // borderColor: "rgb(255, 99, 132)",
-          borderColor: "#00FF5F8F",
-          // backgroundColor: "rgba(255, 99, 132, 0.5)",
-          // backgroundColor: "linear-gradient(180deg, #00FF5F8F 0%, #FFFFFF32 0%, #00FF5F00 100%)",
-          // backgroundColor: gradient,
-          backgroundColor: "green",
-          fill: {
-            target: "origin",
-            // below: "red",
-            // below: "#00FF5F8F",
-            // below: "transparent linear-gradient(180deg, #00FF5F8F 0%, #FFFFFF32 0%, #00FF5F00 100%) 0% 0% no-repeat padding-box",
-          },
-        },
-      ],
-    }
-  }
 
   return (
     <StyledPriceChart>
       <OverviewInfo>
         <p>BTC</p>
-      <div>{currencySymbol}{formatOverviewNumber(todaysPrice)}</div>
-      <p>{wordedDate(new Date())}</p>
+        <div>
+          {currencySymbol}
+          {formatOverviewNumber(todaysPrice)}
+        </div>
+        <p>{wordedDate(new Date())}</p>
       </OverviewInfo>
       <LineChartContainer>
-      <Line
-        
-        data={{
-          labels: getPreviousDates(startDate(), props.timeSpan),
-          datasets: [
-            {
-              data: priceData,
-              // borderColor: "rgb(255, 99, 132)",
-              borderColor: "#00FF5F8F",
-              // backgroundColor: "rgba(255, 99, 132, 0.5)",
-              // backgroundColor: "linear-gradient(180deg, #00FF5F8F 0%, #FFFFFF32 0%, #00FF5F00 100%)",
-              // backgroundColor: gradient,
-              backgroundColor: "pink",
-              fill: {
-                target: "origin",
-                // below: "red",
-                // below: "#00FF5F8F",
-                // below: "transparent linear-gradient(180deg, #00FF5F8F 0%, #FFFFFF32 0%, #00FF5F00 100%) 0% 0% no-repeat padding-box",
-              },
+        <Line
+          ref={chartRef}
+          data={chartData}
+          options={{
+            elements: {
+              point: { radius: 0, hitRadius: 6, backgroundColor: "#00FF5F8F" },
+              line: { tension: 0.2 },
             },
-          ],
-        }}
-        // data={data}
-        options={{
-          elements: {
-            point: { radius: 0, hitRadius: 6, backgroundColor: "#00FF5F8F", },
-            line: { tension: .2 }
-          },
-          scales: {
-            y: {
-              display: false,
-              grid: {
+            scales: {
+              y: {
                 display: false,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  callback: function (value, index, ticks) {
+                    return;
+                  },
+                },
               },
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return;
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  callback: function (val, index) {
+                    const day = this.getLabelForValue(val).split("-")[1];
+                    return day;
+                  },
+                  font: {
+                    size: 8,
+                  },
+                  maxRotation: 0,
                 },
               },
             },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: function (context) {
+                    return `Price: ${context[0].formattedValue}`;
+                  },
+                  label: function (context) {
+                    return `date: ${context.label}`;
+                  },
                 },
-                font: {
-                  size: 8,
-                }
               },
+              legend: { display: false },
             },
-          },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                title: function (context) {
-                  return `Price: ${context[0].formattedValue}`;
-                },
-                label: function (context) {
-                  return `date: ${context.label}`;
-                },
-              },
-            },
-            legend: { display: false },
-          },
-         
-        }}
-      />
+          }}
+        />
       </LineChartContainer>
     </StyledPriceChart>
   );
