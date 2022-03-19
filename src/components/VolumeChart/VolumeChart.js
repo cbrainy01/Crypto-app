@@ -16,6 +16,7 @@ export function VolumeChart(props) {
   const [error, setError] = useState(null);
   const [volumeData, setVolumeData] = useState([]);
   const [todaysVolume, setTodaysVolume] = useState(null);
+  const currencySymbol = getCurrencySymbol(props.currency);
 
   const getMarketChartData = async () => {
     try {
@@ -60,7 +61,6 @@ export function VolumeChart(props) {
     getMarketChartData();
   }, [props.currency, props.timeSpan]);
 
-  const currencySymbol = getCurrencySymbol(props.currency);
   return (
     <StyledVolumeChart>
       <OverviewInfo>
@@ -114,7 +114,7 @@ export function VolumeChart(props) {
             tooltip: {
               callbacks: {
                 title: function (context) {
-                  return `Price: ${context[0].formattedValue}`;
+                  return `Price: ${currencySymbol}${context[0].formattedValue}`;
                 },
                 label: function (context) {
                   return `date: ${context.label}`;

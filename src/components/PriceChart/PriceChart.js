@@ -146,7 +146,7 @@ export function PriceChart(props) {
               tooltip: {
                 callbacks: {
                   title: function (context) {
-                    return `Price: ${context[0].formattedValue}`;
+                    return `Price: ${currencySymbol}${context[0].formattedValue}`;
                   },
                   label: function (context) {
                     return `date: ${context.label}`;
