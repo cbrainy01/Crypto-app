@@ -15,6 +15,7 @@ export const CoinPageContainer = styled.div`
 
 export const YourSummary = styled.p`
   font-size: 11px;
+  font-weight: 600;
   margin-bottom: 25px;
 `
 
@@ -266,7 +267,7 @@ export const RightPct = styled.div`
 `
 
 export const CoinDescription = styled.div`
-  margin-top: 2.6%;
+  // margin-top: 2.6%;
   margin-left: 13.5%;
   margin-right: 12.3%;
   background: ${(props) => props.theme.main};
@@ -275,13 +276,24 @@ export const CoinDescription = styled.div`
     margin: 0 auto;
   }
   div {
-    padding: 18px 36px;
+    padding: 0px 36px 25px 36px;
   }
   a:link {
     color: blue;
     background: ${(props) => props.theme.inner};
   }
+  img {
+    margin-top: 15px;
+  }
+
 `;
+
+export const Description = styled.div`
+  font-size: 11px; 
+  font-weight: 600;
+  margin-top: 25px;
+  margin-bottom: 25px;
+`
 
 export const CoinLinks = styled.div`
   margin-top: 1.4%;

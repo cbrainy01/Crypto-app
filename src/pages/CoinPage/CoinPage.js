@@ -30,6 +30,7 @@ import {
   BarContainer,
   LeftPct,
   RightPct,
+  Description,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -225,8 +226,9 @@ export default function CoinPage(props) {
               </section>
             </SummaryC>
           </CoinSummary>
-          <h1>Description:</h1>
+          <Description>Description</Description>
           <CoinDescription>
+            <StackWrap><img alt="stack icon" src={Stack}/></StackWrap>
             <div
               dangerouslySetInnerHTML={{ __html: coinData.description.en }}
             ></div>
