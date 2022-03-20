@@ -60,6 +60,7 @@ export function PriceChart(props) {
 
       const chart = chartRef.current;
       if (chart) {
+        console.log("made it")
         const chartData = {
           labels: getPreviousDates(startDate(), props.timeSpan),
           datasets: [
@@ -96,8 +97,10 @@ export function PriceChart(props) {
 
   useEffect(() => {
     getMarketChartData();
+    // if(prevChart.current !== currentChart.current && prevChart.current === null) {getmarketchartdata()}
   }, [props.currency, props.timeSpan]);
-
+  
+  console.log("cref: ", chartRef)
   // console.log("loadstatus: ", isLoading)
   // console.log("priceData: ", priceData)
   if(isLoading) { return (<StyledPriceChart><ChartLoader/></StyledPriceChart>) }

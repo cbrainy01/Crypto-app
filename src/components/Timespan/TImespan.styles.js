@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const StyledTimespan = styled.div`
-   padding-left: 265px;
-   padding-right: 265px;
+//    padding-left: 265px;
+//    padding-right: 265px;
+display: flex;
+justify-content: center;
    height: 50px;
    overflow: hidden;
 //    margin-bottom: 60px;
@@ -12,12 +14,8 @@ export const TimespanContainer = styled.div`
  width: 100%;
  display: flex;
  flex-flow: row;
- justify-content: space-evenly;
- justify-content: space-around;
  align-items: center;
-// overflow: hidden;
-    // margin: 0 auto;
-    padding: 7px 6px;
+padding: 7px 0 7px 0;
     
     background: ${(props) => props.theme.main};
     border-radius: 10px;
@@ -25,7 +23,9 @@ export const TimespanContainer = styled.div`
     div {
         background: ${(props) => props.theme.inner};
         padding: 4px 8px;
-        border-radius: 10px
+        border-radius: 6px;
+        margin-right: 8px;
+        margin-left: 8px;
     }
     div:active {
         background: red;
