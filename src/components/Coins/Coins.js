@@ -8,6 +8,8 @@ import ArrowDown from "icons/ArrowDown.svg";
 import ArrowLeft from "icons/ArrowLeft.svg";
 import ArrowRight from "icons/ArrowRight.svg";
 import TornadoSort from "icons/TornadoSort.svg";
+// import ChartError from "components/BitcoinOverview/ChartError"
+// import ChartLoader from "components/BitcoinOverview/ChartLoader"
 import {
   StyledCoins,
   SortingContainer,
@@ -94,6 +96,9 @@ export function Coins(props) {
     const att = e.target.getAttribute("data-value");
     setSortType(att);
   };
+
+  // if(isLoading) { return(<StyledCoins><ChartLoader/></StyledCoins>) }
+  // if(error) { return (<StyledCoins><ChartError errorMessage={error.message}/></StyledCoins>) }
 
   return (
     <CoinsContainer>
