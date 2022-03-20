@@ -25,6 +25,11 @@ import {
   StackWrap,
   ATH,
   ATL,
+  SummaryCTop,
+  SummaryCBottom,
+  BarContainer,
+  LeftPct,
+  RightPct,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -32,12 +37,13 @@ import Uptick from "icons/Uptick.svg";
 import Downtick from "icons/Downtick.svg";
 import Plus from "icons/Plus.svg";
 import Copy from "icons/Copy.svg";
+import Bullet from "icons/Bullet.svg"
 
 export default function CoinPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [coinData, setCoinData] = useState(null);
-  const num = numeral(coinData.market_data.price_change_percentage_24h).format("0.00");
+  // const num = numeral(coinData.market_data.price_change_percentage_24h).format("0.00");
 
   const coinId = props.match.params.coin;
   const currency = props.currency;
@@ -84,6 +90,7 @@ export default function CoinPage(props) {
     navigator.clipboard.writeText(copiedText);
   };
 
+  // console.log("TST: ", coinData.market_data.market_cap.change_percentage)
   return (
     <div>
       {isLoading && <h1>...Loading</h1>}
@@ -151,22 +158,21 @@ export default function CoinPage(props) {
 
             <SummaryC>
               <section>
+                <SummaryCTop>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Market cap: </p>
+                  <span>Market cap: </span>
                   <p>
                     {currencySymbol}
                     {formatNumber(coinData.market_data.market_cap[currency])}
                   </p>
-                  <p>
-                    {renderPercentChange(
-                      coinData.market_data.market_cap.change_percentage
-                    )}
-                  </p>
+                  <span>
+                    2.44%
+                  </span>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Fully Diluted Valuation: </p>
+                  <span>Fully Diluted Valuation: </span>
                   <p>
                     {currencySymbol}
                     {formatNumber(
@@ -176,38 +182,46 @@ export default function CoinPage(props) {
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Volume 24h: {currencySymbol}</p>
+                  <span>Volume 24h: {currencySymbol}</span>
+                </div>
+                </SummaryCTop>
+                <SummaryCBottom>
+                <div>
+                  <img src={Plus} alt="plus" />
+                  <span>Total Volume: </span>
+                  <p>{coinData.market_data.total_volume.btc}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Total Volume: </p>
-                  <p>
-                    {coinData.market_data.total_volume.btc}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
+                  <span>Circulating Supply: </span>
+                  <p>{coinData.market_data.circulating_supply}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Circulating Supply: </p>
-                  <p>
-                    {coinData.market_data.circulating_supply}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
+                  <span>Max Supply: </span>
+                  <p>{coinData.market_data.max_supply}{" "}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
-                <div>
-                  <img src={Plus} alt="plus" />
-                  <p>Max Supply: </p>
-                  <p>
-                    {coinData.market_data.max_supply}{" "}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
-                </div>
-                <div>
+                </SummaryCBottom>
+                <BarContainer>
+                  <section>
+                    <LeftPct>
+                      <img alt="bullet point" src={Bullet}/>
+                      <p>{volume}%</p>
+                    </LeftPct>
+                    <RightPct>
+                    <img alt="bullet point" src={Bullet}/>
+                    <p>{circulating}%</p>
+                    </RightPct>
+                  </section>
                   <Bar circulating={circulating} volume={volume}>
                     <div></div>
                     <div></div>
                   </Bar>
-                </div>
+                </BarContainer>
+                
               </section>
             </SummaryC>
           </CoinSummary>

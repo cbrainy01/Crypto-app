@@ -178,35 +178,92 @@ export const SummaryC = styled.div`
   height: 190px;
   background: ${(props) => props.theme.main};
   section {
-    padding: 18px 36px;
+    padding: 14px 24px 17px 24px;
   }
-  div {
-    display: flex;
+  img {
+    height: 12px;
+    width: 12px;
+    margin-right: 7px;
   }
 `;
 
+export const SummaryCTop = styled.div`
+margin-bottom: 15px;  
+div {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 6px;
+  }
+  p {
+    margin-right: 1.5px;
+  }
+  span {
+    font-weight: 600;
+    margin-right: 1.5px;
+  }
+`
+
+export const SummaryCBottom = styled.div`
+div {
+  display: flex;
+  justify-content: left;
+  margin-bottom: 6px;
+}
+p {
+  margin-right: 1.5px;
+}
+span {
+  font-weight: 600;
+  margin-right: 1.5px;
+}
+`
+
 export const Bar = styled.div`
-  width: 49.2%;
+  width: 135px;
   border-radius: 8px;
-  height: 0.4%;
-  background: blue;
+  height: 4px;
+  background: #FE8C01;
   display: flex;
   overflow: hidden;
   div:nth-child(1) {
     border-radius: 8px;
-    background: green;
+    background: blue;
     width: ${(props) => props.volume}%;
-    height: 15px;
+    height: 4px;
     overflow: hidden;
   }
 
   div:nth-child(2) {
     border-radius: 2px;
     width: ${(props) => props.circulating}%;
-    height: 15px;
-    background: white;
+    height: 4px;
+    background: #FEE158;
   }
 `;
+
+export const BarContainer = styled.div`
+  margin-top: 6px;
+  section {
+    display: flex;
+    padding: 0;
+  }
+  img {
+    margin: auto 4px auto 0;
+    height: 4px;
+    width: 4px;
+  }
+` 
+export const LeftPct = styled.div`
+display: flex;
+width: 50%;
+justify-content: left;
+color: #FEE158;
+`
+export const RightPct = styled.div`
+  display: flex;
+  justify-content: right;
+  color: #FE8C01;
+`
 
 export const CoinDescription = styled.div`
   margin-top: 2.6%;
