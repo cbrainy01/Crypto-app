@@ -15,7 +15,7 @@ export const TimespanContainer = styled.div`
  justify-content: space-evenly;
  justify-content: space-around;
  align-items: center;
-overflow: hidden;
+// overflow: hidden;
     // margin: 0 auto;
     padding: 7px 6px;
     
@@ -37,4 +37,8 @@ overflow: hidden;
     div:focus {
         color: red;
     }
+`
+
+export const TimespanWrap = styled.div`
+display: flex;
 `

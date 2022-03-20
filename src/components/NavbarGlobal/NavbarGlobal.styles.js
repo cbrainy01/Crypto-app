@@ -13,6 +13,7 @@ export const StyledNavbarGlobal = styled.div`
 `
 export const NavbarGlobalContainer = styled.div`
 `
+
 export const MarketDataContainer = styled.div`
     width: 100%;    
     display: flex;

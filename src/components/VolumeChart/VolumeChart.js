@@ -10,6 +10,8 @@ import {
   getCurrencySymbol,
 } from "utils";
 import { BarChartContainer, OverviewInfo, StyledVolumeChart } from "./VolumeChart.styles";
+import ChartLoader from "components/BitcoinOverview/ChartLoader";
+import ChartError from "components/BitcoinOverview/ChartError";
 
 export function VolumeChart(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +44,7 @@ export function VolumeChart(props) {
       }
       const response = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
+        // `https://pi.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
       );
       const volumeData = response.data.total_volumes
         .map((volume) => volume[1])
@@ -60,6 +63,9 @@ export function VolumeChart(props) {
   useEffect(() => {
     getMarketChartData();
   }, [props.currency, props.timeSpan]);
+
+  if(isLoading) { return (<StyledVolumeChart><ChartLoader/></StyledVolumeChart>) }
+  if(error) { return(<StyledVolumeChart><ChartError errorMessage={error.message}/></StyledVolumeChart>) }
 
   return (
     <StyledVolumeChart>

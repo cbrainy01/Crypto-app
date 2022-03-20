@@ -14,6 +14,8 @@ import {
   OverviewInfo,
   StyledPriceChart,
 } from "./PriceChart.styles";
+import ChartLoader from "components/BitcoinOverview/ChartLoader"
+import ChartError from "components/BitcoinOverview/ChartError";
 
 export function PriceChart(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,6 +51,7 @@ export function PriceChart(props) {
 
       const response = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
+        // `https://pi.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
       );
       const priceData = response.data.prices
         .map((price) => price[1])
@@ -94,6 +97,11 @@ export function PriceChart(props) {
   useEffect(() => {
     getMarketChartData();
   }, [props.currency, props.timeSpan]);
+
+  // console.log("loadstatus: ", isLoading)
+  // console.log("priceData: ", priceData)
+  if(isLoading) { return (<StyledPriceChart><ChartLoader/></StyledPriceChart>) }
+  if(error) { return (<StyledPriceChart><ChartError errorMessage={error.message}/></StyledPriceChart>) }
 
   return (
     <StyledPriceChart>
