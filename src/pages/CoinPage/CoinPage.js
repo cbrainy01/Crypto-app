@@ -1,4 +1,5 @@
 import axios from "axios";
+import numeral from "numeral";
 import React, { useState, useEffect } from "react";
 import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
@@ -16,6 +17,14 @@ import {
   YourSummary,
   CoinPageContainer,
   CoinName,
+  SummaryATop,
+  SummaryABottom,
+  BPrice,
+  PercentChange,
+  Profit,
+  StackWrap,
+  ATH,
+  ATL,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -28,6 +37,7 @@ export default function CoinPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [coinData, setCoinData] = useState(null);
+  const num = numeral(coinData.market_data.price_change_percentage_24h).format("0.00");
 
   const coinId = props.match.params.coin;
   const currency = props.currency;
@@ -57,6 +67,14 @@ export default function CoinPage(props) {
     }
   };
 
+  function getProfit(price, pctChangeString) {
+    const pctChange = parseFloat(pctChangeString)
+    const profit =  ((pctChange / 100) * price).toFixed(3)  
+    if(isNaN(pctChange)) {return `${currencySymbol}0`}
+    if( pctChange >= 0 ) { return `${currencySymbol}${profit}` }
+    else { return`-${currencySymbol}${profit}` }
+  }
+
   useEffect(() => {
     getCoinData();
   }, [currency, coinId]);
@@ -76,41 +94,41 @@ export default function CoinPage(props) {
           <YourSummary>Your Summary</YourSummary>
           <CoinSummary>
             <SummaryA>
-              <section>
+                <SummaryATop>
                 <ImgContainer>
                   <img src={coinData.image.small} alt={coinData.name} />
                 </ImgContainer>
                 <CoinName>
                   {coinData.name}({coinData.symbol.toUpperCase()})
                 </CoinName>
-                <div>
+                </SummaryATop>
+                <SummaryABottom>
                   <img src={Link} alt="link icon" />
                   <a href={coinData.links.homepage[0]}>
                     {coinData.links.homepage[0]}
                   </a>
-                </div>
-              </section>
-            </SummaryA>
+                </SummaryABottom>
+             </SummaryA>
+
             <SummaryB>
-              <section>
-                <div>
-                  <span>
+                <BPrice>
+                  <div>
                     {currencySymbol}
                     {coinData.market_data.current_price[currency]}
-                  </span>
-                  <span>
-                    {renderPercentChange(
-                      coinData.market_data.price_change_percentage_24h
-                    )}
-                  </span>
-                </div>
-                <div>
-                  <img src={Stack} alt="stack icon" />
-                </div>
-                <div>
-                  <span>
+                  </div>
+                  <PercentChange color={coinData.market_data.price_change_percentage_24h >= 0 ? "#00FC2A" : "red"}>
+                    <img src={coinData.market_data.price_change_percentage_24h >= 0 ? Uptick : Downtick}/>
+                    {numeral(coinData.market_data.price_change_percentage_24h).format("0.00")}%
+                  </PercentChange>
+                </BPrice>
+                <Profit color={coinData.market_data.price_change_percentage_24h >= 0 ? "#00FC2A" : "red"}>
+                  <p>Profit: </p><span> {getProfit(coinData.market_data.current_price[currency], numeral(coinData.market_data.price_change_percentage_24h).format("0.00"))}</span>
+                </Profit>
+                <StackWrap>
+                    <img src={Stack} alt="stack icon" />
+                </StackWrap>
+                <ATH>
                     <img src={Uptick} alt="uptick" />
-                  </span>
                   <span>
                     <p>
                       All Time High: {currencySymbol}
@@ -118,11 +136,9 @@ export default function CoinPage(props) {
                     </p>
                     <p>{coinData.market_data.ath_date[currency]}</p>
                   </span>
-                </div>
-                <div>
-                  <span>
-                    <img src={Downtick} alt="downtick" />
-                  </span>
+                </ATH>
+                <ATL>
+                  <img src={Downtick} alt="downtick" />
                   <span>
                     <p>
                       All Time Low: {currencySymbol}
@@ -130,9 +146,9 @@ export default function CoinPage(props) {
                     </p>
                     <p>{coinData.market_data.atl_date[currency]}</p>
                   </span>
-                </div>
-              </section>
+                </ATL>
             </SummaryB>
+
             <SummaryC>
               <section>
                 <div>
