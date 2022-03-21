@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from "utils";
 import CurrencyExchange from "components/CurrencyExchange";
@@ -8,12 +8,15 @@ import {
   StyledCoinPageChart,
   RadioLabel,
   RadioWrap,
+  LineContainer,
 } from "./CoinPageChart.styles";
 
 export function CoinPageChart(props) {
   const { data } = props;
 
   const [timespan, setTimespan] = useState(24);
+  const [chartData, setChartData] = useState({ datasets: [] });
+  const chartRef = useRef(null)
 
   const lineData = data.slice(-timespan);
   const labels = getPreviousHours(timespan).reverse();
@@ -21,6 +24,33 @@ export function CoinPageChart(props) {
   const handleTimespanChange = (e) => {
     setTimespan(e.target.value);
   };
+
+  function createGradient(ctx) {
+    const gradient = ctx.createLinearGradient(0, 0, 0, 100);
+    gradient.addColorStop(0, "#00FF5F8F");
+    gradient.addColorStop(0.15, "#FFFFFF32");
+    gradient.addColorStop(1, "#00FF5F00 ");
+    return gradient;
+  }
+
+  useEffect(() => {
+    const chart = chartRef.current;
+    if(chart) {
+      const chartData = {
+        labels: labels,
+        datasets: [
+          {
+            data: lineData,
+            borderColor: "gray",
+            backgroundColor: createGradient(chart.ctx),
+            fill: { target: "origin", },
+          },
+        ],
+      }
+      setChartData(chartData);
+    }
+    
+  },[timespan])
 
   return (
     <StyledCoinPageChart>
@@ -83,20 +113,14 @@ export function CoinPageChart(props) {
             currentPrice={props.currentPrice}
             currency={props.currency}
           />
+          <LineContainer>
       <Line
-        data={{
-          labels: labels,
-          datasets: [
-            {
-              data: lineData,
-              borderColor: "grey",
-            },
-          ],
-        }}
-        
+      data={chartData}
+        ref={chartRef}
         options={{
           elements: {
-            point: { radius: 0 },
+            point: { radius: 0, hitRadius: 30, hoverRadius: 8, backgroundColor: "#06D554"},
+            line: { tension: 0.3 },
           },
           scales: {
             y: {
@@ -125,7 +149,7 @@ export function CoinPageChart(props) {
             legend: { display: false },
           },
         }}
-      />
+      /></LineContainer>
     </StyledCoinPageChart>
   );
 }

@@ -47,3 +47,7 @@ export const RadioLabel = styled.label`
     transform: scale(1);
   }
 `;
+
+export const LineContainer = styled.div`
+  width: 100%;
+`

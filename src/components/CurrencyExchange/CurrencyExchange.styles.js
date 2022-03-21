@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const ExchangeContainer = styled.div`
   padding: 0 298px 0 287px;
+  margin-bottom: 24px;
 `;
 
 export const ExchangeWrap = styled.div`

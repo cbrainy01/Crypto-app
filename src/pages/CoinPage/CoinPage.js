@@ -260,11 +260,6 @@ export default function CoinPage(props) {
             </LinksWrap>
           </CoinLinks>
           </CoinPageContainer> 
-          {/* <CurrencyExchange
-            coin={coinData.symbol}
-            currentPrice={coinData.market_data.current_price[currency]}
-            currency={currency}
-          /> */}
           <CoinPageChart
           coin={coinData.symbol}
           currentPrice={coinData.market_data.current_price[currency]}
