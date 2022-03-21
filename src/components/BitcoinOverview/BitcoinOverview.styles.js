@@ -12,10 +12,12 @@ export const YourOverview = styled.p`
 export const ChartContainer = styled.div`
   padding-left: 46px;
   padding-right: 47px;
-  display: flex;
-  flex-flow: row;
   margin-bottom: 15px;
-  overflow: hidden;
+`;
+
+export const ChartWrap = styled.div`
+  width: 100%;
+  display: flex;
 `;
 
 export const LoaderContainer = styled.div`

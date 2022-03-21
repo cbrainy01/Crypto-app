@@ -27,7 +27,6 @@ export function PriceChart(props) {
   const chartRef = useRef(null);
   const currencySymbol = getCurrencySymbol(props.currency);
 
-  const prevChartRef = usePrevious(chartRef)
 
   const getMarketChartData = async () => {
     try {
@@ -54,16 +53,13 @@ export function PriceChart(props) {
 
       const response = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
-        // `https://pi.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
       );
       const priceData = response.data.prices
         .map((price) => price[1])
         .slice(1, span + 1);
       const todaysPrice = response.data.prices[0][1];
-// TODO:
       const chart = chartRef.current;
       if (chart) {
-        console.log("made it")
         const chartData = {
           labels: getPreviousDates(startDate(), props.timeSpan),
           datasets: [
@@ -98,23 +94,18 @@ export function PriceChart(props) {
     return gradient;
   }
 
-  // console.log("prevC: ", prevChartRef)
-  // console.log("****chartref: ", chartRef)
   useEffect(() => {
-    // getMarketChartData();
-    console.log("pcref: ", prevChartRef)
-  console.log("****chartref: ", chartRef)
-    // if(prevChartRef.current == chartRef.current) {console.log("ACHIEVED")}
-    if(prevChartRef.current !== chartRef.current && prevChartRef.current === null) {getMarketChartData()}
+    getMarketChartData();
   }, [props.currency, props.timeSpan]);
 
   
    
-  if(isLoading) { return (<StyledPriceChart><ChartLoader/></StyledPriceChart>) }
-  if(error) { return (<StyledPriceChart><ChartError errorMessage={error.message}/></StyledPriceChart>) }
+  if(error) { return (<StyledPriceChart><ChartError errorMessage={error.message}/></StyledPriceChart>)}
 
   return (
+    <>
     <StyledPriceChart>
+     { isLoading &&   (<ChartLoader/>) }
       <OverviewInfo>
         <p>BTC</p>
         <div>
@@ -129,7 +120,7 @@ export function PriceChart(props) {
           data={chartData}
           options={{
             elements: {
-              point: { radius: 0, hitRadius: 6, backgroundColor: "#00FF5F8F" },
+              point: { radius: 0, hitRadius: 8, backgroundColor: "#00FF5F8F" },
               line: { tension: 0.2 },
             },
             scales: {
@@ -176,7 +167,7 @@ export function PriceChart(props) {
           }}
         />
       </LineChartContainer>
-    </StyledPriceChart>
+    </StyledPriceChart></>
   );
 }
 
