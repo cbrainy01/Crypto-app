@@ -1,9 +1,11 @@
 import React, { useState } from "react";
+import { getCurrencySymbol } from "utils";
 import {
   ExchangeContainer,
   ExchangeBar,
   CurrencyFill,
   InputBar,
+  ExchangeWrap,
 } from "./CurrencyExchange.styles";
 import Exchange from "icons/Exchange.svg";
 
@@ -13,6 +15,7 @@ export function CurrencyExchange(props) {
   const [focus, setFocus] = useState(null);
   const [currencyInput, setCurrencyInput] = useState(0.0);
   const [coinInput, setCoinInput] = useState(0.0);
+  const currencySymbol = getCurrencySymbol(currency)
 
   const handleChange = (e) => {
     if (isNaN(e.target.value)) {
@@ -34,8 +37,9 @@ export function CurrencyExchange(props) {
 
   return (
     <ExchangeContainer>
+      <ExchangeWrap>
       <ExchangeBar>
-        <CurrencyFill>{currency}</CurrencyFill>
+        <CurrencyFill><p>{currency.toUpperCase()}</p></CurrencyFill>
         <InputBar
           onFocus={() => setFocus("currency")}
           value={currencyInput}
@@ -44,13 +48,14 @@ export function CurrencyExchange(props) {
       </ExchangeBar>
       <img alt="exchange" src={Exchange} />
       <ExchangeBar>
-        <CurrencyFill>{coin}</CurrencyFill>
+        <CurrencyFill><p>{coin.toUpperCase()}</p></CurrencyFill>
         <InputBar
           onFocus={() => setFocus("coin")}
           value={coinInput}
           onChange={handleChange}
-        ></InputBar>
+        />
       </ExchangeBar>
+      </ExchangeWrap>
     </ExchangeContainer>
   );
 }

@@ -4,7 +4,7 @@ export const StyledCoinPageChart = styled.div``;
 
 export const RadioContainer = styled.div`
   margin-top: 27px;
-  padding: 0 351px 0 351px;
+  padding: 0 351px 0 348px;
 `;
 
 export const RadioWrap = styled.div`
@@ -21,7 +21,7 @@ export const RadioLabel = styled.label`
   cursor: pointer;
   margin-right: 18px;
   p {
-    font-size: 7px;
+    font-size: 8.5px;
   }
   input {
     display: none;
