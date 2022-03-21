@@ -8,6 +8,7 @@ import {
   startDate,
   wordedDate,
   getCurrencySymbol,
+  usePrevious,
 } from "utils";
 import {
   LineChartContainer,
@@ -25,6 +26,8 @@ export function PriceChart(props) {
   const [chartData, setChartData] = useState({ datasets: [] });
   const chartRef = useRef(null);
   const currencySymbol = getCurrencySymbol(props.currency);
+
+  const prevChartRef = usePrevious(chartRef)
 
   const getMarketChartData = async () => {
     try {
@@ -57,7 +60,7 @@ export function PriceChart(props) {
         .map((price) => price[1])
         .slice(1, span + 1);
       const todaysPrice = response.data.prices[0][1];
-
+// TODO:
       const chart = chartRef.current;
       if (chart) {
         console.log("made it")
@@ -95,14 +98,18 @@ export function PriceChart(props) {
     return gradient;
   }
 
+  // console.log("prevC: ", prevChartRef)
+  // console.log("****chartref: ", chartRef)
   useEffect(() => {
-    getMarketChartData();
-    // if(prevChart.current !== currentChart.current && prevChart.current === null) {getmarketchartdata()}
+    // getMarketChartData();
+    console.log("pcref: ", prevChartRef)
+  console.log("****chartref: ", chartRef)
+    // if(prevChartRef.current == chartRef.current) {console.log("ACHIEVED")}
+    if(prevChartRef.current !== chartRef.current && prevChartRef.current === null) {getMarketChartData()}
   }, [props.currency, props.timeSpan]);
+
   
-  console.log("cref: ", chartRef)
-  // console.log("loadstatus: ", isLoading)
-  // console.log("priceData: ", priceData)
+   
   if(isLoading) { return (<StyledPriceChart><ChartLoader/></StyledPriceChart>) }
   if(error) { return (<StyledPriceChart><ChartError errorMessage={error.message}/></StyledPriceChart>) }
 
