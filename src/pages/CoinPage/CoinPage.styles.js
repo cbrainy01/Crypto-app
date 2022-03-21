@@ -11,48 +11,49 @@ export const StyledCoinPage = styled.div`
 export const CoinPageContainer = styled.div`
   padding-left: 150px;
   padding-right: 118px;
-`
+`;
 
 export const YourSummary = styled.p`
   font-size: 11px;
   font-weight: 600;
   margin-bottom: 25px;
-`
+`;
 
 export const CoinSummary = styled.div`
   display: flex;
   flex-flow: row;
-  font-size: 9px; 
- 
+  font-size: 9px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 `;
 
 export const SummaryA = styled.div`
   margin-right: 36px;
 `;
 export const SummaryATop = styled.div`
-height: 147px;
-width: 129px;
-background : ${(props) => props.theme.main};
-border-radius: 6px;
-padding: 18px 36px;
-
-`
+  height: 147px;
+  width: 129px;
+  background: ${(props) => props.theme.main};
+  border-radius: 6px;
+  padding: 18px 36px;
+`;
 export const SummaryABottom = styled.div`
- height: 32px;
- width: 129px;
- border-radius: 6px;
- background : ${(props) => props.theme.main};
- margin-top: 10px; 
- padding: 11px 36px;
- padding-left: 11px;
- padding-right: 11px;
- img {
-   height: 6px;
-   width: 6px;
-   margin-right: 17px;
- }
-
-`
+  height: 32px;
+  width: 129px;
+  border-radius: 6px;
+  background: ${(props) => props.theme.main};
+  margin-top: 10px;
+  padding: 11px 36px;
+  padding-left: 11px;
+  padding-right: 11px;
+  img {
+    height: 6px;
+    width: 6px;
+    margin-right: 17px;
+  }
+`;
 
 export const ImgContainer = styled.div`
   margin: 0 auto;
@@ -66,11 +67,11 @@ export const ImgContainer = styled.div`
     width: 22x;
     height: 22px;
   }
-`
+`;
 export const CoinName = styled.div`
   font-size: 12px;
   margin: 0 auto;
-`
+`;
 
 export const SummaryB = styled.div`
   border-radius: 6px;
@@ -81,33 +82,32 @@ export const SummaryB = styled.div`
   padding-left: 45px;
   padding-right: 41px;
   background: ${(props) => props.theme.main};
-   margin-right: 4.4%;
+  margin-right: 4.4%;
 `;
 
 export const BPrice = styled.div`
-display: flex;
-justify-content: center;
+  display: flex;
+  justify-content: center;
   width: 100%;
   margin: 0 auto;
   div:nth-child(1) {
     font-size: 22px;
-  font-weight: 800;
-
+    font-weight: 800;
   }
-`                                                   
+`;
 
 export const PercentChange = styled.div`
-display: flex;
-margin: auto 0 auto 7px;
-color: ${(props) => props.color};
-font-size: 8p;
-img {
-  height: 2px;
-  width: 6px;
-  margin: auto 0;
-  margin-right: 2px;
-}
-`
+  display: flex;
+  margin: auto 0 auto 7px;
+  color: ${(props) => props.color};
+  font-size: 8p;
+  img {
+    height: 2px;
+    width: 6px;
+    margin: auto 0;
+    margin-right: 2px;
+  }
+`;
 
 export const Profit = styled.div`
   display: flex;
@@ -120,58 +120,59 @@ export const Profit = styled.div`
   p {
     font-weight: 600;
   }
-  span { color: ${(props) => props.color}; 
-  margin-left: 2px; };
-`
+  span {
+    color: ${(props) => props.color};
+    margin-left: 2px;
+  }
+`;
 export const StackWrap = styled.div`
-display: flex;
-justify-content: center;
-width: 100%;
-margin: 0 auto;
-margin-bottom: 13px;
- img {
-   height: 11px;
-   width: 11px;
- }
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 13px;
+  img {
+    height: 11px;
+    width: 11px;
+  }
   div {
     width: 100%;
     margin: 0 auto;
-  } 
-`
+  }
+`;
 
 export const ATH = styled.div`
-display: flex;
-justify-content: center;
-width: 100%;
-margin: 0 auto;
-margin-bottom: 18px;
-font-size: 9px;
-img {
-  margin: auto 6px auto 0;
-  height: 10px;
-  width: 4px;
-}
-p:nth-child(1) {
-margin-bottom: 1px;
-}
-`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 18px;
+  font-size: 9px;
+  img {
+    margin: auto 6px auto 0;
+    height: 10px;
+    width: 4px;
+  }
+  p:nth-child(1) {
+    margin-bottom: 1px;
+  }
+`;
 
 export const ATL = styled.div`
-display: flex;
-justify-content: center;
-width: 100%;
-margin: 0 auto;
-font-size: 9px;
-img {
-  margin: auto 6px auto 0;
-  height: 10px;
-  width: 4px;
-}
-p:nth-child(1) {
-margin-bottom: 1px;
-}
-
-`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+  font-size: 9px;
+  img {
+    margin: auto 6px auto 0;
+    height: 10px;
+    width: 4px;
+  }
+  p:nth-child(1) {
+    margin-bottom: 1px;
+  }
+`;
 
 export const SummaryC = styled.div`
   border-radius: 6px;
@@ -189,8 +190,8 @@ export const SummaryC = styled.div`
 `;
 
 export const SummaryCTop = styled.div`
-margin-bottom: 15px;  
-div {
+  margin-bottom: 15px;
+  div {
     display: flex;
     justify-content: left;
     margin-bottom: 6px;
@@ -202,33 +203,33 @@ div {
     font-weight: 600;
     margin-right: 1.5px;
   }
-`
+`;
 
 export const SummaryCBottom = styled.div`
-div {
-  display: flex;
-  justify-content: left;
-  margin-bottom: 6px;
-}
-p {
-  margin-right: 1.5px;
-}
-span {
-  font-weight: 600;
-  margin-right: 1.5px;
-}
-`
+  div {
+    display: flex;
+    justify-content: left;
+    margin-bottom: 6px;
+  }
+  p {
+    margin-right: 1.5px;
+  }
+  span {
+    font-weight: 600;
+    margin-right: 1.5px;
+  }
+`;
 
 export const Bar = styled.div`
   width: 135px;
   border-radius: 8px;
   height: 4px;
-  background: #FE8C01;
+  background: #b54124;
   display: flex;
   overflow: hidden;
   div:nth-child(1) {
     border-radius: 8px;
-    background: blue;
+    background: #fee158;
     width: ${(props) => props.volume}%;
     height: 4px;
     overflow: hidden;
@@ -238,7 +239,7 @@ export const Bar = styled.div`
     border-radius: 2px;
     width: ${(props) => props.circulating}%;
     height: 4px;
-    background: #FEE158;
+    background: #fe8c01;
   }
 `;
 
@@ -253,21 +254,28 @@ export const BarContainer = styled.div`
     height: 4px;
     width: 4px;
   }
-` 
+`;
 export const LeftPct = styled.div`
-display: flex;
-width: 50%;
-justify-content: left;
-color: #FEE158;
-`
+  display: flex;
+  width: 50%;
+  justify-content: left;
+  color: #fee158;
+`;
 export const RightPct = styled.div`
   display: flex;
-  justify-content: right;
+  width: 50%
+  align-items: right;
   color: #FE8C01;
-`
+`;
 
-export const CoinDescription = styled.div`  
-  width: 712px;
+export const DescriptionContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+`;
+
+export const CoinDescription = styled.div`
   background: ${(props) => props.theme.main};
   border-radius: 12px;
   div:nth-child(1) {
@@ -286,14 +294,20 @@ export const CoinDescription = styled.div`
 `;
 
 export const Description = styled.div`
-  font-size: 11px; 
+  font-size: 11px;
   font-weight: 600;
   margin-top: 25px;
   margin-bottom: 25px;
-`
+`;
+
+export const LinksContainer = styled.div`
+  padding-left: 150px;
+  padding-right: 118px;
+`;
 
 export const CoinLinks = styled.div`
   margin-top: 14px;
+  width: 100%;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
@@ -303,11 +317,6 @@ export const CoinLinks = styled.div`
   }
 `;
 
-export const LinksWrap = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-`
-
 export const CoinLink = styled.div`
   display: flex;
   justify-content: center;
@@ -316,7 +325,7 @@ export const CoinLink = styled.div`
   border-radius: 12px;
   padding: 10px 8px 10px 11px;
   margin-right: 10px;
-  
+
   font-size: 7px;
   div {
     height: 32px;

@@ -8,11 +8,11 @@ export const RadioContainer = styled.div`
 `;
 
 export const RadioWrap = styled.div`
-  width: 260px;
+  width: 100%;
   display: flex;
-  flex-flow: row;
+  margin: 0 auto;
   justify-content: center;
-`
+`;
 export const RadioButton = styled.input``;
 
 export const RadioLabel = styled.label`
@@ -29,7 +29,7 @@ export const RadioLabel = styled.label`
   div {
     width: 14px;
     height: 14px;
-    border: 1px solid #06D554;
+    border: 1px solid #06d554;
     border-radius: 50%;
     margin-right: 2px;
     padding: 1px;
@@ -50,4 +50,4 @@ export const RadioLabel = styled.label`
 
 export const LineContainer = styled.div`
   width: 100%;
-`
+`;

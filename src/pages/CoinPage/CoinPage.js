@@ -2,8 +2,8 @@ import axios from "axios";
 import numeral from "numeral";
 import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
-import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
-import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
+import { CoinPageChart, ErrorDisplay } from "components";
+import { getCurrencySymbol, formatNumber } from "utils";
 import {
   CoinDescription,
   CoinLinks,
@@ -32,7 +32,7 @@ import {
   LeftPct,
   RightPct,
   Description,
-  LinksWrap,
+  DescriptionContainer,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -57,7 +57,7 @@ export default function CoinPage(props) {
   );
   const volume = Math.round(
     (coinData?.market_data.total_volume["btc"] /
-      coinData?.market_data.max_supply) *
+      coinData?.market_data.max_supply || 1) *
       100
   );
 
@@ -80,7 +80,7 @@ export default function CoinPage(props) {
     const profit =  ((pctChange / 100) * price).toFixed(3)  
     if(isNaN(pctChange)) {return `${currencySymbol}0`}
     if( pctChange >= 0 ) { return `${currencySymbol}${profit}` }
-    else { return`-${currencySymbol}${profit}` }
+    else if( pctChange < 0 ) { return`-${currencySymbol}${profit.slice(1)}` }
   }
   
   const handleClipboardCopy = (e) => {
@@ -107,7 +107,6 @@ export default function CoinPage(props) {
     </CoinLink> )})
     return links.slice(0,3);
   }
-  
 
   useEffect(() => {
     getCoinData();
@@ -231,11 +230,11 @@ export default function CoinPage(props) {
                   <section>
                     <LeftPct>
                       <img alt="bullet point" src={Bullet}/>
-                      <p>{volume}%</p>
+                      <p>{volume > 100 ? "N/A" : `${volume}%`}</p>
                     </LeftPct>
                     <RightPct>
                     <img alt="bullet point" src={Bullet}/>
-                    <p>{circulating}%</p>
+                    <p>{circulating > 100 ? "N/A" : `${circulating}%`}</p>
                     </RightPct>
                   </section>
                   <Bar circulating={circulating} volume={volume}>
@@ -248,16 +247,15 @@ export default function CoinPage(props) {
             </SummaryC>
           </CoinSummary>
           <Description>Description</Description>
+          <DescriptionContainer>
           <CoinDescription>
             <StackWrap><img alt="stack icon" src={Stack}/></StackWrap>
             <div
               dangerouslySetInnerHTML={{ __html: coinData.description.en }}
             ></div>
-          </CoinDescription>
+          </CoinDescription></DescriptionContainer>
           <CoinLinks>
-            <LinksWrap>
               {renderLinks()}
-            </LinksWrap>
           </CoinLinks>
           </CoinPageContainer> 
           <CoinPageChart

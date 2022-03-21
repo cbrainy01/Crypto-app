@@ -7,9 +7,9 @@ export const ExchangeContainer = styled.div`
 
 export const ExchangeWrap = styled.div`
   display: flex;
-  width: 375px;
+  width: 100%;
   height: 27px;
-  align-items: center;
+  justify-content: center;
   margin-top: 12px;
   color: ${(props) => props.theme.main};
   img {
