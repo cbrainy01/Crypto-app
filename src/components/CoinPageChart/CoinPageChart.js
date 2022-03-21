@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from "utils";
+import CurrencyExchange from "components/CurrencyExchange";
 import {
   RadioButton,
   RadioContainer,
   StyledCoinPageChart,
   RadioLabel,
+  RadioWrap,
 } from "./CoinPageChart.styles";
 
 export function CoinPageChart(props) {
@@ -23,6 +25,7 @@ export function CoinPageChart(props) {
   return (
     <StyledCoinPageChart>
       <RadioContainer>
+        <RadioWrap>
         <RadioLabel>
           <RadioButton
             onChange={handleTimespanChange}
@@ -31,7 +34,7 @@ export function CoinPageChart(props) {
             value={12}
             name="12h"
           />
-          <div></div>12h
+          <div></div><p>12h</p>
         </RadioLabel>
         <RadioLabel>
           <RadioButton
@@ -41,7 +44,7 @@ export function CoinPageChart(props) {
             value={24}
             name="1d"
           />
-          <div></div>1d
+          <div></div><p>1d</p>
         </RadioLabel>
         <RadioLabel>
           <RadioButton
@@ -51,7 +54,7 @@ export function CoinPageChart(props) {
             value={72}
             name="3d"
           />
-          <div></div>3d
+          <div></div><p>3d</p>
         </RadioLabel>
         <RadioLabel>
           <RadioButton
@@ -61,7 +64,7 @@ export function CoinPageChart(props) {
             value={120}
             name="5d"
           />
-          <div></div>5d
+          <div></div><p>5d</p>
         </RadioLabel>
         <RadioLabel>
           <RadioButton
@@ -71,9 +74,15 @@ export function CoinPageChart(props) {
             value={168}
             name="7d"
           />
-          <div></div>7d
+          <div></div><p>7d</p>
         </RadioLabel>
+        </RadioWrap>
       </RadioContainer>
+      <CurrencyExchange
+            coin={props.coin}
+            currentPrice={props.currentPrice}
+            currency={props.currency}
+          />
       <Line
         data={{
           labels: labels,
@@ -84,11 +93,7 @@ export function CoinPageChart(props) {
             },
           ],
         }}
-        options={{
-          elements: {
-            point: { radius: 3, backgroundColor: "limegreen" },
-          },
-        }}
+        
         options={{
           elements: {
             point: { radius: 0 },

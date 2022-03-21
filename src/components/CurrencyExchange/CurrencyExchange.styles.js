@@ -6,7 +6,7 @@ export const ExchangeContainer = styled.div`
     margin-right: 29.89%;
     height: 30px;
     align-items: center; 
-    margin-top: 5.7%;
+    margin-top: 27px;
     color: red;
     img {
         margin-right: 10px;

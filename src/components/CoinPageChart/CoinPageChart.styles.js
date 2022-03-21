@@ -2,25 +2,37 @@ import styled from "styled-components";
 
 export const StyledCoinPageChart = styled.div``;
 
-export const RadioContainer = styled.div``;
+export const RadioContainer = styled.div`
+  margin-top: 27px;
+  padding: 0 351px 0 351px;
+`;
 
+export const RadioWrap = styled.div`
+  width: 260px;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+`
 export const RadioButton = styled.input``;
 
 export const RadioLabel = styled.label`
-  display: inline-flex;
+  display: flex;
   align-items: center;
   cursor: pointer;
-  margin-right: 10px;
+  margin-right: 18px;
+  p {
+    font-size: 7px;
+  }
   input {
     display: none;
   }
   div {
-    width: 1.25em;
-    height: 1.25em;
-    border: 2px solid white;
+    width: 14px;
+    height: 14px;
+    border: 1px solid #06D554;
     border-radius: 50%;
-    margin-right: 10px;
-    padding: 2px;
+    margin-right: 2px;
+    padding: 1px;
     &:after {
       content: "";
       width: 100%;
