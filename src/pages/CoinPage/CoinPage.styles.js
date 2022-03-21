@@ -266,10 +266,8 @@ export const RightPct = styled.div`
   color: #FE8C01;
 `
 
-export const CoinDescription = styled.div`
-  // margin-top: 2.6%;
-  margin-left: 13.5%;
-  margin-right: 12.3%;
+export const CoinDescription = styled.div`  
+  width: 712px;
   background: ${(props) => props.theme.main};
   border-radius: 12px;
   div:nth-child(1) {
@@ -285,7 +283,6 @@ export const CoinDescription = styled.div`
   img {
     margin-top: 15px;
   }
-
 `;
 
 export const Description = styled.div`
@@ -296,35 +293,48 @@ export const Description = styled.div`
 `
 
 export const CoinLinks = styled.div`
-  margin-top: 1.4%;
-  margin-left: 13.5%;
-  margin-right: 12.3%;
+  margin-top: 14px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
   div {
     display: flex;
     justify-content: space-evenly;
   }
 `;
 
+export const LinksWrap = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`
+
 export const CoinLink = styled.div`
   display: flex;
   justify-content: center;
+  min-width: 230px;
   background: ${(props) => props.theme.main};
   border-radius: 12px;
-  padding: 8px 18px;
-  font-size: 15px;
+  padding: 10px 8px 10px 11px;
+  margin-right: 10px;
+  
+  font-size: 7px;
   div {
-    height: 15px;
+    height: 32px;
   }
   p {
-    margin-right: 4.5%;
+    margin: auto 2px;
   }
   a {
-    margin-left: 1.14%;
-    margin-right: 4.68%;
+    margin: auto 0;
+  }
+  a img {
+    height: 6px;
+    width: 6px;
   }
   img {
-    margin-left: 1.14%;
-    margin-right: 4.68%;
     cursor: pointer;
+    height: 10px;
+    width: 10px;
+    margin: auto 0;
   }
 `;

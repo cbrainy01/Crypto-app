@@ -1,6 +1,7 @@
 import axios from "axios";
 import numeral from "numeral";
 import React, { useState, useEffect } from "react";
+import { v4 as uuid } from "uuid";
 import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
 import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
 import {
@@ -31,6 +32,7 @@ import {
   LeftPct,
   RightPct,
   Description,
+  LinksWrap,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -44,7 +46,6 @@ export default function CoinPage(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [coinData, setCoinData] = useState(null);
-  // const num = numeral(coinData.market_data.price_change_percentage_24h).format("0.00");
 
   const coinId = props.match.params.coin;
   const currency = props.currency;
@@ -81,17 +82,37 @@ export default function CoinPage(props) {
     if( pctChange >= 0 ) { return `${currencySymbol}${profit}` }
     else { return`-${currencySymbol}${profit}` }
   }
-
-  useEffect(() => {
-    getCoinData();
-  }, [currency, coinId]);
-
+  
   const handleClipboardCopy = (e) => {
     const copiedText = e.target.getAttribute("data-value");
     navigator.clipboard.writeText(copiedText);
   };
 
-  // console.log("TST: ", coinData.market_data.market_cap.change_percentage)
+  function renderLinks() {
+    const links =  coinData.links.blockchain_site.map( (siteLink, index) => {
+      if(siteLink.length == 0) {return}
+      return (<CoinLink key={uuid()}>
+      <div>
+        <a href={siteLink} target="_blank">
+          <img src={Link} alt="link" />
+        </a>
+        <p>{siteLink}</p>
+        <img
+          onClick={handleClipboardCopy}
+          data-value={siteLink}
+          src={Copy}
+          alt="copy"
+        />
+      </div>
+    </CoinLink> )})
+    return links.slice(0,3);
+  }
+  
+
+  useEffect(() => {
+    getCoinData();
+  }, [currency, coinId]);
+
   return (
     <div>
       {isLoading && <h1>...Loading</h1>}
@@ -234,50 +255,9 @@ export default function CoinPage(props) {
             ></div>
           </CoinDescription>
           <CoinLinks>
-            <div>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[0]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[0]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[0]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[1]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[1]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[1]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[2]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[2]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[2]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-            </div>
+            <LinksWrap>
+              {renderLinks()}
+            </LinksWrap>
           </CoinLinks>
           </CoinPageContainer> 
           <CurrencyExchange
