@@ -14,6 +14,9 @@ export const CoinPageContainer = styled.div`
 `;
 
 export const YourSummary = styled.p`
+  width: 100%;
+  display: flex;
+  justify-content: left;
   font-size: 11px;
   font-weight: 600;
   margin-bottom: 25px;
@@ -29,6 +32,11 @@ export const CoinSummary = styled.div`
   margin: 0 auto;
 `;
 
+export const SummaryWrap = styled.div`
+display: flex;
+justify-content: center;
+margin: 0 auto;
+`
 export const SummaryA = styled.div`
   margin-right: 36px;
 `;

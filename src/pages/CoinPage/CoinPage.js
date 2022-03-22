@@ -33,6 +33,7 @@ import {
   RightPct,
   Description,
   DescriptionContainer,
+  SummaryWrap,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -118,6 +119,7 @@ export default function CoinPage(props) {
       {error && <ErrorDisplay />}
       {coinData && (
         <StyledCoinPage>
+          
           <CoinPageContainer>
           <YourSummary>Your Summary</YourSummary>
           <CoinSummary>

@@ -58,9 +58,7 @@ export const DisplayCountControl = styled.div`
 export const RankingSort = styled.div``;
 
 export const SortBy = styled.div``;
-export const StyledTable = styled.div`
-  // overflow-x: scroll;
-`;
+export const StyledTable = styled.div``;
 
 export const IndexHeader = styled.span`
   margin-right: 10px;
