@@ -1,5 +1,15 @@
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import SVG from "react-inlinesvg"
+
+export const StyledSearchIcon = styled(SVG)`
+  height: 10px;
+  width: 10px;
+  margin-right: 7px;
+  & path {
+    fill: ${(props) => props.theme.color};
+  }
+`;
 
 export const NavbarContainer = styled.div``;
 

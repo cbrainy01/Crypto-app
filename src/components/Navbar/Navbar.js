@@ -9,6 +9,7 @@ import {
   RightNavbar,
   LinkContainer,
   SearchContainer,
+  StyledSearchIcon,
   DropdownContainer,
   CurrencyDropdown,
   ThemeToggleContainer,
@@ -56,7 +57,7 @@ export default function Navbar(props) {
         </LeftNavbar>
         <RightNavbar>
           <SearchContainer>
-            <img src={SearchIcon} alt="search icon" />
+            <StyledSearchIcon alt="search icon" src={SearchIcon}/>
             <CoinSearch />
           </SearchContainer>
           <DropdownContainer>
