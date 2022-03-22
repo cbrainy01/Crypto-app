@@ -13,6 +13,7 @@ export const YourOverview = styled.p`
 
 export const ChartContainer = styled.div`
   margin: 0 auto;
+  margin-bottom: 15px;
 `;
 
 export const ChartWrap = styled.div`
