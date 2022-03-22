@@ -1,8 +1,10 @@
 import styled from "styled-components";
 
 export const StyledNavbarGlobal = styled.div`
-  padding-left: 251px;
-  padding-right: 246px;
+  display: flex;
+  justify-content: center;
+  height: 27px;
+  margin: 0 auto;
   font-size: 8px;
 `;
 
