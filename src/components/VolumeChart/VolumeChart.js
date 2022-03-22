@@ -9,13 +9,20 @@ import {
   startDate,
   getCurrencySymbol,
 } from "utils";
-import { StyledVolumeChart } from "./VolumeChart.styles";
+import {
+  BarChartContainer,
+  OverviewInfo,
+  StyledVolumeChart,
+} from "./VolumeChart.styles";
+import ChartLoader from "components/BitcoinOverview/ChartLoader";
+import ChartError from "components/BitcoinOverview/ChartError";
 
 export function VolumeChart(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [volumeData, setVolumeData] = useState([]);
   const [todaysVolume, setTodaysVolume] = useState(null);
+  const currencySymbol = getCurrencySymbol(props.currency);
 
   const getMarketChartData = async () => {
     try {
@@ -60,86 +67,86 @@ export function VolumeChart(props) {
     getMarketChartData();
   }, [props.currency, props.timeSpan]);
 
-  const currencySymbol = getCurrencySymbol(props.currency);
+  if (error) {
+    return (
+      <StyledVolumeChart>
+        <ChartError errorMessage={error.message} />
+      </StyledVolumeChart>
+    );
+  }
+
   return (
-    <StyledVolumeChart>
-      VolumeChart
-      <div>Volume 24h</div>
-      <div>
-        Todays volume: {currencySymbol}
-        {formatOverviewNumber(todaysVolume)}
-      </div>
-      <div>Todays date: {wordedDate(new Date())}</div>
-      <Bar
-        data={{
-          labels: getPreviousDates(startDate(), props.timeSpan),
-          datasets: [
-            {
-              data: volumeData,
-              borderColor: "rgb(53, 162, 235)",
-              backgroundColor: "rgba(53, 162, 235, 0.5)",
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value;
+    <>
+      <StyledVolumeChart>
+        {isLoading && <ChartLoader />}
+        <OverviewInfo>
+          <p>Volume 24h</p>
+          <div>
+            {currencySymbol}
+            {formatOverviewNumber(todaysVolume)}
+          </div>
+          <p>{wordedDate(new Date())}</p>
+        </OverviewInfo>
+        <BarChartContainer>
+          <Bar
+            data={{
+              labels: getPreviousDates(startDate(), props.timeSpan),
+              datasets: [
+                {
+                  data: volumeData,
+                  borderColor: "#2172E5",
+                  backgroundColor: "#2172E5",
+                  borderRadius: 2,
+                },
+              ],
+            }}
+            options={{
+              scales: {
+                y: {
+                  display: false,
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    callback: function (value, index, ticks) {
+                      return value;
+                    },
+                  },
+                },
+                x: {
+                  grid: {
+                    display: false,
+                  },
+                  ticks: {
+                    callback: function (val, index) {
+                      const day = this.getLabelForValue(val).split("-")[1];
+                      return day;
+                    },
+                    font: {
+                      size: 6,
+                    },
+                    maxRotation: 0,
+                  },
                 },
               },
-            },
-            x: {
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
+              plugins: {
+                tooltip: {
+                  callbacks: {
+                    title: function (context) {
+                      return `Price: ${currencySymbol}${context[0].formattedValue}`;
+                    },
+                    label: function (context) {
+                      return `date: ${context.label}`;
+                    },
+                  },
                 },
+                legend: { display: false },
               },
-            },
-          },
-        }}
-        options={{
-          scales: {
-            y: {
-              display: false,
-              grid: {
-                display: false,
-              },
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value;
-                },
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
-                },
-              },
-            },
-          },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                title: function (context) {
-                  return `Price: ${context[0].formattedValue}`;
-                },
-                label: function (context) {
-                  return `date: ${context.label}`;
-                },
-              },
-            },
-          },
-        }}
-      />
-    </StyledVolumeChart>
+            }}
+          />
+        </BarChartContainer>
+      </StyledVolumeChart>
+    </>
   );
 }
 
