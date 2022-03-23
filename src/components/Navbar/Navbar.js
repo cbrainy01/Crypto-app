@@ -9,9 +9,11 @@ import {
   RightNavbar,
   LinkContainer,
   SearchContainer,
+  StyledSearchIcon,
   DropdownContainer,
   CurrencyDropdown,
   ThemeToggleContainer,
+  NavbarContainer,
 } from "./Navbar.styles";
 import SearchIcon from "../../icons/SearchIcon.svg";
 import Theme from "../../icons/Theme.svg";
@@ -43,11 +45,11 @@ export default function Navbar(props) {
   };
 
   return (
-    <div>
+    <NavbarContainer>
       <StyledNavbar>
         <LeftNavbar>
-          <LinkContainer text="coinlist">
-            <StyledLink to={"/"}>CoinList</StyledLink>
+          <LinkContainer text="coins">
+            <StyledLink to={"/"}>Coins</StyledLink>
           </LinkContainer>
           <LinkContainer text="portfolio">
             <StyledLink to="/portfolio">Portfolio</StyledLink>
@@ -55,11 +57,11 @@ export default function Navbar(props) {
         </LeftNavbar>
         <RightNavbar>
           <SearchContainer>
-            <img src={SearchIcon} alt="search icon" />
+            <StyledSearchIcon alt="search icon" src={SearchIcon}/>
             <CoinSearch />
           </SearchContainer>
           <DropdownContainer>
-            <p>{getCurrencySymbol(props.currency)}</p>
+            <span><p>{getCurrencySymbol(props.currency)}</p></span>
             <CurrencyDropdown>
               <select value={props.currency} onChange={handleChange}>
                 <option value={"usd"}>USD</option>
@@ -76,6 +78,6 @@ export default function Navbar(props) {
         </RightNavbar>
       </StyledNavbar>
       <NavbarGlobal currency={props.currency} globalData={globalData} />
-    </div>
+    </NavbarContainer>
   );
 }

@@ -5,7 +5,7 @@ export const StyledCoin = styled.div`
   width: 100%;
   flex-flow: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: safe-space;
   color: ${(props) => props.theme.color};
   border-bottom: 1px solid #707070;
   height: 75px;
@@ -103,6 +103,7 @@ export const ProgressDisplay = styled.div`
     height: 8px;
   }
 `;
+
 export const Progress = styled.div`
   background: pink;
   width: 300px;
@@ -125,12 +126,14 @@ export const Volume = styled.div`
     width: 4px;
   }
 `;
+
 export const VolumeA = styled.div`
   width: 50%;
   span {
     margin-left: 4px;
   }
 `;
+
 export const VolumeB = styled.div`
   width: 50%;
   text-align: right;
@@ -155,12 +158,14 @@ export const Circulation = styled.div`
     width: 4px;
   }
 `;
+
 export const CirculationA = styled.div`
   width: 50%;
   span {
     margin-left: 4px;
   }
 `;
+
 export const CirculationB = styled.div`
   width: 50%;
   text-align: right;
@@ -168,6 +173,7 @@ export const CirculationB = styled.div`
     margin-left: 4px;
   }
 `;
+
 export const StyledSparkline = styled.div`
   width: 75px;
   text-align: center;
