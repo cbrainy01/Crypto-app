@@ -7,7 +7,6 @@ export default function CoinList(props) {
   const handleTimespanChange = (newTimespan) => {
     setTimeSpan(newTimespan);
   };
-
   return (
     <div>
       <BitcoinOverview timeSpan={timeSpan} currency={props.currency} />
