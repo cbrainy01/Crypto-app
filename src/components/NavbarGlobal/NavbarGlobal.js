@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { formatNumber, getCurrencySymbol } from "utils";
+import { useSelector, useDispatch } from "react-redux";
 import {
   StyledNavbarGlobal,
   MarketData1,
@@ -16,9 +17,21 @@ import Bitcoin from "icons/Bitcoin.svg";
 import Bullet from "icons/Bullet.svg";
 import Ethereum from "icons/Eth.svg";
 import Uptick from "icons/Uptick.svg";
+import { getGlobalData } from "store/globalData/actions";
 
-export function NavbarGlobal({ currency, globalData }) {
+export default function NavbarGlobal(props) {
+  const globalData = useSelector( (state) => state.globalData.data )
+  const currency = useSelector( (state) => state.currency )
+  const isLoading = useSelector( (state) => state.globalData.isLoading )
+  const error = useSelector( (state) => state.globalData.error )
+
+  const dispatch = useDispatch()
+
   const currencySymbol = getCurrencySymbol(currency);
+
+  useEffect(() => {
+    dispatch( getGlobalData() )
+  }, [])
 
   return (
     globalData && (
@@ -83,5 +96,3 @@ export function NavbarGlobal({ currency, globalData }) {
     )
   );
 }
-
-export default NavbarGlobal;
