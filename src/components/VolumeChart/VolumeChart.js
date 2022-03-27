@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Chart from "chart.js/auto";
+import { useSelector, useDispatch } from "react-redux";
 import { Bar } from "react-chartjs-2";
 import {
   formatOverviewNumber,
@@ -16,56 +16,44 @@ import {
 } from "./VolumeChart.styles";
 import ChartLoader from "components/BitcoinOverview/ChartLoader";
 import ChartError from "components/BitcoinOverview/ChartError";
+import { getVolumeChartData } from "store/volumeData/action";
 
 export function VolumeChart(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [volumeData, setVolumeData] = useState([]);
-  const [todaysVolume, setTodaysVolume] = useState(null);
-  const currencySymbol = getCurrencySymbol(props.currency);
+  const dispatch = useDispatch();
+  const currency = useSelector((state) => state.currency);
+  const currencySymbol = getCurrencySymbol(currency);
+  const { timeSpan } = props;
+  let span;
+  switch (timeSpan) {
+    case "1":
+      span = 30;
+      break;
+    case "3":
+      span = 90;
+      break;
+    case "6":
+      span = 180;
+      break;
+    case "12":
+      span = 360;
+      break;
+    default:
+      span = 7;
+      break;
+  }
 
-  const getMarketChartData = async () => {
-    try {
-      setIsLoading(true);
-      const { currency, timeSpan } = props;
-      let span;
-      switch (timeSpan) {
-        case "1":
-          span = 30;
-          break;
-        case "3":
-          span = 90;
-          break;
-        case "6":
-          span = 180;
-          break;
-        case "12":
-          span = 360;
-          break;
-        default:
-          span = 7;
-          break;
-      }
-      const response = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
-      );
-      const volumeData = response.data.total_volumes
-        .map((volume) => volume[1])
-        .slice(1, span + 1);
-      const todaysVolume = response.data.total_volumes[0][1];
-      setIsLoading(false);
-      setVolumeData(volumeData);
-      setTodaysVolume(todaysVolume);
-    } catch (err) {
-      console.error("error: ", err);
-      setIsLoading(false);
-      setError(err);
-    }
-  };
+  const error = useSelector((state) => state.volumeData.error);
+  const isLoading = useSelector((state) => state.volumeData.isLoading);
+  const volumeDatapoints = useSelector(
+    (state) => state.volumeData.data?.volumeDatapoints
+  );
+  const todaysVolume = useSelector(
+    (state) => state.volumeData.data?.todaysVolume
+  );
 
   useEffect(() => {
-    getMarketChartData();
-  }, [props.currency, props.timeSpan]);
+    dispatch(getVolumeChartData(span));
+  }, [currency, props.timeSpan]);
 
   if (error) {
     return (
@@ -93,7 +81,7 @@ export function VolumeChart(props) {
               labels: getPreviousDates(startDate(), props.timeSpan),
               datasets: [
                 {
-                  data: volumeData,
+                  data: volumeDatapoints,
                   borderColor: "#2172E5",
                   backgroundColor: "#2172E5",
                   borderRadius: 2,
