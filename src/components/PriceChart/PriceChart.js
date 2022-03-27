@@ -1,14 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
-import axios from "axios";
 import Chart from "chart.js/auto";
+import { useSelector, useDispatch } from "react-redux";
 import { Line } from "react-chartjs-2";
 import {
-  getPreviousDates,
   formatOverviewNumber,
-  startDate,
   wordedDate,
   getCurrencySymbol,
-  usePrevious,
 } from "utils";
 import {
   LineChartContainer,
@@ -17,21 +14,15 @@ import {
 } from "./PriceChart.styles";
 import ChartLoader from "components/BitcoinOverview/ChartLoader"
 import ChartError from "components/BitcoinOverview/ChartError";
+import { getPriceChartData } from "store/priceData/actions";
 
 export function PriceChart(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [priceData, setPriceData] = useState([]);
-  const [todaysPrice, setTodaysPrice] = useState(null);
-  const [chartData, setChartData] = useState({ datasets: [] });
   const chartRef = useRef(null);
-  const currencySymbol = getCurrencySymbol(props.currency);
+  const dispatch = useDispatch()
 
-
-  const getMarketChartData = async () => {
-    try {
-      setIsLoading(true);
-      const { currency, timeSpan } = props;
+  const currency = useSelector((state) => state.currency)
+  const currencySymbol = getCurrencySymbol(currency);
+  const { timeSpan } = props;
       let span;
       switch (timeSpan) {
         case "1":
@@ -49,57 +40,17 @@ export function PriceChart(props) {
         default:
           span = 7;
           break;
-      }
-
-      const response = await axios(
-        `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
-      );
-      const priceData = response.data.prices
-        .map((price) => price[1])
-        .slice(1, span + 1);
-      const todaysPrice = response.data.prices[0][1];
-      const chart = chartRef.current;
-      if (chart) {
-        const chartData = {
-          labels: getPreviousDates(startDate(), props.timeSpan),
-          datasets: [
-            {
-              data: priceData,
-              borderColor: "#00FF5F8F",
-              backgroundColor: createGradient(chart.ctx),
-              fill: {
-                target: "origin",
-              },
-            },
-          ],
-        };
-        setChartData(chartData);
-      }
-
-      setIsLoading(false);
-      setPriceData(priceData);
-      setTodaysPrice(todaysPrice);
-    } catch (err) {
-      console.error(err);
-      setIsLoading(false);
-      setError(err);
     }
-  };
-
-  function createGradient(ctx) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, 100);
-    gradient.addColorStop(0, "#00FF5F8F");
-    gradient.addColorStop(0.15, "#FFFFFF32");
-    gradient.addColorStop(1, "#00FF5F00 ");
-    return gradient;
-  }
-
+    
+    const isLoading = useSelector((state) => state.priceData.isLoading)
+    const error = useSelector((state) => state.priceData.error)
+    const priceDatapoints = useSelector((state) => state.priceData.data?.priceDatapoints)
+    const todaysPrice = useSelector((state) => state.priceData.data?.todaysPrice)
+    
   useEffect(() => {
-    getMarketChartData();
-  }, [props.currency, props.timeSpan]);
+    dispatch( getPriceChartData(span, chartRef, timeSpan) )
+  }, [currency, props.timeSpan]);
 
-  
-   
   if(error) { return (<StyledPriceChart><ChartError errorMessage={error.message}/></StyledPriceChart>)}
 
   return (
@@ -117,7 +68,7 @@ export function PriceChart(props) {
       <LineChartContainer>
         <Line
           ref={chartRef}
-          data={chartData}
+          data={ priceDatapoints || {datasets: []} }
           options={{
             elements: {
               point: { radius: 0, hitRadius: 8, backgroundColor: "#00FF5F8F" },
