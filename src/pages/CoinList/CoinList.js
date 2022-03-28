@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { BitcoinOverview, Timespan, Coins } from "components";
 
-export default function CoinList(props) {
+export default function CoinList() {
   const [timeSpan, setTimeSpan] = useState("1");
 
   const handleTimespanChange = (newTimespan) => {
@@ -9,9 +9,9 @@ export default function CoinList(props) {
   };
   return (
     <div>
-      <BitcoinOverview timeSpan={timeSpan} currency={props.currency} />
+      <BitcoinOverview timeSpan={timeSpan} />
       <Timespan handleTimespanChange={handleTimespanChange} />
-      <Coins {...props} />
+      <Coins />
     </div>
   );
 }

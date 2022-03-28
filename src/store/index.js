@@ -8,6 +8,7 @@ import globalDataReducer from "./globalData/globalDataReducer";
 import isBlackedReducer from "./isBlacked/isBlackedReducer";
 import volumeDataReducer from "./volumeData/volumeDataReducer";
 import priceDataReducer from "./priceData/priceDataReducer";
+import coinsDataReducer from "./coinsData/coinsDataReducer";
 
 const rootReducer = combineReducers({
     currency: currencyReducer,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
     globalData: globalDataReducer,
     volumeData: volumeDataReducer,
     priceData: priceDataReducer,
+    coinsData: coinsDataReducer,
 })
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

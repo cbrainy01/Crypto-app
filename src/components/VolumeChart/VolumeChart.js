@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar } from "react-chartjs-2";

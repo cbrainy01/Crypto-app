@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledCoin = styled.div`
   display: flex;
@@ -28,12 +29,13 @@ export const CoinId = styled.div`
     width: 20px;
     height: 20px;
   }
-  div {
-    cursor: pointer;
-    width: 75px;
-    text-decoration: none;
-    color: ${(props) => props.theme.color};
-  }
+`;
+
+export const CoinLink = styled(Link)`
+  cursor: pointer;
+  width: 75px;
+  text-decoration: none;
+  color: ${(props) => props.theme.color};
 `;
 
 export const CoinPrice = styled.span`

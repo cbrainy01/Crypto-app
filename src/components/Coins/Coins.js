@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import axios from "axios";
 import { Coin } from "components";
-import { reduceSparkline } from "utils";
+import { useSelector, useDispatch } from "react-redux";
 import topDownArrow from "icons/topDownArrow.svg";
 import ArrowDown from "icons/ArrowDown.svg";
 import ArrowLeft from "icons/ArrowLeft.svg";
@@ -29,17 +28,13 @@ import {
   WeekHeader,
   SparklineHeader,
   TornadoIcon,
-  ScrollComponent,
 } from "./Coins.styles";
+import { getCoinsData } from "store/coinsData/actions";
 
-export function Coins(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [coinsData, setCoinsData] = useState(null);
+export function Coins() {
+  const dispatch = useDispatch();
   const [sortDirection, setSortDirection] = useState("desc");
   const [sortType, setSortType] = useState("volume");
-  const [hasMore, setHasMore] = useState(true);
-  const [currentPage, setCurrentPage] = useState(1);
 
   const sortCoins = () => {
     if (sortDirection === "asc") {
@@ -50,43 +45,21 @@ export function Coins(props) {
       return coinsData;
     }
   };
-
-  const getCoins = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=10&page=${currentPage}&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
-      );
-      const updatedData = reduceSparkline(data);
-      if (!coinsData) {
-        setCoinsData(updatedData);
-        setCurrentPage(currentPage + 1);
-        setIsLoading(false);
-      } else {
-        setCoinsData(coinsData.concat(updatedData));
-        setCurrentPage(currentPage + 1);
-        setIsLoading(false);
-      }
-      return data;
-    } catch (error) {
-      console.error(error);
-      setIsLoading(false);
-      setError(error);
-    }
-  };
+  const currency = useSelector((state) => state.currency);
+  const isLoading = useSelector((state) => state.coinsData.isLoading);
+  const error = useSelector((state) => state.coinsData.error);
+  const hasMore = useSelector((state) => state.coinsData.hasMore);
+  const coinsData = useSelector((state) => state.coinsData.data?.coinsData);
+  const currentPage = useSelector((state) => state.coinsData.data?.currentPage);
 
   useEffect(() => {
-    getCoins();
-  }, [props.currency]);
+    if(coinsData.length >= 30) {return}
+    dispatch(getCoinsData());
+  }, [currency]);
 
   const fetchMoreCoins = () => {
-    if (coinsData?.length > 20) {
-      setHasMore(false);
-      return;
-    }
-
     setTimeout(() => {
-      const response = getCoins();
+      dispatch(getCoinsData());
     }, 500);
   };
 
@@ -167,19 +140,19 @@ export function Coins(props) {
               <SparklineHeader>Last 7d</SparklineHeader>
             </TableHead>
             <InfiniteScroll
-              dataLength={coinsData ? coinsData.length : 10}
+              dataLength={coinsData.length}
               next={fetchMoreCoins}
               hasMore={hasMore}
               loader={<h3>Loading...</h3>}
               endMessage={<p>Thats all Folks!</p>}
+              scrollThreshold={1.0}
             >
               {coinsData?.map((coinData, index) => (
                 <Coin
                   key={`${coinData.id} +${Math.random(20)}`}
-                  {...props}
                   coinData={coinData}
                   index={index + 1}
-                  currency={props.currency}
+                  currency={currency}
                 />
               ))}
             </InfiniteScroll>

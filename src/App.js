@@ -34,7 +34,7 @@ function App(props) {
             <Route
               exact
               path="/"
-              component={(props) => <CoinList {...props} currency={currency} />}
+              component={() => <CoinList />}
             />
           </Switch>
         </Router>

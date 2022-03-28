@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { CoinChart } from "components";
 import {
   formatNumber,
@@ -13,37 +13,31 @@ import {
   HourChange,
   DayChange,
   CoinId,
+  CoinLink,
   Circulation,
   CoinPrice,
   StyledCoin,
   Index,
-  TD,
   ProgressDisplay,
-  MarketCap,
   WeekChange,
   Volume,
   VolumeA,
   VolumeB,
-  Progress,
   StyledSparkline,
 } from "./Coin.styles";
 
 export function Coin(props) {
   const { index, currency } = props;
   const data = props.coinData;
-  const handleCoinSelect = () => {
-    const selectedCoin = data.id;
-    props.history.push(`/coinpage/${selectedCoin}`);
-  };
-
   const currencySymbol = getCurrencySymbol(currency);
+  
   return (
     <StyledCoin>
       <Index>{index}</Index>
       <CoinId>
         <img src={data.image} alt={data.name} />
-        <div onClick={handleCoinSelect}>
-          {data.name}({data.symbol})
+        <div >
+          <CoinLink to={`/coinpage/${data.id}`}>{data.name}({data.symbol})</CoinLink>
         </div>
       </CoinId>
       <CoinPrice>
