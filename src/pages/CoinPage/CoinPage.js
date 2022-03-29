@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { CoinPageChart, ErrorDisplay } from "components";
 import { getCurrencySymbol, formatNumber } from "utils";
+import { useSelector, useDispatch } from "react-redux";
 import {
   CoinDescription,
   CoinLinks,
@@ -35,6 +36,7 @@ import {
   DescriptionContainer,
   SummaryWrap,
 } from "./CoinPage.styles";
+import { getCoinData } from "store/coinData/actions";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
 import Uptick from "icons/Uptick.svg";
@@ -44,12 +46,17 @@ import Copy from "icons/Copy.svg";
 import Bullet from "icons/Bullet.svg"
 
 export default function CoinPage(props) {
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [coinData, setCoinData] = useState(null);
-
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
+  // const [coinData, setCoinData] = useState(null);
+  const dispatch = useDispatch();
   const coinId = props.match.params.coin;
-  const currency = props.currency;
+  
+  const currency = useSelector((state) => state.currency);
+  const isLoading = useSelector((state) => state.coinData.isLoading);
+  const error = useSelector((state) => state.coinData.error);
+  const coinData = useSelector((state) => state.coinData.data);
+
   const currencySymbol = getCurrencySymbol(currency);
   const circulating = Math.round(
     (coinData?.market_data.circulating_supply /
@@ -62,19 +69,19 @@ export default function CoinPage(props) {
       100
   );
 
-  const getCoinData = async () => {
-    setIsLoading(true);
-    try {
-      const { data } = await axios(
-        `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`
-      );
-      setIsLoading(false);
-      setCoinData(data);
-    } catch (err) {
-      setIsLoading(false);
-      setError(err);
-    }
-  };
+  // const getCoinData = async () => {
+  //   setIsLoading(true);
+  //   try {
+  //     const { data } = await axios(
+  //       `https://api.coingecko.com/api/v3/coins/${coinId}?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=true`
+  //     );
+  //     setIsLoading(false);
+  //     setCoinData(data);
+  //   } catch (err) {
+  //     setIsLoading(false);
+  //     setError(err);
+  //   }
+  // };
 
   function getProfit(price, pctChangeString) {
     const pctChange = parseFloat(pctChangeString)
@@ -110,7 +117,7 @@ export default function CoinPage(props) {
   }
 
   useEffect(() => {
-    getCoinData();
+    dispatch( getCoinData(coinId) );
   }, [currency, coinId]);
 
   return (
