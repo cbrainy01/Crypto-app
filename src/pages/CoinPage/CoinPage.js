@@ -3,7 +3,7 @@ import numeral from "numeral";
 import React, { useState, useEffect } from "react";
 import { v4 as uuid } from "uuid";
 import { CoinPageChart, ErrorDisplay } from "components";
-import { getCurrencySymbol, formatNumber } from "utils";
+import { getCurrencySymbol, formatNumber, isoToStandardTime } from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import {
   CoinDescription,
@@ -171,7 +171,7 @@ export default function CoinPage(props) {
                       All Time High: {currencySymbol}
                       {coinData.market_data.ath[currency]}
                     </p>
-                    <p>{coinData.market_data.ath_date[currency]}</p>
+                    <p>{isoToStandardTime(coinData.market_data.ath_date[currency])}</p>
                   </span>
                 </ATH>
                 <ATL>
@@ -181,7 +181,7 @@ export default function CoinPage(props) {
                       All Time Low: {currencySymbol}
                       {coinData.market_data.atl[currency]}
                     </p>
-                    <p>{coinData.market_data.atl_date[currency]}</p>
+                    <p>{isoToStandardTime(coinData.market_data.atl_date[currency])}</p>
                   </span>
                 </ATL>
             </SummaryB>

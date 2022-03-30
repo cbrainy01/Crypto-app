@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from "utils";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import CurrencyExchange from "components/CurrencyExchange";
 import {
   RadioButton,
