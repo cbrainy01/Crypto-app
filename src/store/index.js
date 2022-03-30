@@ -1,65 +1,36 @@
-import {combineReducers, createStore, applyMiddleware} from "redux";
-import { composeWithDevTools } from "@redux-devtools/extension"
+import { combineReducers, createStore, applyMiddleware } from "redux";
+import { composeWithDevTools } from "@redux-devtools/extension";
 import thunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
-import currencyReducer from "./currency/currencyReducer";
 import globalDataReducer from "./globalData/globalDataReducer";
-import isBlackedReducer from "./isBlacked/isBlackedReducer";
 import volumeDataReducer from "./volumeData/volumeDataReducer";
 import priceDataReducer from "./priceData/priceDataReducer";
 import coinsDataReducer from "./coinsData/coinsDataReducer";
+import universalVariablesReducer from "./universalVariables/universalVariablesReducer";
 import coinDataReducer from "./coinData/coinDataReducer";
 
+const universalVariablesConfig = {
+  key: "universalVariables",
+  storage,
+};
+
 const rootReducer = combineReducers({
-    currency: currencyReducer,
-    isBlacked: isBlackedReducer,
-    globalData: globalDataReducer,
-    volumeData: volumeDataReducer,
-    priceData: priceDataReducer,
-    coinsData: coinsDataReducer,
-    coinData: coinDataReducer,
-})
+  universalVariables: persistReducer(
+    universalVariablesConfig,
+    universalVariablesReducer
+  ),
+  globalData: globalDataReducer,
+  volumeData: volumeDataReducer,
+  priceData: priceDataReducer,
+  coinsData: coinsDataReducer,
+  coinData: coinDataReducer,
+});
 
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+);
+const persistor = persistStore(store);
 
-
-// const persistConfig = {
-//     key: "root",
-//     storage,
-//     whitelist: ["currency", "isBlacked"],
-//     blacklist: ["volumeData", "globalData"],
-// }
-
-// const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-// export const store = createStore(persistedReducer, applyMiddleware(thunk));
-
-// export const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-// export const persistor = persistStore(store);
-
-
-// TODO: Localstorage configuration
-// const currencyConfig = {
-//     key: "currency",
-//     storage,
-//     whitelist: ["currency"],
-// };
-
-// const isBlackedConfig = {
-//     key: "isBlacked",
-//     storage,
-//     whitelist: ["isBlacked"],
-// };
-
-// const rootReducer = combineReducers({
-//     currency: persistReducer(currencyConfig, currencyReducer),
-//     isBlacked: persistReducer(isBlackedConfig, isBlackedReducer),
-//     globalData: globalDataReducer,
-//     volumeData: volumeDataReducer,
-// });
-
-// const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
-// const persistor = persistStore(store);
-
-// export { store, persistor };
+export { store, persistor };

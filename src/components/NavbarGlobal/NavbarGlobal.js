@@ -20,12 +20,11 @@ import Uptick from "icons/Uptick.svg";
 import { getGlobalData } from "store/globalData/actions";
 
 export default function NavbarGlobal(props) {
+  const dispatch = useDispatch()
   const globalData = useSelector( (state) => state.globalData.data )
-  const currency = useSelector( (state) => state.currency )
+  const currency = useSelector( (state) => state.universalVariables.currency )
   const isLoading = useSelector( (state) => state.globalData.isLoading )
   const error = useSelector( (state) => state.globalData.error )
-
-  const dispatch = useDispatch()
 
   const currencySymbol = getCurrencySymbol(currency);
 

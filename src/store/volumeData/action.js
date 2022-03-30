@@ -9,7 +9,8 @@ export const getVolumeChartData = (span) => async (dispatch, getState) => {
   try {
     dispatch({ type: GET_VOLUME_CHART_DATA_PENDING });
     const state = getState();
-    const currency = state.currency;
+    const currency = state.universalVariables.currency
+
     const response = await axios(
       `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
     );

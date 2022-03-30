@@ -22,7 +22,7 @@ export function CoinPageChart(props) {
   const lineData = data.slice(-timespan);
   const labels = getPreviousHours(timespan).reverse();
 
-  const currency = useSelector((state) => state.currency);
+  const currency = useSelector( (state) => state.universalVariables.currency )
 
   const handleTimespanChange = (e) => {
     setTimespan(e.target.value);

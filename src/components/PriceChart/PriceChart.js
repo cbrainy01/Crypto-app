@@ -13,11 +13,12 @@ import ChartError from "components/BitcoinOverview/ChartError";
 import { getPriceChartData } from "store/priceData/actions";
 
 export function PriceChart(props) {
-  const chartRef = useRef(null);
   const dispatch = useDispatch();
+  const chartRef = useRef(null);
 
-  const currency = useSelector((state) => state.currency);
+  const currency = useSelector( (state) => state.universalVariables.currency )
   const currencySymbol = getCurrencySymbol(currency);
+  
   const { timeSpan } = props;
   let span;
   switch (timeSpan) {

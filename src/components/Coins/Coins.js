@@ -45,7 +45,8 @@ export function Coins() {
       return coinsData;
     }
   };
-  const currency = useSelector((state) => state.currency);
+  
+  const currency = useSelector( (state) => state.universalVariables.currency )
   const isLoading = useSelector((state) => state.coinsData.isLoading);
   const error = useSelector((state) => state.coinsData.error);
   const hasMore = useSelector((state) => state.coinsData.hasMore);

@@ -20,7 +20,7 @@ import { getVolumeChartData } from "store/volumeData/action";
 
 export function VolumeChart(props) {
   const dispatch = useDispatch();
-  const currency = useSelector((state) => state.currency);
+  const currency = useSelector( (state) => state.universalVariables.currency )
   const currencySymbol = getCurrencySymbol(currency);
   const { timeSpan } = props;
   let span;
