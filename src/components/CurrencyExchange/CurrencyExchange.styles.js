@@ -21,7 +21,7 @@ export const ExchangeWrap = styled.div`
 
 export const ExchangeBar = styled.div`
   border-radius: 4px;
-  width: 166px;
+  min-width: 166px;
   background: ${(props) => props.theme.inner};
   display: flex;
 `;
