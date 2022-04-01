@@ -8,11 +8,13 @@ export const AssetButtonContainer = styled.div`
 
 export const AssetButtonWrap = styled.div`
     background: #06D554;
-    width: 253px;
+    max-width: 253px;
     padding: 12px 101px;
     border-radius: 6px;
-    flex-shrink: 1;
     cursor: pointer;
+    @media (max-width: 292px) {
+        padding: 10px 50px;
+    }
 `
 
 export const AssetButton = styled.div`
