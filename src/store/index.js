@@ -10,6 +10,7 @@ import coinsDataReducer from "./coinsData/coinsDataReducer";
 import universalVariablesReducer from "./universalVariables/universalVariablesReducer";
 import coinDataReducer from "./coinData/coinDataReducer";
 import portfolioInfoReducer from "./portfolioInfo/portfolioInfoReducer";
+import coinSearchReducer from "./coinSearch/coinSearchReducer";
 
 const universalVariablesConfig = {
   key: "universalVariables",
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   priceData: priceDataReducer,
   coinsData: coinsDataReducer,
   coinData: coinDataReducer,
+  coinSearch: coinSearchReducer,
   portfolioInfo: portfolioInfoReducer,
 });
 
