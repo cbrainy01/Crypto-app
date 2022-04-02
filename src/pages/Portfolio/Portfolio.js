@@ -1,6 +1,8 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import PurchasedCoins from "components/PurchasedCoins";
+import { PurchasedCoins, CoinShop } from "components";
+import { useSelector, useDispatch } from "react-redux";
+import { coinShopDisplay } from "store/portfolioInfo/actions";
 import {
   AssetButton,
   AssetButtonWrap,
@@ -8,8 +10,11 @@ import {
 } from "./Portfolio.styles";
 
 function Portfolio() {
-  const [purchasedCoins, setPurchasedCoins] = useState(null);
+    const dispatch = useDispatch();
+    const showCoinShop = useSelector((state) => state.portfolioInfo.showCoinShop)
+    const [purchasedCoins, setPurchasedCoins] = useState(null);
   const [err, setErr] = useState(null);
+  const [showNewCoin, setShowNewCoin] = useState(false);
 
   const coinId = "bitcoin";
   async function getData() {
@@ -26,18 +31,22 @@ function Portfolio() {
   useEffect(() => {
     getData();
   }, []);
+
   return (
     <>
       {purchasedCoins && (
         <div>
           <AssetButtonContainer>
-            <AssetButtonWrap>
-              <AssetButton>Add Asset</AssetButton>
+            <AssetButtonWrap onClick={() => dispatch(coinShopDisplay())}>
+              <AssetButton >Add Asset</AssetButton>
             </AssetButtonWrap>
           </AssetButtonContainer>
           <PurchasedCoins data={purchasedCoins} />
+          {showCoinShop && <CoinShop/>}
         </div>
+        
       )}
+      
     </>
   );
 }

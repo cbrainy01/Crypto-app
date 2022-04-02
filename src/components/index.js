@@ -11,5 +11,6 @@ export { default as ErrorDisplay } from "./ErrorDisplay"
 export {default as CoinSearch} from "./CoinSearch"
 export { default as CoinPageChart } from "./CoinPageChart"
 export { default as CurrencyExchange } from "./CurrencyExchange"
-
+export { default as CoinShop } from "./CoinShop";
+export { default as PurchasedCoins } from "./PurchasedCoins";
 

@@ -83,7 +83,7 @@ function PurchasedCoins(props) {
                 </ProgressBar>
               </MarketCapVsVolume>
               <CircVsMax value={circVsMax}>
-                Circ supply vs max supply
+                <div>Circ supply vs max supply</div>
                 <p>{circVsMax + "%" || "-"}</p>
                 <ProgressBar progress={circVsMax}>
                   <div></div>

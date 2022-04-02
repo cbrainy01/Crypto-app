@@ -101,6 +101,7 @@ export const CurrentPrice = styled.div`
 export const PriceChange24H = styled.div`
   display: flex;
   align-items: center;
+
   img {
     margin-left: 5px;
     height: 3px;
@@ -114,6 +115,7 @@ export const MarketCapVsVolume = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+
   p {
     color: ${(props) => (props.value >= 0 ? "#06D554" : "red")};
   }
@@ -122,6 +124,14 @@ export const CircVsMax = styled.div`
   display: flex;
   align-items: center;
   gap: 4px;
+    // @media (max-width: 198px) {
+    //     display: flex;
+    //     flex-direction: column;
+    //     flex-wrap: wrap;
+    //     div {
+    //         overflow-wrap: break-word;
+    //     }
+    // }
   p {
     color: ${(props) => (props.value >= 0 ? "#06D554" : "red")};
   }

@@ -9,6 +9,7 @@ import priceDataReducer from "./priceData/priceDataReducer";
 import coinsDataReducer from "./coinsData/coinsDataReducer";
 import universalVariablesReducer from "./universalVariables/universalVariablesReducer";
 import coinDataReducer from "./coinData/coinDataReducer";
+import portfolioInfoReducer from "./portfolioInfo/portfolioInfoReducer";
 
 const universalVariablesConfig = {
   key: "universalVariables",
@@ -25,6 +26,7 @@ const rootReducer = combineReducers({
   priceData: priceDataReducer,
   coinsData: coinsDataReducer,
   coinData: coinDataReducer,
+  portfolioInfo: portfolioInfoReducer,
 });
 
 const store = createStore(
