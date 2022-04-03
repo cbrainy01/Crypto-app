@@ -20,7 +20,7 @@ function CoinSearch() {
   const handleChange = () => {
     const value = inputField.current?.value;
     if (value === "") {
-      dispatch(searchCleanup());
+      cleanupSearch()
       return;
     }
     dispatch(getQueryMatches(value));
@@ -35,9 +35,10 @@ function CoinSearch() {
     <div>
       <InputField
         ref={inputField}
-        onChange={debounce(handleChange, 200)}
+        onChange={debounce(handleChange, 150)}
         placeholder="Search..."
       />
+      {/* {inputField.current?.value === "" && null} */}
       {isLoading ? (
         <Result>...Loading</Result>
       ) : (

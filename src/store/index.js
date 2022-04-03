@@ -11,11 +11,15 @@ import universalVariablesReducer from "./universalVariables/universalVariablesRe
 import coinDataReducer from "./coinData/coinDataReducer";
 import portfolioInfoReducer from "./portfolioInfo/portfolioInfoReducer";
 import coinSearchReducer from "./coinSearch/coinSearchReducer";
+import shopSearchReducer from "./shopSearch/shopSearchReducer";
+import shopFormReducer from "./shopForm/shopFormReducer";
 
 const universalVariablesConfig = {
   key: "universalVariables",
   storage,
 };
+
+// TODO: persist shopformreducer data. whitelist allowSave(dont persist it) 
 
 const rootReducer = combineReducers({
   universalVariables: persistReducer(
@@ -29,6 +33,8 @@ const rootReducer = combineReducers({
   coinData: coinDataReducer,
   coinSearch: coinSearchReducer,
   portfolioInfo: portfolioInfoReducer,
+  shopSearch: shopSearchReducer,
+  shopForm: shopFormReducer,
 });
 
 const store = createStore(

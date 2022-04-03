@@ -138,7 +138,7 @@ export const ButtonB = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 8px;
-  cursor: pointer;
+  cursor: ${(props) => props.allowSave ? "pointer" : "not-allowed" };
   &:hover {
     background: #191b1f;
   }

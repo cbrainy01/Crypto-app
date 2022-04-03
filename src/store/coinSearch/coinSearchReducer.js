@@ -10,6 +10,7 @@ const initialState = {
 }
 
 export default function coinSearchReducer(state = initialState, action) {
+    // console.log("b")
     switch(action.type) {
         case GET_QUERY_MATCHES_PENDING:
             return {...state, isLoading: true, error: false};
