@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { coinShopHide } from "store/portfolioInfo/actions";
+import { coinShopHide, savePurchasedCoin } from "store/portfolioInfo/actions";
 import {
   CoinShopForm,
   CoinShopBackground,
@@ -35,11 +35,12 @@ function NewCoin() {
   console.log("formData: ", formData);
   console.log("allowSave: ", allowSave);
 
-  function handleSubmit(e) {
+  function handlePurchaseSave(e) {
     e.preventDefault();
     if (!allowSave) {
       return;
     }
+    dispatch(savePurchasedCoin());
   }
 
   return (
@@ -93,9 +94,9 @@ function NewCoin() {
         </PurchaseDetailsContainer>
 
         <ButtonsContainer>
-          <ButtonA>Close</ButtonA>
+          <ButtonA onClick={() => dispatch(coinShopHide())} >Close</ButtonA>
           {/*TODO: on onClick={handleSubmit}  also dispatch action which gets the selected coins data for "your coin" data*/}
-          <ButtonB allowSave={allowSave}>Save and Continue</ButtonB>
+          <ButtonB onClick={handlePurchaseSave} allowSave={allowSave}>Save and Continue</ButtonB>
         </ButtonsContainer>
       </CoinShopForm>
     </CoinShopBackground>

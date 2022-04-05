@@ -139,7 +139,9 @@ export const ButtonB = styled.div`
   align-items: center;
   font-size: 8px;
   cursor: ${(props) => props.allowSave ? "pointer" : "not-allowed" };
+  filter: ${(props) => props.allowSave ? "brightness(100%)" : "brightness(25%)" };
   &:hover {
-    background: #191b1f;
+    // background: #191b1f;
+    background: ${(props) => props.allowSave ? "#191b1f" : "#06d554"};
   }
 `;

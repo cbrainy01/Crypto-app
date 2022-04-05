@@ -1,6 +1,7 @@
 export const SET_FORM_DATA = "SET_FORM_DATA";
 export const SET_DISPLAY_DATA = "SET_DISPLAY_DATA";
 export const VALIDATE_INPUTS = "VALIDATE_INPUTS";
+export const RESET_FORM = "RESET_FORM";
 
 const initialState = {
     displayData: undefined,
@@ -17,6 +18,8 @@ export default function shopFormReducer(state = initialState, action) {
             return {...state, displayData: action.payload}
         case VALIDATE_INPUTS:
             return {...state, allowSave: action.payload};
+        case RESET_FORM:
+            return initialState;
         default:
             return state;
     }

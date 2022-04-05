@@ -19,6 +19,12 @@ const universalVariablesConfig = {
   storage,
 };
 
+const portfolioInfoConfig = {
+  key: "portfolioInfo",
+  storage,
+  blacklist: ["showCoinShop"],
+}
+
 // TODO: persist shopformreducer data. whitelist allowSave(dont persist it) 
 
 const rootReducer = combineReducers({
@@ -32,7 +38,8 @@ const rootReducer = combineReducers({
   coinsData: coinsDataReducer,
   coinData: coinDataReducer,
   coinSearch: coinSearchReducer,
-  portfolioInfo: portfolioInfoReducer,
+  // portfolioInfo: portfolioInfoReducer,
+  portfolioInfo: persistReducer(portfolioInfoConfig, portfolioInfoReducer),
   shopSearch: shopSearchReducer,
   shopForm: shopFormReducer,
 });

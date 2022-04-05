@@ -11,7 +11,7 @@ import {
   } from "components/CoinSearch/CoinSearch.styles";
 //   import { searchCleanup, getQueryMatches } from "store/shopSearch/actions";
 import { shopSearchCleanup, getShopQueryMatches } from "store/shopSearch/actions";
-import { setDisplayData } from 'store/shopForm/actions';
+import { setDisplayData, validateInputs } from 'store/shopForm/actions';
 
 function ShopSearch() {
   const dispatch = useDispatch();
@@ -52,7 +52,8 @@ function ShopSearch() {
                 <ResultLink
                   onClick={() => {
                     //   set display data. will require aciton to be created
-                    dispatch(setDisplayData(result))
+                    dispatch(setDisplayData(result));
+                    dispatch(validateInputs());
                     cleanupSearch();
                   }}
                 //   to={`/coinpage/${result.id}`}

@@ -8,6 +8,7 @@ import {
   AssetButtonWrap,
   AssetButtonContainer,
 } from "./Portfolio.styles";
+import { resetForm } from "store/shopForm/actions";
 
 function Portfolio() {
     const dispatch = useDispatch();
@@ -37,7 +38,7 @@ function Portfolio() {
       {purchasedCoins && (
         <div>
           <AssetButtonContainer>
-            <AssetButtonWrap onClick={() => dispatch(coinShopDisplay())}>
+            <AssetButtonWrap onClick={() => { dispatch(resetForm()); dispatch(coinShopDisplay()) }}>
               <AssetButton >Add Asset</AssetButton>
             </AssetButtonWrap>
           </AssetButtonContainer>

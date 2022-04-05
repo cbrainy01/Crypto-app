@@ -1,4 +1,14 @@
 import styled from "styled-components";
+import SVG from "react-inlinesvg";
+
+export const RedCross = styled(SVG)`
+  cursor: pointer;
+  height: 17px;
+  width: 17px;
+  & path {
+    fill: red;
+  }
+`
 
 export const StyledPurchasedCoins = styled.div``;
 
@@ -66,6 +76,15 @@ export const CoinName = styled.div`
   font-size: 12px;
   overflow-wrap: break-word;
 `;
+
+export const RemoveCoin = styled.div`
+display: flex;
+justify-content: center;  
+// img {
+//     height: 19px;
+//     width: 19px;
+//   }
+`
 
 export const StatisticInfo = styled.div`
   display: flex;
@@ -160,7 +179,12 @@ export const YourCoinStatistics = styled.div`
 
 export const CoinAmt = styled.div``;
 export const AmtValue = styled.div``;
-export const AmtPriceChange = styled.div``;
+export const AmtPriceChange = styled.div`
+
+  span {
+  color: ${(props) => props.value >= 0 ? "#06d554" : "red" };
+  }
+  `;
 export const PurchaseDate = styled.div``;
 
 export const ProgressBar = styled.div`

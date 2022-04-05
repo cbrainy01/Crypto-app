@@ -1,5 +1,5 @@
 import { isFutureDate } from "utils"
-import { SET_DISPLAY_DATA, SET_FORM_DATA, VALIDATE_INPUTS } from "./shopFormReducer"
+import { RESET_FORM, SET_DISPLAY_DATA, SET_FORM_DATA, VALIDATE_INPUTS } from "./shopFormReducer"
 
 export const handleFormChange = (keyOfInput, inputValue) => (dispatch, getState) => {
     const payloadObj = {
@@ -32,4 +32,8 @@ export const validateInputs = () => (dispatch, getState) => {
    
     console.log("check passed")
     dispatch({ type: VALIDATE_INPUTS, payload: true });
+}
+
+export const resetForm = () => (dispatch, getState) => {
+    dispatch({ type: RESET_FORM })
 }

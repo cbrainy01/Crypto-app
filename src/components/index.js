@@ -14,4 +14,5 @@ export { default as CurrencyExchange } from "./CurrencyExchange"
 export { default as CoinShop } from "./CoinShop";
 export { default as PurchasedCoins } from "./PurchasedCoins";
 export { default as ShopSearch } from "./ShopSearch";
+export { default as PurchaseItem } from "./PurchaseItem";
 
