@@ -43,7 +43,6 @@ import {
   DescriptionContainer,
 } from "./CoinPage.styles";
 
-
 export default function CoinPage(props) {
   const dispatch = useDispatch();
   const coinId = props.match.params.coin;
@@ -114,7 +113,7 @@ export default function CoinPage(props) {
   return (
     <div>
       {isLoading && <h1>...Loading</h1>}
-      {error && <ErrorDisplay />}
+      {error && <ErrorDisplay/>}
       {coinData && (
         <StyledCoinPage>
           <CoinPageContainer>

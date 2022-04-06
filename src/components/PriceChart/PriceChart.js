@@ -3,14 +3,14 @@ import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { Line } from "react-chartjs-2";
 import { formatOverviewNumber, wordedDate, getCurrencySymbol } from "utils";
+import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
+import { getPriceChartData } from "store/priceData/actions";
+import { ErrorDisplay } from "components";
 import {
   LineChartContainer,
   OverviewInfo,
   StyledPriceChart,
 } from "./PriceChart.styles";
-import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
-import ChartError from "components/BitcoinOverview/ChartError";
-import { getPriceChartData } from "store/priceData/actions";
 
 export function PriceChart(props) {
   const dispatch = useDispatch();
@@ -53,7 +53,7 @@ export function PriceChart(props) {
   if (error) {
     return (
       <StyledPriceChart>
-        <ChartError errorMessage={error.message} />
+        <ErrorDisplay errorMessage={error.message} />
       </StyledPriceChart>
     );
   }

@@ -9,14 +9,14 @@ import {
   startDate,
   getCurrencySymbol,
 } from "utils";
+import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
+import { getVolumeChartData } from "store/volumeData/action";
+import { ErrorDisplay } from "components";
 import {
   BarChartContainer,
   OverviewInfo,
   StyledVolumeChart,
 } from "./VolumeChart.styles";
-import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
-import ChartError from "components/BitcoinOverview/ChartError";
-import { getVolumeChartData } from "store/volumeData/action";
 
 export function VolumeChart(props) {
   const dispatch = useDispatch();
@@ -58,7 +58,7 @@ export function VolumeChart(props) {
   if (error) {
     return (
       <StyledVolumeChart>
-        <ChartError errorMessage={error.message} />
+        <ErrorDisplay errorMessage={error.message} />
       </StyledVolumeChart>
     );
   }
