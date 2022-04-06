@@ -1,17 +1,18 @@
-import React from 'react';
+import React from "react";
 import debounce from "lodash.debounce";
 import { useSelector, useDispatch } from "react-redux";
-import { SearchInput } from 'components/CoinShop/CoinShop.styles'
-import { InputField } from './ShopSearch.styles'
+import { SearchInput } from "components/CoinShop/CoinShop.styles";
 import {
-    // InputField,
-    SearchResults,
-    Result,
-    ResultLink,
-  } from "components/CoinSearch/CoinSearch.styles";
-//   import { searchCleanup, getQueryMatches } from "store/shopSearch/actions";
-import { shopSearchCleanup, getShopQueryMatches } from "store/shopSearch/actions";
-import { setDisplayData, validateInputs } from 'store/shopForm/actions';
+  SearchResults,
+  Result,
+  ResultLink,
+  InputField,
+} from "components/CoinSearch/CoinSearch.styles";
+import {
+  shopSearchCleanup,
+  getShopQueryMatches,
+} from "store/shopSearch/actions";
+import { setDisplayData, validateInputs } from "store/shopForm/actions";
 
 function ShopSearch() {
   const dispatch = useDispatch();
@@ -23,7 +24,7 @@ function ShopSearch() {
   const handleChange = () => {
     const value = inputField.current?.value;
     if (value === "") {
-      cleanupSearch()
+      cleanupSearch();
       return;
     }
     dispatch(getShopQueryMatches(value));
@@ -36,37 +37,33 @@ function ShopSearch() {
 
   return (
     <SearchInput>
-        <InputField
-         ref={inputField}
-         onChange={debounce(handleChange, 150)}
-         placeholder='Search coin'
-        />
-
-         {isLoading ? (
+      <InputField
+        ref={inputField}
+        onChange={debounce(handleChange, 150)}
+        placeholder="Search coin"
+      />
+      {isLoading ? (
         <Result>...Loading</Result>
       ) : (
         <SearchResults>
           {searchResults?.map((result) => {
             return (
-              <Result key={result.id}>
-                <ResultLink
-                  onClick={() => {
-                    //   set display data. will require aciton to be created
-                    dispatch(setDisplayData(result));
-                    dispatch(validateInputs());
-                    cleanupSearch();
-                  }}
-                //   to={`/coinpage/${result.id}`}
-                >
-                  {result.name}
-                </ResultLink>
+              <Result
+                key={result.id}
+                onClick={() => {
+                  dispatch(setDisplayData(result));
+                  dispatch(validateInputs());
+                  cleanupSearch();
+                }}
+              >
+                <ResultLink>{result.name}</ResultLink>
               </Result>
             );
           })}
         </SearchResults>
       )}
     </SearchInput>
-  )
+  );
 }
 
-export default ShopSearch
+export default ShopSearch;

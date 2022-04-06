@@ -8,9 +8,11 @@ export const RedCross = styled(SVG)`
   & path {
     fill: red;
   }
+  margin-bottom: 3px;
 `
 
-export const StyledPurchasedCoins = styled.div``;
+export const StyledPurchasedCoins = styled.div`
+`;
 
 export const StatisticsContainer = styled.div`
   max-width: 857px;
@@ -18,14 +20,14 @@ export const StatisticsContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-  background: pink;
+  // background: pink;
   color: ${(props) => props.theme.color};
   flex-wrap: wrap;
 `;
 
 export const YourStatisticsHeader = styled.div`
   display: flex;
-  background: red;
+  // background: red;
   margin-bottom: 25px;
   justify-content: start;
 `;
@@ -33,48 +35,58 @@ export const YourStatisticsHeader = styled.div`
 export const CoinContainer = styled.div`
   width: 100%;
   margin-bottom: 18px;
-  background: ${(props) => props.theme.main};
+  background: ${(props) => props.theme.inner};
   display: flex;
   gap: 12px;
-  @media (max-width: 292px) {
+  // @media (max-width: 292px) {
+  //   flex-direction: column;
+  // }
+  @media (max-width: 588px) {
     flex-direction: column;
   }
 `;
 
 export const CoinId = styled.div`
   width: 130px;
-  background: gold;
+  // background: gold;
+  background: ${(props) => props.theme.main};
   border-radius: 6px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  @media (max-width: 292px) {
+  @media (max-width: 588px) {
     width: 100%;
   }
 `;
 
 export const CoinDisplay = styled.div`
-  background: purple;
+  // background: purple;
   width: 80px;
-  height: 80px;
+  // height: 80px;
 `;
 
 export const CoinImgContainer = styled.div`
   width: 52px;
   height: 52px;
-  background: grey;
+  background: ${(props) => props.theme.inner};
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0 auto;
   border-radius: 4px;
   flex-wrap: wrap;
+  img {
+    height: 22px;
+    width: 22px;
+  }
 `;
 
 export const CoinName = styled.div`
   font-size: 12px;
   overflow-wrap: break-word;
+  margin-top: 4px;
+  margin-bottom: 4px;
 `;
 
 export const RemoveCoin = styled.div`
@@ -99,7 +111,7 @@ export const MarketPriceHeader = styled.div`
 export const MarketPriceStatistics = styled.div`
   height: 50px;
   width: 100%;
-  background: grey;
+  background: ${(props) => props.theme.main};
   margin-bottom: 9px;
   border-radius: 6px;
   font-size: 10px;
@@ -163,8 +175,9 @@ export const YourCoinHeader = styled.div`
 export const YourCoinStatistics = styled.div`
   height: 50px;
   width: 100%;
-  background: orange;
-  margin-bottom: 9px;
+  // background: orange;
+  background: ${(props) => props.theme.main};
+  // margin-bottom: 9px;
   border-radius: 6px;
   font-size: 10px;
   font-weight: 600;

@@ -56,15 +56,9 @@ function PurchasedCoins(props) {
 
   const isLoading = useSelector((state) => state.coinData.isLoading);
   const error = useSelector((state) => state.coinData.error);
-  // const data = useSelector((state) => state.coinData.data);
   const purchasedCoinsArray = useSelector((state) => state.portfolioInfo.purchasedCoins)
   console.log("purchasedCoinsDisplay: ", purchasedCoinsDisplay);
-  // { 
-    // displayData: undefined,
-    // purchaseAmt: "13",
-    // purchaseDate: "02-04-2022",
-    // purchaseId: "bitcoin + woiwoydf6798y2"
-// }
+  
   useEffect(() => {
     Promise.all(
         purchasedCoinsArray.map( async(coin) => {
@@ -81,17 +75,6 @@ function PurchasedCoins(props) {
 
   const renderPurchaseItems = purchasedCoinsDisplay.map((coinObj) => <PurchaseItem key={uuid()} coinData={coinObj} />)
   
-  // const priceChange24H = formatNumber(
-  //   data.market_data.price_change_percentage_24h
-  // );
-  // const marketCapVsVolume = Math.round(
-  //   data.market_data.market_cap[currency] /
-  //     data.market_data.total_volume[currency]
-  // );
-  // const circVsMax = Math.round(
-  //   data.market_data.circulating_supply / data.market_data.max_supply
-  // );
-
   return (
     <StyledPurchasedCoins>
       <StatisticsContainer>

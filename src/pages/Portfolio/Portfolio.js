@@ -7,6 +7,7 @@ import {
   AssetButton,
   AssetButtonWrap,
   AssetButtonContainer,
+  StyledPortfolioPage,
 } from "./Portfolio.styles";
 import { resetForm } from "store/shopForm/actions";
 
@@ -36,7 +37,7 @@ function Portfolio() {
   return (
     <>
       {purchasedCoins && (
-        <div>
+        <StyledPortfolioPage>
           <AssetButtonContainer>
             <AssetButtonWrap onClick={() => { dispatch(resetForm()); dispatch(coinShopDisplay()) }}>
               <AssetButton >Add Asset</AssetButton>
@@ -44,7 +45,7 @@ function Portfolio() {
           </AssetButtonContainer>
           <PurchasedCoins data={purchasedCoins} />
           {showCoinShop && <CoinShop/>}
-        </div>
+        </StyledPortfolioPage>
         
       )}
       

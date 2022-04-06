@@ -17,6 +17,8 @@ import {
   ButtonsContainer,
   ButtonA,
   ButtonB,
+  CoinImageWrap,
+  CoinName,
 } from "./CoinShop.styles";
 import CoinSearch from "components/CoinSearch";
 import Cross from "icons/Cross.svg";
@@ -47,7 +49,7 @@ function NewCoin() {
     <CoinShopBackground>
       <CoinShopForm>
         <SelectCoinsContainer>
-          <SelectCoins>Select Coins</SelectCoins>
+          <SelectCoins>Select Coin</SelectCoins>
           <CloseButton>
             <img
               onClick={() => dispatch(coinShopHide())}
@@ -59,14 +61,14 @@ function NewCoin() {
 
         <PurchaseDetailsContainer>
           <CoinId>
-            {displayData?.name}({displayData?.symbol})
-            <img src={displayData?.thumb} />
+            <CoinImageWrap>
+              <img src={displayData?.thumb} />
+            </CoinImageWrap>
+            <CoinName>{displayData?.name}{displayData?.symbol}</CoinName>
           </CoinId>
           <InputsContainer>
             <form>
-              <SearchInput>
                 <ShopSearch />
-              </SearchInput>
               <AmtInput>
                 <input
                   onChange={(e) => {
@@ -95,7 +97,6 @@ function NewCoin() {
 
         <ButtonsContainer>
           <ButtonA onClick={() => dispatch(coinShopHide())} >Close</ButtonA>
-          {/*TODO: on onClick={handleSubmit}  also dispatch action which gets the selected coins data for "your coin" data*/}
           <ButtonB onClick={handlePurchaseSave} allowSave={allowSave}>Save and Continue</ButtonB>
         </ButtonsContainer>
       </CoinShopForm>

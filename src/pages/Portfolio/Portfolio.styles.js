@@ -1,5 +1,8 @@
 import styled from "styled-components";
 
+export const StyledPortfolioPage = styled.div`
+`
+
 export const AssetButtonContainer = styled.div`
     display: flex;
     justify-content: center;
