@@ -1,13 +1,14 @@
 import React from "react";
 import debounce from "lodash.debounce";
 import { useSelector, useDispatch } from "react-redux";
+import { searchCleanup, getQueryMatches } from "store/coinSearch/actions";
 import {
   InputField,
   SearchResults,
   Result,
   ResultLink,
 } from "./CoinSearch.styles";
-import { searchCleanup, getQueryMatches } from "store/coinSearch/actions";
+
 
 function CoinSearch() {
   const dispatch = useDispatch();
@@ -38,7 +39,6 @@ function CoinSearch() {
         onChange={debounce(handleChange, 150)}
         placeholder="Search..."
       />
-      {/* {inputField.current?.value === "" && null} */}
       {isLoading ? (
         <Result>...Loading</Result>
       ) : (

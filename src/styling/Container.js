@@ -5,5 +5,4 @@ export const Container = styled.div`
     border: 10px solid ${(props) => props.theme.main};
     margin: 0 auto;
     min-width: 236px;
-
 `

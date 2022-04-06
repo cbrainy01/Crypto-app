@@ -14,7 +14,7 @@ import {
   OverviewInfo,
   StyledVolumeChart,
 } from "./VolumeChart.styles";
-import ChartLoader from "components/BitcoinOverview/ChartLoader";
+import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
 import ChartError from "components/BitcoinOverview/ChartError";
 import { getVolumeChartData } from "store/volumeData/action";
 
@@ -66,7 +66,7 @@ export function VolumeChart(props) {
   return (
     <>
       <StyledVolumeChart>
-        {isLoading && <ChartLoader />}
+        {isLoading && <LoaderComponent />}
         <OverviewInfo>
           <p>Volume 24h</p>
           <div>

@@ -8,7 +8,7 @@ import {
   OverviewInfo,
   StyledPriceChart,
 } from "./PriceChart.styles";
-import ChartLoader from "components/BitcoinOverview/ChartLoader";
+import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
 import ChartError from "components/BitcoinOverview/ChartError";
 import { getPriceChartData } from "store/priceData/actions";
 
@@ -61,7 +61,7 @@ export function PriceChart(props) {
   return (
     <>
       <StyledPriceChart>
-        {isLoading && <ChartLoader />}
+        {isLoading && <LoaderComponent />}
         <OverviewInfo>
           <p>BTC</p>
           <div>

@@ -1,7 +1,7 @@
 import { combineReducers, createStore, applyMiddleware } from "redux";
 import { composeWithDevTools } from "@redux-devtools/extension";
-import thunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
+import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 import globalDataReducer from "./globalData/globalDataReducer";
 import volumeDataReducer from "./volumeData/volumeDataReducer";
@@ -23,14 +23,16 @@ const portfolioInfoConfig = {
   key: "portfolioInfo",
   storage,
   blacklist: ["showCoinShop"],
-}
-
-// TODO: persist shopformreducer data. whitelist allowSave(dont persist it) 
+};
 
 const rootReducer = combineReducers({
   universalVariables: persistReducer(
     universalVariablesConfig,
     universalVariablesReducer
+  ),
+  portfolioInfo: persistReducer(
+    portfolioInfoConfig,
+    portfolioInfoReducer
   ),
   globalData: globalDataReducer,
   volumeData: volumeDataReducer,
@@ -38,8 +40,6 @@ const rootReducer = combineReducers({
   coinsData: coinsDataReducer,
   coinData: coinDataReducer,
   coinSearch: coinSearchReducer,
-  // portfolioInfo: portfolioInfoReducer,
-  portfolioInfo: persistReducer(portfolioInfoConfig, portfolioInfoReducer),
   shopSearch: shopSearchReducer,
   shopForm: shopFormReducer,
 });

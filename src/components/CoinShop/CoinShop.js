@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { coinShopHide, savePurchasedCoin } from "store/portfolioInfo/actions";
+import { handleFormChange, validateInputs } from "store/shopForm/actions";
+import Cross from "icons/Cross.svg";
+import ShopSearch from "components/ShopSearch";
 import {
   CoinShopForm,
   CoinShopBackground,
   SelectCoins,
-  StyledNewCoin,
   SelectCoinsContainer,
   CloseButton,
   PurchaseDetailsContainer,
   CoinId,
   InputsContainer,
   AmtInput,
-  SearchInput,
   DateInput,
   ButtonsContainer,
   ButtonA,
@@ -20,23 +21,15 @@ import {
   CoinImageWrap,
   CoinName,
 } from "./CoinShop.styles";
-import CoinSearch from "components/CoinSearch";
-import Cross from "icons/Cross.svg";
-import ShopSearch from "components/ShopSearch";
-import { handleFormChange, validateInputs } from "store/shopForm/actions";
 
-function NewCoin() {
+function CoinShop() {
   const dispatch = useDispatch();
-  const showCoinShop = useSelector((state) => state.portfolioInfo.showCoinShop);
+
   const displayData = useSelector((state) => state.shopForm.displayData);
   const purchaseAmt = useSelector((state) => state.shopForm.purchaseAmt);
   const purchaseDate = useSelector((state) => state.shopForm.purchaseDate);
   const allowSave = useSelector((state) => state.shopForm.allowSave);
-
-  const formData = useSelector((state) => state.shopForm);
-  console.log("formData: ", formData);
-  console.log("allowSave: ", allowSave);
-
+  
   function handlePurchaseSave(e) {
     e.preventDefault();
     if (!allowSave) {
@@ -104,4 +97,4 @@ function NewCoin() {
   );
 }
 
-export default NewCoin;
+export default CoinShop;
