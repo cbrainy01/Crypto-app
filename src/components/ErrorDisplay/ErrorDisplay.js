@@ -1,12 +1,18 @@
-import React from 'react'
-import { StyledErrorDisplay } from './ErrorDisplay.styles'
+import React from "react";
+import { ErrorContainer, ErrorWrap } from "./ErrorDisplay.styles";
 
-export class ErrorDisplay extends React.Component {
-  render() {
-    return (
-      <StyledErrorDisplay>ErrorDisplay</StyledErrorDisplay>
-    )
-  }
+function ErrorDisplay({ errorMessage }) {
+  return (
+    <ErrorContainer>
+      <ErrorWrap>
+        <img
+          src="https://static.thenounproject.com/png/675772-200.png"
+          alt="sad robot"
+        />
+        <p>{errorMessage}</p>
+      </ErrorWrap>
+    </ErrorContainer>
+  );
 }
 
-export default ErrorDisplay
+export default ErrorDisplay;
