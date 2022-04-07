@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
 import { getPreviousHours } from "utils";
+import { useSelector } from "react-redux";
 import CurrencyExchange from "components/CurrencyExchange";
 import {
   RadioButton,
@@ -20,6 +21,8 @@ export function CoinPageChart(props) {
 
   const lineData = data.slice(-timespan);
   const labels = getPreviousHours(timespan).reverse();
+
+  const currency = useSelector( (state) => state.universalVariables.currency )
 
   const handleTimespanChange = (e) => {
     setTimespan(e.target.value);
@@ -111,7 +114,7 @@ export function CoinPageChart(props) {
       <CurrencyExchange
             coin={props.coin}
             currentPrice={props.currentPrice}
-            currency={props.currency}
+            currency={currency}
           />
           <LineContainer>
       <Line

@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { NavbarGlobal, CoinSearch } from "components";
 import { getCurrencySymbol } from "utils";
 import { useSelector, useDispatch } from "react-redux";
-import { connect } from "react-redux";
+import { changeCurrency } from "store/universalVariables/actions"
+import { toggleTheme } from "store/universalVariables/actions";
+import SearchIcon from "icons/SearchIcon.svg";
+import Theme from "icons/Theme.svg";
 import {
   StyledNavbar,
   StyledLink,
@@ -17,21 +19,12 @@ import {
   ThemeToggleContainer,
   NavbarContainer,
 } from "./Navbar.styles";
-import SearchIcon from "../../icons/SearchIcon.svg";
-import Theme from "../../icons/Theme.svg";
-import { changeCurrency } from "store/currency/actions"
-import { toggleTheme } from "store/isBlacked/actions";
-
-import { getCurrency } from "store/currency/currencyReducer";
 
 export default function Navbar(props) {
-  const [isLoading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [globalData, setGlobalData] = useState(null);
-
-  const isBlacked = useSelector((state) => state.isBlacked)
-  const currency = useSelector((state) => getCurrency(state))
   const dispatch = useDispatch()
+  
+  const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
+  const currency = useSelector( (state) => state.universalVariables.currency )
 
   return (
     <NavbarContainer>

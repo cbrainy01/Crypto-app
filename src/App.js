@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { ThemeProvider } from "styled-components";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { Navbar } from "components";
 import { CoinList, CoinPage, Portfolio } from "pages";
-import { getCurrencySymbol, useLocalState } from "utils";
 import { GlobalStyle, Container, darkTheme, lightTheme } from "styling";
 import { useSelector } from "react-redux";
 import "./App.css";
 
-function App(props) {
-  const [currency, setCurrency] = useLocalState("currency", "usd");
-  const isBlacked = useSelector((state) => state.isBlacked)
+function App() {
+  const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
   
   return (
     <ThemeProvider theme={isBlacked ? darkTheme : lightTheme}>
@@ -23,18 +21,18 @@ function App(props) {
               exact
               path="/portfolio"
               component={(props) => (
-                <Portfolio {...props} currency={currency} />
+                <Portfolio {...props} />
               )}
             />
             <Route
               exact
               path="/coinpage/:coin"
-              component={(props) => <CoinPage {...props} currency={currency} />}
+              component={(props) => <CoinPage {...props} />}
             />
             <Route
               exact
               path="/"
-              component={(props) => <CoinList {...props} currency={currency} />}
+              component={() => <CoinList />}
             />
           </Switch>
         </Router>

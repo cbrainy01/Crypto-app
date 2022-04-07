@@ -8,7 +8,7 @@ const initialState = {
     error: false,
 };
 
-export default function (state = initialState, action) {
+export default function globalDataReducer(state = initialState, action) {
   switch (action.type) {
       case GET_GLOBAL_DATA_PENDING:
           return {...state, isLoading: true, error: false}

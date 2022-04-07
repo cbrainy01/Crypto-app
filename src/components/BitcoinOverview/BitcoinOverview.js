@@ -14,11 +14,9 @@ export function BitcoinOverview(props) {
       <ChartContainer>
         <ChartWrap>
           <PriceChart
-            currency={props.currency.toString()}
             timeSpan={props.timeSpan}
           />
           <VolumeChart
-            currency={props.currency.toString()}
             timeSpan={props.timeSpan}
           />
         </ChartWrap>
