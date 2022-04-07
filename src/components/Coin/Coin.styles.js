@@ -3,20 +3,30 @@ import { Link } from "react-router-dom";
 
 export const StyledCoin = styled.div`
   display: flex;
-  width: 100%;
+  // width: 100%;
+  // width: 578px;
+  // width: 700px;
   flex-flow: row;
   align-items: center;
-  justify-content: safe-space;
+  // justify-content: safe-space;
+  // gap: 15px;
   color: ${(props) => props.theme.color};
   border-bottom: 1px solid #707070;
   height: 75px;
   font-size: 11px;
+  //background: orange;
+  // overflow: scroll;
+  width: 856px;
+
 `;
 
 export const Index = styled.span`
-  margin-right: 10px;
+  // margin-right: 10px;
   width: 30px;
+  // width: 100%;
   text-align: center;
+  //background: grey;
+
 `;
 
 export const CoinId = styled.div`
@@ -24,6 +34,8 @@ export const CoinId = styled.div`
   flex-flow: row;
   align-items: center;
   width: 154px;
+  // width: 100%;
+  //background: pink;
 
   img {
     width: 20px;
@@ -40,10 +52,14 @@ export const CoinLink = styled(Link)`
 
 export const CoinPrice = styled.span`
   width: 66px;
+  //background: yellow;
+
 `;
 
 export const HourChange = styled.div`
   width: 62px;
+  //background: blue;
+
   div {
     display: flex;
     flex-flow: row;
@@ -65,6 +81,8 @@ export const Barr = styled.div`
 
 export const DayChange = styled.div`
   width: 70px;
+  // background: green;
+
   div {
     display: flex;
     flex-flow: row;
@@ -79,6 +97,8 @@ export const DayChange = styled.div`
 
 export const WeekChange = styled.div`
   width: 63px;
+  // background: purple;
+
   div {
     display: flex;
     flex-flow: row;
@@ -114,6 +134,8 @@ export const Progress = styled.div`
 
 export const Volume = styled.div`
   width: 156px;
+  //background: turquoise;
+
   margin-right: 21px;
   section:nth-child(1) {
     display: flex;
@@ -146,6 +168,7 @@ export const VolumeB = styled.div`
 
 export const Circulation = styled.div`
   width: 156px;
+  //background: lime;
   margin-right: 16px;
   section:nth-child(1) {
     display: flex;
@@ -180,4 +203,6 @@ export const StyledSparkline = styled.div`
   width: 75px;
   text-align: center;
   padding-right: 10px;
+  //background: brown;
+
 `;
