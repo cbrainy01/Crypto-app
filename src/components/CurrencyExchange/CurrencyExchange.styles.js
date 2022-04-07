@@ -29,8 +29,13 @@ export const ExchangeWrap = styled.div`
 `;
 
 export const ExchangeBar = styled.div`
+<<<<<<< HEAD
   border-radius: 8px;
   width: 166px;
+=======
+  border-radius: 4px;
+  min-width: 166px;
+>>>>>>> portfolio-page
   background: ${(props) => props.theme.inner};
   display: flex;
   @media (max-width: 588px) {
