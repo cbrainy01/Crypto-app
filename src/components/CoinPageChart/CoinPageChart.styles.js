@@ -1,17 +1,26 @@
 import styled from "styled-components";
 
-export const StyledCoinPageChart = styled.div``;
+export const StyledCoinPageChart = styled.div`
+  @media (max-width: 588px) {
+    background: ${(props) => props.theme.main};
+    display: flex;
+    flex-flow: column;
+    gap: 26px;
+  }
+`;
 
 export const RadioContainer = styled.div`
   margin-top: 27px;
-  padding: 0 351px 0 348px;
 `;
 
 export const RadioWrap = styled.div`
-  width: 100%;
+  width: 230px;
   display: flex;
   margin: 0 auto;
   justify-content: center;
+  @media (max-width: 588px) {
+    width: 100%;
+  }
 `;
 export const RadioButton = styled.input``;
 

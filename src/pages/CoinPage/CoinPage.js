@@ -129,10 +129,12 @@ export default function CoinPage(props) {
                   </CoinName>
                 </SummaryATop>
                 <SummaryABottom>
-                  <img src={Link} alt="link icon" />
-                  <a href={coinData.links.homepage[0]}>
-                    {coinData.links.homepage[0]}
+                  <a href={coinData.links.homepage[0]} target="_blank">
+                    <img src={Link} alt="link icon" />
                   </a>
+                  <span>
+                    {coinData.links.homepage[0]}
+                  </span>
                 </SummaryABottom>
               </SummaryA>
 
@@ -237,10 +239,6 @@ export default function CoinPage(props) {
                         )}
                       </p>
                     </div>
-                    <div>
-                      <img src={Plus} alt="plus" />
-                      <span>Volume 24h: {currencySymbol}</span>
-                    </div>
                   </SummaryCTop>
                   <SummaryCBottom>
                     <div>
@@ -258,8 +256,7 @@ export default function CoinPage(props) {
                     <div>
                       <img src={Plus} alt="plus" />
                       <span>Max Supply: </span>
-                      <p>{coinData.market_data.max_supply} </p>
-                      <p>{coinData.symbol.toUpperCase()}</p>
+                      <p>{coinData.market_data.max_supply ? `${coinData.market_data.max_supply} ${coinData.symbol.toUpperCase()}` : "N/A"} </p>
                     </div>
                   </SummaryCBottom>
                   <BarContainer>

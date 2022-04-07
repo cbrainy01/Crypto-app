@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { getCurrencySymbol } from "utils";
+import Exchange from "icons/Exchange.svg";
 import {
   ExchangeContainer,
   ExchangeBar,
@@ -8,7 +9,7 @@ import {
   ExchangeWrap,
   SymbolFill,
 } from "./CurrencyExchange.styles";
-import Exchange from "icons/Exchange.svg";
+
 
 export function CurrencyExchange(props) {
   const { currentPrice, currency, coin } = props;
