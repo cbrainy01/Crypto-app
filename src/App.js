@@ -5,30 +5,19 @@ import { Navbar } from "components";
 import { CoinList, CoinPage, Portfolio } from "pages";
 import { getCurrencySymbol, useLocalState } from "utils";
 import { GlobalStyle, Container, darkTheme, lightTheme } from "styling";
+import { useSelector } from "react-redux";
 import "./App.css";
 
-function App() {
+function App(props) {
   const [currency, setCurrency] = useLocalState("currency", "usd");
-  const [isBlacked, setIsBlacked] = useLocalState("isBlacked", true);
-
-  const handleCurrencyChange = (newCurrency) => {
-    setCurrency(newCurrency);
-  };
-
-  const handleThemeChange = () => {
-    setIsBlacked(!isBlacked);
-  };
-
+  const isBlacked = useSelector((state) => state.isBlacked)
+  
   return (
     <ThemeProvider theme={isBlacked ? darkTheme : lightTheme}>
       <Container>
         <GlobalStyle />
         <Router>
-          <Navbar
-            handleThemeChange={handleThemeChange}
-            handleCurrencyChange={handleCurrencyChange}
-            currency={currency}
-          />
+          <Navbar />
           <Switch>
             <Route
               exact

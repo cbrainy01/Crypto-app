@@ -1,17 +1,39 @@
 import axios from "axios";
+import numeral from "numeral";
 import React, { useState, useEffect } from "react";
-import { CoinPageChart, CurrencyExchange, ErrorDisplay } from "components";
-import { renderPercentChange, getCurrencySymbol, formatNumber } from "utils";
+import { v4 as uuid } from "uuid";
+import { CoinPageChart, ErrorDisplay } from "components";
+import { getCurrencySymbol, formatNumber } from "utils";
 import {
   CoinDescription,
   CoinLinks,
   CoinLink,
   CoinSummary,
+  ImgContainer,
   StyledCoinPage,
   SummaryA,
   SummaryB,
   SummaryC,
   Bar,
+  YourSummary,
+  CoinPageContainer,
+  CoinName,
+  SummaryATop,
+  SummaryABottom,
+  BPrice,
+  PercentChange,
+  Profit,
+  StackWrap,
+  ATH,
+  ATL,
+  SummaryCTop,
+  SummaryCBottom,
+  BarContainer,
+  LeftPct,
+  RightPct,
+  Description,
+  DescriptionContainer,
+  SummaryWrap,
 } from "./CoinPage.styles";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
@@ -19,6 +41,7 @@ import Uptick from "icons/Uptick.svg";
 import Downtick from "icons/Downtick.svg";
 import Plus from "icons/Plus.svg";
 import Copy from "icons/Copy.svg";
+import Bullet from "icons/Bullet.svg"
 
 export default function CoinPage(props) {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,7 +58,7 @@ export default function CoinPage(props) {
   );
   const volume = Math.round(
     (coinData?.market_data.total_volume["btc"] /
-      coinData?.market_data.max_supply) *
+      coinData?.market_data.max_supply || 1) *
       100
   );
 
@@ -53,14 +76,42 @@ export default function CoinPage(props) {
     }
   };
 
-  useEffect(() => {
-    getCoinData();
-  }, [currency, coinId]);
-
+  function getProfit(price, pctChangeString) {
+    const pctChange = parseFloat(pctChangeString)
+    const profit =  ((pctChange / 100) * price).toFixed(3)  
+    if(isNaN(pctChange)) {return `${currencySymbol}0`}
+    if( pctChange >= 0 ) { return `${currencySymbol}${profit}` }
+    else if( pctChange < 0 ) { return`-${currencySymbol}${profit.slice(1)}` }
+  }
+  
   const handleClipboardCopy = (e) => {
     const copiedText = e.target.getAttribute("data-value");
     navigator.clipboard.writeText(copiedText);
   };
+
+  function renderLinks() {
+    const links =  coinData.links.blockchain_site.map( (siteLink, index) => {
+      if(siteLink.length == 0) {return}
+      return (<CoinLink key={uuid()}>
+      <div>
+        <a href={siteLink} target="_blank">
+          <img src={Link} alt="link" />
+        </a>
+        <p>{siteLink}</p>
+        <img
+          onClick={handleClipboardCopy}
+          data-value={siteLink}
+          src={Copy}
+          alt="copy"
+        />
+      </div>
+    </CoinLink> )})
+    return links.slice(0,3);
+  }
+
+  useEffect(() => {
+    getCoinData();
+  }, [currency, coinId]);
 
   return (
     <div>
@@ -68,42 +119,46 @@ export default function CoinPage(props) {
       {error && <ErrorDisplay />}
       {coinData && (
         <StyledCoinPage>
-          <h1>Your Summary:</h1>
+          
+          <CoinPageContainer>
+          <YourSummary>Your Summary</YourSummary>
           <CoinSummary>
             <SummaryA>
-              <section>
-                <img src={coinData.image.small} alt={coinData.name} />
-                <div>
+                <SummaryATop>
+                <ImgContainer>
+                  <img src={coinData.image.small} alt={coinData.name} />
+                </ImgContainer>
+                <CoinName>
                   {coinData.name}({coinData.symbol.toUpperCase()})
-                </div>
-                <div>
+                </CoinName>
+                </SummaryATop>
+                <SummaryABottom>
                   <img src={Link} alt="link icon" />
                   <a href={coinData.links.homepage[0]}>
                     {coinData.links.homepage[0]}
                   </a>
-                </div>
-              </section>
-            </SummaryA>
+                </SummaryABottom>
+             </SummaryA>
+
             <SummaryB>
-              <section>
-                <div>
-                  <span>
+                <BPrice>
+                  <div>
                     {currencySymbol}
                     {coinData.market_data.current_price[currency]}
-                  </span>
-                  <span>
-                    {renderPercentChange(
-                      coinData.market_data.price_change_percentage_24h
-                    )}
-                  </span>
-                </div>
-                <div>
-                  <img src={Stack} alt="stack icon" />
-                </div>
-                <div>
-                  <span>
+                  </div>
+                  <PercentChange color={coinData.market_data.price_change_percentage_24h >= 0 ? "#00FC2A" : "red"}>
+                    <img src={coinData.market_data.price_change_percentage_24h >= 0 ? Uptick : Downtick}/>
+                    {numeral(coinData.market_data.price_change_percentage_24h).format("0.00")}%
+                  </PercentChange>
+                </BPrice>
+                <Profit color={coinData.market_data.price_change_percentage_24h >= 0 ? "#00FC2A" : "red"}>
+                  <p>Profit: </p><span> {getProfit(coinData.market_data.current_price[currency], numeral(coinData.market_data.price_change_percentage_24h).format("0.00"))}</span>
+                </Profit>
+                <StackWrap>
+                    <img src={Stack} alt="stack icon" />
+                </StackWrap>
+                <ATH>
                     <img src={Uptick} alt="uptick" />
-                  </span>
                   <span>
                     <p>
                       All Time High: {currencySymbol}
@@ -111,11 +166,9 @@ export default function CoinPage(props) {
                     </p>
                     <p>{coinData.market_data.ath_date[currency]}</p>
                   </span>
-                </div>
-                <div>
-                  <span>
-                    <img src={Downtick} alt="downtick" />
-                  </span>
+                </ATH>
+                <ATL>
+                  <img src={Downtick} alt="downtick" />
                   <span>
                     <p>
                       All Time Low: {currencySymbol}
@@ -123,27 +176,26 @@ export default function CoinPage(props) {
                     </p>
                     <p>{coinData.market_data.atl_date[currency]}</p>
                   </span>
-                </div>
-              </section>
+                </ATL>
             </SummaryB>
+
             <SummaryC>
               <section>
+                <SummaryCTop>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Market cap: </p>
+                  <span>Market cap: </span>
                   <p>
                     {currencySymbol}
                     {formatNumber(coinData.market_data.market_cap[currency])}
                   </p>
-                  <p>
-                    {renderPercentChange(
-                      coinData.market_data.market_cap.change_percentage
-                    )}
-                  </p>
+                  <span>
+                    2.44%
+                  </span>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Fully Diluted Valuation: </p>
+                  <span>Fully Diluted Valuation: </span>
                   <p>
                     {currencySymbol}
                     {formatNumber(
@@ -153,99 +205,66 @@ export default function CoinPage(props) {
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Volume 24h: {currencySymbol}</p>
+                  <span>Volume 24h: {currencySymbol}</span>
+                </div>
+                </SummaryCTop>
+                <SummaryCBottom>
+                <div>
+                  <img src={Plus} alt="plus" />
+                  <span>Total Volume: </span>
+                  <p>{coinData.market_data.total_volume.btc}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Total Volume: </p>
-                  <p>
-                    {coinData.market_data.total_volume.btc}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
+                  <span>Circulating Supply: </span>
+                  <p>{coinData.market_data.circulating_supply}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
                 <div>
                   <img src={Plus} alt="plus" />
-                  <p>Circulating Supply: </p>
-                  <p>
-                    {coinData.market_data.circulating_supply}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
+                  <span>Max Supply: </span>
+                  <p>{coinData.market_data.max_supply}{" "}</p>
+                  <p>{coinData.symbol.toUpperCase()}</p>
                 </div>
-                <div>
-                  <img src={Plus} alt="plus" />
-                  <p>Max Supply: </p>
-                  <p>
-                    {coinData.market_data.max_supply}{" "}
-                    {coinData.symbol.toUpperCase()}
-                  </p>
-                </div>
-                <div>
+                </SummaryCBottom>
+                <BarContainer>
+                  <section>
+                    <LeftPct>
+                      <img alt="bullet point" src={Bullet}/>
+                      <p>{volume > 100 ? "N/A" : `${volume}%`}</p>
+                    </LeftPct>
+                    <RightPct>
+                    <img alt="bullet point" src={Bullet}/>
+                    <p>{circulating > 100 ? "N/A" : `${circulating}%`}</p>
+                    </RightPct>
+                  </section>
                   <Bar circulating={circulating} volume={volume}>
                     <div></div>
                     <div></div>
                   </Bar>
-                </div>
+                </BarContainer>
+                
               </section>
             </SummaryC>
           </CoinSummary>
-          <h1>Description:</h1>
+          <Description>Description</Description>
+          <DescriptionContainer>
           <CoinDescription>
+            <StackWrap><img alt="stack icon" src={Stack}/></StackWrap>
             <div
               dangerouslySetInnerHTML={{ __html: coinData.description.en }}
             ></div>
-          </CoinDescription>
+          </CoinDescription></DescriptionContainer>
           <CoinLinks>
-            <div>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[0]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[0]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[0]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[1]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[1]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[1]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-              <CoinLink>
-                <div>
-                  <a href={coinData.links.blockchain_site[2]} target="_blank">
-                    <img src={Link} alt="link" />
-                  </a>
-                  <p>{coinData.links.blockchain_site[2]}</p>
-                  <img
-                    onClick={handleClipboardCopy}
-                    data-value={coinData.links.blockchain_site[2]}
-                    src={Copy}
-                    alt="copy"
-                  />
-                </div>
-              </CoinLink>
-            </div>
+              {renderLinks()}
           </CoinLinks>
-          <CurrencyExchange
-            coin={coinData.symbol}
-            currentPrice={coinData.market_data.current_price[currency]}
-            currency={currency}
-          />
-          <CoinPageChart data={coinData.market_data.sparkline_7d.price} />
+          </CoinPageContainer> 
+          <CoinPageChart
+          coin={coinData.symbol}
+          currentPrice={coinData.market_data.current_price[currency]}
+          currency={currency}
+          data={coinData.market_data.sparkline_7d.price} />
         </StyledCoinPage>
       )}
     </div>
