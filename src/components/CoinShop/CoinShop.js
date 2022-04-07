@@ -29,6 +29,9 @@ function CoinShop() {
   const purchaseAmt = useSelector((state) => state.shopForm.purchaseAmt);
   const purchaseDate = useSelector((state) => state.shopForm.purchaseDate);
   const allowSave = useSelector((state) => state.shopForm.allowSave);
+
+  const today = new Date;
+  const maxDate = today.toISOString().split("T")[0]
   
   function handlePurchaseSave(e) {
     e.preventDefault();
@@ -82,6 +85,7 @@ function CoinShop() {
                   value={purchaseDate}
                   type="date"
                   placeholder="purchase date"
+                  max={maxDate}
                 />
               </DateInput>
             </form>
