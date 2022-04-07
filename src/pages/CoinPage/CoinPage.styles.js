@@ -6,46 +6,75 @@ export const StyledCoinPage = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.color};
   }
+  @media (max-width: 588px) {
+    margin-top: 0;
+  }
 `;
 
 export const CoinPageContainer = styled.div`
-  padding-left: 150px;
-  padding-right: 118px;
+  @media (max-width: 588px) {
+    background: ${(props) => props.theme.main};
+  }
 `;
 
 export const YourSummary = styled.p`
-  width: 100%;
+  max-width: 712px;
   display: flex;
   justify-content: left;
   font-size: 11px;
+  margin: 0 auto;
   font-weight: 600;
   margin-bottom: 25px;
 `;
 
 export const CoinSummary = styled.div`
+  max-width: 712px;
   display: flex;
   flex-flow: row;
   font-size: 9px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  @media (max-width: 588px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 8px;
+    background: ${(props) => props.theme.main};
+  }
+`;
+
+export const SummaryWrap = styled.div`
   display: flex;
   justify-content: center;
   margin: 0 auto;
 `;
 
-export const SummaryWrap = styled.div`
-display: flex;
-justify-content: center;
-margin: 0 auto;
-`
 export const SummaryA = styled.div`
   margin-right: 36px;
+  @media (max-width: 588px) {
+    align-self: center;
+    width: 100%;
+    margin-right: 0;
+    background: ${(props) => props.theme.main};
+  }
 `;
 export const SummaryATop = styled.div`
   height: 147px;
-  width: 129px;
   background: ${(props) => props.theme.main};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border-radius: 6px;
-  padding: 18px 36px;
+  @media (max-width: 588px) {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 export const SummaryABottom = styled.div`
   height: 32px;
@@ -56,10 +85,21 @@ export const SummaryABottom = styled.div`
   padding: 11px 36px;
   padding-left: 11px;
   padding-right: 11px;
+  span {
+    word-break: break-all;
+  }
   img {
     height: 6px;
     width: 6px;
     margin-right: 17px;
+  }
+  @media (max-width: 588px) {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: ${(props) => props.theme.inner};
   }
 `;
 
@@ -91,6 +131,12 @@ export const SummaryB = styled.div`
   padding-right: 41px;
   background: ${(props) => props.theme.main};
   margin-right: 4.4%;
+  @media (max-width: 588px) {
+    align-self: center;
+    width: 100%;
+    margin-right: 0;
+    background: ${(props) => props.theme.inner};
+  }
 `;
 
 export const BPrice = styled.div`
@@ -124,7 +170,6 @@ export const Profit = styled.div`
   margin: 0 auto;
   font-size: 9px;
   margin-bottom: 12px;
-
   p {
     font-weight: 600;
   }
@@ -195,6 +240,13 @@ export const SummaryC = styled.div`
     width: 12px;
     margin-right: 7px;
   }
+  @media (max-width: 588px) {
+    align-self: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: ${(props) => props.theme.inner};
+  }
 `;
 
 export const SummaryCTop = styled.div`
@@ -229,7 +281,7 @@ export const SummaryCBottom = styled.div`
 `;
 
 export const Bar = styled.div`
-  width: 135px;
+  width: 100%;
   border-radius: 8px;
   height: 4px;
   background: #b54124;
@@ -255,6 +307,7 @@ export const BarContainer = styled.div`
   margin-top: 6px;
   section {
     display: flex;
+    justify-content: space-between;
     padding: 0;
   }
   img {
@@ -272,12 +325,12 @@ export const LeftPct = styled.div`
 export const RightPct = styled.div`
   display: flex;
   width: 50%
-  align-items: right;
+  justify-content: right;
   color: #FE8C01;
 `;
 
 export const DescriptionContainer = styled.div`
-  width: 100%;
+  max-width: 712px;
   display: flex;
   justify-content: center;
   margin: 0 auto;
@@ -299,13 +352,23 @@ export const CoinDescription = styled.div`
   img {
     margin-top: 15px;
   }
+  @media (max-width: 588px) {
+    background: ${(props) => props.theme.inner};
+  }
 `;
 
 export const Description = styled.div`
   font-size: 11px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: left;
   font-weight: 600;
   margin-top: 25px;
   margin-bottom: 25px;
+  max-width: 712px;
+  @media (max-width: 588px) {
+    background: ${(props) => props.theme.main};
+  }
 `;
 
 export const LinksContainer = styled.div`
@@ -314,7 +377,7 @@ export const LinksContainer = styled.div`
 `;
 
 export const CoinLinks = styled.div`
-  margin-top: 14px;
+  margin-top: 7px;
   width: 100%;
   display: flex;
   flex-flow: row wrap;
@@ -323,26 +386,33 @@ export const CoinLinks = styled.div`
     display: flex;
     justify-content: space-evenly;
   }
+  @media (max-width: 588px) {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
 `;
 
 export const CoinLink = styled.div`
   display: flex;
-  justify-content: center;
   min-width: 230px;
   background: ${(props) => props.theme.main};
   border-radius: 12px;
-  padding: 10px 8px 10px 11px;
+  padding: 10px 0px 10px 0px;
   margin-right: 10px;
+  margin-top: 8px;
 
   font-size: 7px;
   div {
     height: 32px;
+    width: 100%;
   }
   p {
     margin: auto 2px;
   }
   a {
     margin: auto 0;
+    align-self: left;
   }
   a img {
     height: 6px;
@@ -353,5 +423,9 @@ export const CoinLink = styled.div`
     height: 10px;
     width: 10px;
     margin: auto 0;
+  }
+  @media (max-width: 588px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
   }
 `;

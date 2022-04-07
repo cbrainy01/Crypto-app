@@ -1,15 +1,15 @@
 import styled from "styled-components";
 
 export const ExchangeContainer = styled.div`
-  padding: 0 298px 0 287px;
   margin-bottom: 24px;
 `;
 
 export const ExchangeWrap = styled.div`
   display: flex;
-  width: 100%;
+  width: 375px;
   height: 27px;
   justify-content: center;
+  margin: 0 auto;
   margin-top: 12px;
   color: ${(props) => props.theme.main};
   img {
@@ -17,20 +17,32 @@ export const ExchangeWrap = styled.div`
     width: 12px;
     height: 9px;
   }
+  @media (max-width: 588px) {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 6px;
+    img {
+      align-self: center;
+    }
+  }
 `;
 
 export const ExchangeBar = styled.div`
-  border-radius: 4px;
+  border-radius: 8px;
   width: 166px;
   background: ${(props) => props.theme.inner};
   display: flex;
+  @media (max-width: 588px) {
+    width: 100%;
+  }
 `;
 
 export const InputBar = styled.input`
   background: ${(props) => props.theme.inner};
   color: ${(props) => props.theme.color};
   height: 27px;
-  width: 60%;
+  width: 100%;
   border-radius: 0px 8px 8px 0px;
   outline: none;
   border: 1px solid #191b1f;
