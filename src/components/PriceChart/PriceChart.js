@@ -6,13 +6,17 @@ import { formatOverviewNumber, wordedDate, getCurrencySymbol } from "utils";
 import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
 import { getPriceChartData } from "store/priceData/actions";
 import { ErrorDisplay } from "components";
+import { useWindowSize } from "@react-hook/window-size/throttled";
 import {
+  CarouselPriceChart,
   LineChartContainer,
   OverviewInfo,
   StyledPriceChart,
 } from "./PriceChart.styles";
 
 export function PriceChart(props) {
+  const [width, height] = useWindowSize({ fps: 60 });
+  
   const dispatch = useDispatch();
   const chartRef = useRef(null);
 
@@ -60,7 +64,9 @@ export function PriceChart(props) {
 
   return (
     <>
-      <StyledPriceChart>
+    {width > 602 ?
+    
+    <StyledPriceChart width={width} height={height}>
         {isLoading && <LoaderComponent />}
         <OverviewInfo>
           <p>BTC</p>
@@ -128,6 +134,78 @@ export function PriceChart(props) {
           />
         </LineChartContainer>
       </StyledPriceChart>
+      :
+      <CarouselPriceChart width={width} height={height}>
+      {isLoading && <LoaderComponent />}
+      <OverviewInfo>
+        <p>BTC</p>
+        <div>
+          {currencySymbol}
+          {formatOverviewNumber(todaysPrice)}
+        </div>
+        <p>{wordedDate(new Date())}</p>
+      </OverviewInfo>
+      <LineChartContainer>
+        <Line
+          ref={chartRef}
+          data={priceDatapoints || { datasets: [] }}
+          options={{
+            elements: {
+              point: {
+                radius: 0,
+                hitRadius: 8,
+                backgroundColor: "#00FF5F8F",
+              },
+              line: { tension: 0.2 },
+            },
+            scales: {
+              y: {
+                display: false,
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  callback: function (value, index, ticks) {
+                    return;
+                  },
+                },
+              },
+              x: {
+                grid: {
+                  display: false,
+                },
+                ticks: {
+                  callback: function (val, index) {
+                    const day = this.getLabelForValue(val).split("-")[1];
+                    return day;
+                  },
+                  font: {
+                    size: 8,
+                  },
+                  maxRotation: 0,
+                },
+              },
+            },
+            plugins: {
+              tooltip: {
+                callbacks: {
+                  title: function (context) {
+                    return `Price: ${currencySymbol}${context[0].formattedValue}`;
+                  },
+                  label: function (context) {
+                    return `date: ${context.label}`;
+                  },
+                },
+              },
+              legend: { display: false },
+            },
+          }}
+        />
+      </LineChartContainer>
+    </CarouselPriceChart> 
+  
+  }
+      
     </>
   );
 }
