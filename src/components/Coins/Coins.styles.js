@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import SVG from "react-inlinesvg";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 export const TornadoIcon = styled(SVG)`
   cursor: pointer;
@@ -9,47 +8,30 @@ export const TornadoIcon = styled(SVG)`
   & path {
     fill: ${(props) => props.theme.color};
   }
-`
-
-export const ScrollComponent = styled(InfiniteScroll)`
-  all: unset;
-`
+`;
 
 export const CoinsContainer = styled.div`
   margin: 0 auto;
-  padding: 0 55px 34px 55px;
+  max-width: 856px;
+  justify-content: center;
   box-sizing: border-box;
-`;
-
-export const StyledCoins = styled.div`
   border-radius: 10px;
-  width: 100%;
-  max-width: 1712px;
 `;
 
 export const SortingContainer = styled.div`
-  background: grey;
   display: flex;
 `;
 
-export const CoinsBox = styled.div`
-  background: ${(props) => props.theme.main};
-  border-radius: 10px;
-`;
-
-export const SortControl = styled.div`
-  background: orange;
-  display: flex;
-  align-items: left;
-  img {
-    width: 10px;
-    height: 10px;
+export const ScrollContainer = styled.div`
+  max-width: 856px;
+  div:last-child {
+    border-bottom: none;
   }
 `;
 
-export const DisplayCountControl = styled.div`
-  background: green;
+export const SortControl = styled.div`
   display: flex;
+  align-items: left;
   img {
     width: 10px;
     height: 10px;
@@ -58,10 +40,22 @@ export const DisplayCountControl = styled.div`
 export const RankingSort = styled.div``;
 
 export const SortBy = styled.div``;
-export const StyledTable = styled.div``;
+
+export const DisplayCountControl = styled.div`
+  display: flex;
+  img {
+    width: 10px;
+    height: 10px;
+  }
+`;
+
+export const CoinsBox = styled.div`
+  background: ${(props) => props.theme.main};
+  border-radius: 10px;
+  width: 100%;
+`;
 
 export const IndexHeader = styled.span`
-  margin-right: 10px;
   width: 30px;
   text-align: center;
 `;
@@ -82,6 +76,7 @@ export const PriceHeader = styled.div`
   display: flex;
   flex-flow: row;
   align-items: center;
+
   img {
     cursor: pointer;
     width: 20px;
@@ -94,6 +89,7 @@ export const HourHeader = styled.div`
   display: flex;
   flex-flow: row;
   align-items: center;
+
   img {
     cursor: pointer;
     width: 20px;
@@ -106,6 +102,7 @@ export const DayHeader = styled.div`
   display: flex;
   flex-flow: row;
   align-items: center;
+
   img {
     cursor: pointer;
     width: 20px;
@@ -118,6 +115,7 @@ export const WeekHeader = styled.div`
   display: flex;
   flex-flow: row;
   align-items: center;
+
   img {
     cursor: pointer;
     width: 20px;
@@ -144,7 +142,6 @@ export const SparklineHeader = styled.div`
 
 export const TableHead = styled.div`
   display: flex;
-  width: 100%;
   flex-flow: row;
   align-items: center;
   color: ${(props) => props.theme.color};
@@ -152,4 +149,5 @@ export const TableHead = styled.div`
   height: 75px;
   font-size: 11px;
   font-weight: 800;
+  width: 856px;
 `;

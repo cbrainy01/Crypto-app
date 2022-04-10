@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { Coin } from "components";
+import { Coin, ErrorDisplay } from "components";
 import { useSelector, useDispatch } from "react-redux";
+import { getCoinsData } from "store/coinsData/actions";
 import topDownArrow from "icons/topDownArrow.svg";
 import ArrowDown from "icons/ArrowDown.svg";
 import ArrowLeft from "icons/ArrowLeft.svg";
 import ArrowRight from "icons/ArrowRight.svg";
 import TornadoSort from "icons/TornadoSort.svg";
 import {
-  StyledCoins,
   SortingContainer,
   CoinsContainer,
   SortControl,
   DisplayCountControl,
   RankingSort,
   SortBy,
-  StyledTable,
   TableHead,
   CoinsBox,
   IndexHeader,
@@ -28,8 +27,8 @@ import {
   WeekHeader,
   SparklineHeader,
   TornadoIcon,
+  ScrollContainer,
 } from "./Coins.styles";
-import { getCoinsData } from "store/coinsData/actions";
 
 export function Coins() {
   const dispatch = useDispatch();
@@ -69,9 +68,10 @@ export function Coins() {
     setSortType(att);
   };
 
+  if(error) {return <ErrorDisplay errorMessage={error.message}/>}
+
   return (
     <CoinsContainer>
-      <StyledCoins>
         <SortingContainer>
           <SortControl>
             <img src={topDownArrow} alt="ethereum" />
@@ -88,8 +88,15 @@ export function Coins() {
           </DisplayCountControl>
         </SortingContainer>
         <CoinsBox>
-          <StyledTable>
-            <TableHead>
+            <InfiniteScroll
+              dataLength={coinsData.length}
+              next={fetchMoreCoins}
+              hasMore={hasMore}
+              loader={<h3>Loading...</h3>}
+              scrollThreshold={1.0}
+            >
+              <ScrollContainer>
+                <TableHead>
               <IndexHeader>#</IndexHeader>
               <IdHeader>
                 <span>Name</span>
@@ -139,15 +146,7 @@ export function Coins() {
               <VolumeHeader>24h Vol / Market Cap</VolumeHeader>
               <CirculatingHeader>Circulating /Total Sup</CirculatingHeader>
               <SparklineHeader>Last 7d</SparklineHeader>
-            </TableHead>
-            <InfiniteScroll
-              dataLength={coinsData.length}
-              next={fetchMoreCoins}
-              hasMore={hasMore}
-              loader={<h3>Loading...</h3>}
-              endMessage={<p>Thats all Folks!</p>}
-              scrollThreshold={1.0}
-            >
+            </TableHead> 
               {coinsData?.map((coinData, index) => (
                 <Coin
                   key={`${coinData.id} +${Math.random(20)}`}
@@ -156,10 +155,9 @@ export function Coins() {
                   currency={currency}
                 />
               ))}
+              </ScrollContainer>
             </InfiniteScroll>
-          </StyledTable>
         </CoinsBox>
-      </StyledCoins>
     </CoinsContainer>
   );
 }
