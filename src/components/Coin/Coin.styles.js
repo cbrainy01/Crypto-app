@@ -3,18 +3,17 @@ import { Link } from "react-router-dom";
 
 export const StyledCoin = styled.div`
   display: flex;
-  width: 100%;
   flex-flow: row;
   align-items: center;
-  justify-content: safe-space;
   color: ${(props) => props.theme.color};
   border-bottom: 1px solid #707070;
   height: 75px;
   font-size: 11px;
+  width: 856px;
+
 `;
 
 export const Index = styled.span`
-  margin-right: 10px;
   width: 30px;
   text-align: center;
 `;
@@ -44,6 +43,7 @@ export const CoinPrice = styled.span`
 
 export const HourChange = styled.div`
   width: 62px;
+
   div {
     display: flex;
     flex-flow: row;
@@ -65,6 +65,7 @@ export const Barr = styled.div`
 
 export const DayChange = styled.div`
   width: 70px;
+
   div {
     display: flex;
     flex-flow: row;
@@ -79,6 +80,7 @@ export const DayChange = styled.div`
 
 export const WeekChange = styled.div`
   width: 63px;
+
   div {
     display: flex;
     flex-flow: row;
@@ -114,6 +116,7 @@ export const Progress = styled.div`
 
 export const Volume = styled.div`
   width: 156px;
+
   margin-right: 21px;
   section:nth-child(1) {
     display: flex;
