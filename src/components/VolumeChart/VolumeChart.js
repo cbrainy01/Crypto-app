@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar } from "react-chartjs-2";
+import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
 import {
   formatOverviewNumber,
   wordedDate,
@@ -14,11 +15,15 @@ import { getVolumeChartData } from "store/volumeData/action";
 import { ErrorDisplay } from "components";
 import {
   BarChartContainer,
+  CarouselVolumeChart,
   OverviewInfo,
   StyledVolumeChart,
 } from "./VolumeChart.styles";
 
 export function VolumeChart(props) {
+
+  const [width, height] = useWindowSizeD({ width: 200 });
+
   const dispatch = useDispatch();
   const currency = useSelector( (state) => state.universalVariables.currency )
   const currencySymbol = getCurrencySymbol(currency);
@@ -44,6 +49,7 @@ export function VolumeChart(props) {
 
   const error = useSelector((state) => state.volumeData.error);
   const isLoading = useSelector((state) => state.volumeData.isLoading);
+  
   const volumeDatapoints = useSelector(
     (state) => state.volumeData.data?.volumeDatapoints
   );
@@ -65,7 +71,8 @@ export function VolumeChart(props) {
 
   return (
     <>
-      <StyledVolumeChart>
+    {width > 602 ? 
+    <StyledVolumeChart width={width} height={height} >
         {isLoading && <LoaderComponent />}
         <OverviewInfo>
           <p>Volume 24h</p>
@@ -134,6 +141,78 @@ export function VolumeChart(props) {
           />
         </BarChartContainer>
       </StyledVolumeChart>
+    :
+    <CarouselVolumeChart width={width} height={height} >
+    {isLoading && <LoaderComponent />}
+    <OverviewInfo>
+      <p>Volume 24h</p>
+      <div>
+        {currencySymbol}
+        {formatOverviewNumber(todaysVolume)}
+      </div>
+      <p>{wordedDate(new Date())}</p>
+    </OverviewInfo>
+    <BarChartContainer>
+      <Bar
+        data={{
+          labels: getPreviousDates(startDate(), props.timeSpan),
+          datasets: [
+            {
+              data: volumeDatapoints,
+              borderColor: "#2172E5",
+              backgroundColor: "#2172E5",
+              borderRadius: 2,
+            },
+          ],
+        }}
+        options={{
+          scales: {
+            y: {
+              display: false,
+              grid: {
+                display: false,
+              },
+              ticks: {
+                callback: function (value, index, ticks) {
+                  return value;
+                },
+              },
+            },
+            x: {
+              grid: {
+                display: false,
+              },
+              ticks: {
+                callback: function (val, index) {
+                  const day = this.getLabelForValue(val).split("-")[1];
+                  return day;
+                },
+                font: {
+                  size: 6,
+                },
+                maxRotation: 0,
+              },
+            },
+          },
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: function (context) {
+                  return `Price: ${currencySymbol}${context[0].formattedValue}`;
+                },
+                label: function (context) {
+                  return `date: ${context.label}`;
+                },
+              },
+            },
+            legend: { display: false },
+          },
+        }}
+      />
+    </BarChartContainer>
+  </CarouselVolumeChart>
+  }
+      
     </>
   );
 }
