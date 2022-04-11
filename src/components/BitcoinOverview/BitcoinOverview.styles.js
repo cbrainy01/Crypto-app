@@ -22,8 +22,6 @@ export const ChartContainer = styled.div`
   margin-bottom: 15px;
   max-width: 856px;
   max-height: 225px;
-  // max-height: 280px;
-  // background: pink;
   display: flex;
   justify-content: center;
 `;
