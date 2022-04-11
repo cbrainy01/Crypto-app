@@ -1,5 +1,5 @@
 import React from "react";
-import { NavbarGlobal, CoinSearch } from "components";
+import { NavbarGlobal, CoinSearch, MobileNavTop } from "components";
 import { getCurrencySymbol } from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { changeCurrency } from "store/universalVariables/actions"
@@ -58,8 +58,10 @@ export default function Navbar(props) {
             <img src={Theme} alt="theme change icon" />
           </ThemeToggleContainer>
         </RightNavbar>
+        <MobileNavTop/>  
       </StyledNavbar>
-      <NavbarGlobal currency={props.currency} />
+      <NavbarGlobal/>
+      {/* <MobileNavBottom/> */}
     </NavbarContainer>
   );
 }

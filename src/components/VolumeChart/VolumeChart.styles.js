@@ -21,6 +21,9 @@ export const CarouselVolumeChart = styled.div`
   max-height: 225px;
   background: ${(props) => props.theme.main};
   border-radius: 5px;
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+  }
 `;
 
 export const BarChartContainer = styled.div`

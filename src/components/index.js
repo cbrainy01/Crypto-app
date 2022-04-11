@@ -16,4 +16,5 @@ export { default as ShopSearch } from "./ShopSearch";
 export { default as PurchaseItem } from "./PurchaseItem";
 export { default as ErrorDisplay } from "./ErrorDisplay";
 export { default as MobileSearch } from "./MobileSearch";
+export { default as MobileNavTop } from "./MobileNavTop";
 

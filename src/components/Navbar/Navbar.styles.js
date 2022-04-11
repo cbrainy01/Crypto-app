@@ -22,12 +22,19 @@ export const StyledNavbar = styled.div`
   justify-content: space-around;
   align-items: center;
   padding-left: 47px;
+  @media (max-width: 602px) {
+    padding-left: 0;
+  }
+  
 `;
 
 export const LeftNavbar = styled.div`
   display: flex;
   width: 902px;
   align-items: center;
+  @media (max-width: 602px) {
+    display: none;
+  }
 `;
 
 export const LinkContainer = styled.div`
@@ -50,6 +57,9 @@ export const RightNavbar = styled.div`
   display: flex;
   flex-flow: row;
   width: 580px;
+  @media (max-width: 602px) {
+    display: none;
+  }
 `;
 
 export const SearchContainer = styled.div`
