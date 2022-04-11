@@ -5,6 +5,7 @@ import { SearchInput } from "components/CoinShop/CoinShop.styles";
 import {
   SearchResults,
   Result,
+  Loading,
   ResultLink,
   InputField,
 } from "components/CoinSearch/CoinSearch.styles";
@@ -43,12 +44,12 @@ function ShopSearch() {
         placeholder="Search coin"
       />
       {isLoading ? (
-        <Result>...Loading</Result>
+        <Loading>...Loading</Loading>
       ) : (
         <SearchResults>
           {searchResults?.map((result) => {
             return (
-              <Result
+              <ResultLink
                 key={result.id}
                 onClick={() => {
                   dispatch(setDisplayData(result));
@@ -56,8 +57,8 @@ function ShopSearch() {
                   cleanupSearch();
                 }}
               >
-                <ResultLink>{result.name}</ResultLink>
-              </Result>
+                {result.name}
+              </ResultLink>
             );
           })}
         </SearchResults>
