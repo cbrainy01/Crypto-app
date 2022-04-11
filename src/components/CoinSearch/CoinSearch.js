@@ -1,24 +1,28 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import debounce from "lodash.debounce";
 import { useSelector, useDispatch } from "react-redux";
-import { searchCleanup, getQueryMatches } from "store/coinSearch/actions";
+import { searchCleanup, getQueryMatches, searchBlur, searchFocus } from "store/coinSearch/actions";
+import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
+import MobileSearch from "components/MobileSearch";
 import {
   InputField,
   SearchResults,
-  Result,
   ResultLink,
+  Loading,
 } from "./CoinSearch.styles";
-
 
 function CoinSearch() {
   const dispatch = useDispatch();
+
   const isLoading = useSelector((state) => state.coinSearch.isLoading);
   const error = useSelector((state) => state.coinSearch.error);
   const searchResults = useSelector((state) => state.coinSearch.searchResults);
+  const isFocused = useSelector((state) => state.coinSearch.isFocused);
 
-  const inputField = React.createRef();
-
-  const handleChange = () => {
+  const inputField = useRef(null);
+  const [width] = useWindowSizeD({wait: 200});
+  
+  const handleChange = (e) => {
     const value = inputField.current?.value;
     if (value === "") {
       cleanupSearch()
@@ -34,19 +38,26 @@ function CoinSearch() {
 
   return (
     <div>
+      {
+        width <= 602 && isFocused ? 
+      <MobileSearch />
+        :
+        <>
       <InputField
         ref={inputField}
         onChange={debounce(handleChange, 150)}
         placeholder="Search..."
+        onFocus={() => dispatch(searchFocus())}
+        onBlur={() => dispatch(searchBlur())} 
       />
       {isLoading ? (
-        <Result>...Loading</Result>
+        <Loading>...Loading</Loading>
       ) : (
         <SearchResults>
           {searchResults?.map((result) => {
             return (
-              <Result key={result.id}>
                 <ResultLink
+                  key={result.id}
                   onClick={() => {
                     cleanupSearch();
                   }}
@@ -54,11 +65,12 @@ function CoinSearch() {
                 >
                   {result.name}
                 </ResultLink>
-              </Result>
             );
           })}
         </SearchResults>
       )}
+      </>
+      }
     </div>
   );
 }
