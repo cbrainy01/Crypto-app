@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 import { useSelector, useDispatch } from "react-redux";
 import { Bar } from "react-chartjs-2";
-import { useWindowSize } from "@react-hook/window-size/throttled";
-
-// import { useWindowSize } from "hooks";
+import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
 import {
   formatOverviewNumber,
   wordedDate,
@@ -24,12 +22,7 @@ import {
 
 export function VolumeChart(props) {
 
-  const [width, height] = useWindowSize({ fps: 60 });
-  // const size = useWindowSize();
-  // console.log("width: ", width);
-  // console.log("height: ", height);
-  // console.log("hello")
-  // const { width: screenWidth } = useWindowSize();
+  const [width, height] = useWindowSizeD({ width: 200 });
 
   const dispatch = useDispatch();
   const currency = useSelector( (state) => state.universalVariables.currency )
@@ -56,6 +49,7 @@ export function VolumeChart(props) {
 
   const error = useSelector((state) => state.volumeData.error);
   const isLoading = useSelector((state) => state.volumeData.isLoading);
+  
   const volumeDatapoints = useSelector(
     (state) => state.volumeData.data?.volumeDatapoints
   );
@@ -88,7 +82,6 @@ export function VolumeChart(props) {
           </div>
           <p>{wordedDate(new Date())}</p>
         </OverviewInfo>
-        {/* <BarChartContainer width={screenWidth - window.scrollX*2}> */}
         <BarChartContainer>
           <Bar
             data={{
@@ -159,7 +152,6 @@ export function VolumeChart(props) {
       </div>
       <p>{wordedDate(new Date())}</p>
     </OverviewInfo>
-    {/* <BarChartContainer width={screenWidth - window.scrollX*2}> */}
     <BarChartContainer>
       <Bar
         data={{

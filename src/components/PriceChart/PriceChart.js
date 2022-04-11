@@ -6,7 +6,7 @@ import { formatOverviewNumber, wordedDate, getCurrencySymbol } from "utils";
 import LoaderComponent from "components/BitcoinOverview/LoaderComponent";
 import { getPriceChartData } from "store/priceData/actions";
 import { ErrorDisplay } from "components";
-import { useWindowSize } from "@react-hook/window-size/throttled";
+import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
 import {
   CarouselPriceChart,
   LineChartContainer,
@@ -15,7 +15,7 @@ import {
 } from "./PriceChart.styles";
 
 export function PriceChart(props) {
-  const [width, height] = useWindowSize({ fps: 60 });
+  const [width, height] = useWindowSizeD({ width: 200 });
   
   const dispatch = useDispatch();
   const chartRef = useRef(null);

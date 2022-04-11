@@ -4,6 +4,7 @@ import Carousel from "react-elastic-carousel";
 import { useSelector } from "react-redux";
 import { CarouselComponent } from "components/VolumeChart/VolumeChart.styles";
 import { useWindowSize } from "@react-hook/window-size/throttled";
+import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
 import {
   ChartContainer,
   ChartWrap,
@@ -17,7 +18,9 @@ const breakPoints = [
 ];
 
 export function BitcoinOverview() {
+  // const [width] = useWindowSizeD({ wait: 200 });
   const [width, height] = useWindowSize({ fps: 60 });
+
   const timeSpan = useSelector((state) => state.universalVariables.timeSpan)
   
   return (
