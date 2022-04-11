@@ -1,4 +1,4 @@
-import { TOGGLE_THEME, CHANGE_CURRENCY } from "./universalVariablesReducer";
+import { TOGGLE_THEME, CHANGE_CURRENCY, CHANGE_TIMESPAN } from "./universalVariablesReducer";
 
 export const changeCurrency = (newCurrency) => {
   return {
@@ -13,3 +13,11 @@ export const toggleTheme = (updatedTheme) => {
     payload: updatedTheme,
   };
 };
+
+export const changeTimeSpan = (updatedTimeSpan) => {
+  return {
+    type: CHANGE_TIMESPAN,
+    payload: updatedTimeSpan,
+  };
+};
+
