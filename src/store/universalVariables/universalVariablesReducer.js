@@ -3,6 +3,7 @@ export const CHANGE_CURRENCY = "CHANGE_CURRENCY";
 export const CHANGE_TIMESPAN = "CHANGE_TIMESPAN";
 export const SET_PAGENAME = "SET_PAGENAME";
 
+
 const initialState = {
   isBlacked: true,
   currency: "usd",

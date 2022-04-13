@@ -12,6 +12,7 @@ export const YourOverview = styled.p`
   margin-bottom: 15px;
   font-weight: 600;
   margin-left: 2.5%;
+
   @media (max-width: 602px) {
     display: none;
   }

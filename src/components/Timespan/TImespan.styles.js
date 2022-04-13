@@ -24,6 +24,8 @@ export const TimespanContainer = styled.div`
   @media (max-width: 602px) {
     background: ${(props) => props.theme.inner};
   }
+
+
 `;
 
 export const TimespanButton = styled.div`
@@ -37,7 +39,6 @@ export const TimespanButton = styled.div`
   @media (max-width: 602px) {
     height: 100%;
     background: ${(props) => (props.selected ? "#00FF5F" : "")};
-
   }
   &:hover {
     background: #00ff5f;

@@ -16,7 +16,7 @@ import {
 
 export function PriceChart(props) {
   const [width, height] = useWindowSizeD({ width: 200 });
-
+ 
   const dispatch = useDispatch();
   const chartRef = useRef(null);
 

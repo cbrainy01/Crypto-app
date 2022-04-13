@@ -34,6 +34,21 @@ export const BarChartContainer = styled.div`
   margin-bottom: 20px;
 `;
 
+export const CarouselVolumeChart = styled.div`
+  max-width: 416px;
+  max-height: 225px;
+  background: ${(props) => props.theme.main};
+  border-radius: 5px;
+`;
+
+export const BarChartContainer = styled.div`
+  max-width: 326px;
+  max-height: 147px;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-bottom: 20px;
+`;
+
 export const OverviewInfo = styled.div`
   margin-left: 10px;
   margin-top: 8px;
