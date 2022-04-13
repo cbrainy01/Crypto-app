@@ -6,6 +6,9 @@ export const StyledNavbarGlobal = styled.div`
   height: 27px;
   margin: 0 auto;
   font-size: 8px;
+  @media (max-width: 602px) {
+    margin-bottom: 14px;
+  }
 `;
 
 export const NavbarGlobalContainer = styled.div`
@@ -22,11 +25,18 @@ export const NavbarGlobalContainer = styled.div`
   border-radius: 0px 0px 6px 6px;
   margin: 0 auto;
   overflow: hidden;
+  @media (max-width: 602px) {
+    border-radius: 0;
+    background: ${(props) => props.theme.inner};
+  }
 `;
 
 export const NavbarGlobalWrap = styled.div`
   margin: 0 auto;
-`
+  @media (max-width: 602px) {
+    width: 100%;
+  }
+`;
 
 export const MarketData1 = styled.div`
   margin-right: 21px;

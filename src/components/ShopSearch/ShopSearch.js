@@ -49,7 +49,7 @@ function ShopSearch() {
         <SearchResults>
           {searchResults?.map((result) => {
             return (
-              <ResultLink
+              <Result
                 key={result.id}
                 onClick={() => {
                   dispatch(setDisplayData(result));
@@ -58,7 +58,7 @@ function ShopSearch() {
                 }}
               >
                 {result.name}
-              </ResultLink>
+              </Result>
             );
           })}
         </SearchResults>

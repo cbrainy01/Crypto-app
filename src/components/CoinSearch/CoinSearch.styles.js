@@ -43,3 +43,13 @@ export const ResultLink = styled(Link)`
     background: ${(props) => props.theme.main};
   }
 `;
+
+export const Result = styled.div`
+  text-decoration: none;
+  color: ${(props) => props.theme.color};
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+    background: ${(props) => props.theme.main};
+  }
+`
