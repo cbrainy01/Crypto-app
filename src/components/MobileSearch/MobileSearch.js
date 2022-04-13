@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   searchCleanup,
   getQueryMatches,
-  searchBlur,
+  deactivateSearch,
 } from "store/coinSearch/actions";
 import Cross from "icons/Cross.svg";
 import {
@@ -44,7 +44,7 @@ function MobileSearch() {
   };
 
   function handleSearchClose() {
-    dispatch(searchBlur());
+    dispatch(deactivateSearch())
     cleanupSearch();
   }
 
@@ -70,10 +70,7 @@ function MobileSearch() {
               return (
                 <MobileSearchResult
                   key={result.id}
-                  onClick={() => {
-                    cleanupSearch();
-                    dispatch(searchBlur());
-                  }}
+                  onClick={handleSearchClose}
                   to={`/coinpage/${result.id}`}
                 >
                   {result.name}

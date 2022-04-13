@@ -1,4 +1,4 @@
-import { TOGGLE_THEME, CHANGE_CURRENCY, CHANGE_TIMESPAN } from "./universalVariablesReducer";
+import { TOGGLE_THEME, CHANGE_CURRENCY, CHANGE_TIMESPAN, SET_PAGENAME } from "./universalVariablesReducer";
 
 export const changeCurrency = (newCurrency) => {
   return {
@@ -20,4 +20,11 @@ export const changeTimeSpan = (updatedTimeSpan) => {
     payload: updatedTimeSpan,
   };
 };
+
+export const setPageName = (updatedPage) => {
+  return {
+    type: SET_PAGENAME,
+    payload: updatedPage,
+  }
+}
 

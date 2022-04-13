@@ -11,7 +11,10 @@ export const StyledSearchIcon = styled(SVG)`
   }
 `;
 
-export const NavbarContainer = styled.div``;
+export const NavbarContainer = styled.div`
+  position: relative;
+  z-index: 1;
+`;
 
 export const StyledNavbar = styled.div`
   display: flex;
@@ -25,7 +28,6 @@ export const StyledNavbar = styled.div`
   @media (max-width: 602px) {
     padding-left: 0;
   }
-  
 `;
 
 export const LeftNavbar = styled.div`

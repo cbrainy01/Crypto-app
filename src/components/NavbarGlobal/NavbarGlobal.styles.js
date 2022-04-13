@@ -9,7 +9,6 @@ export const StyledNavbarGlobal = styled.div`
   @media (max-width: 602px) {
     margin-bottom: 14px;
   }
-  
 `;
 
 export const NavbarGlobalContainer = styled.div`
@@ -34,11 +33,10 @@ export const NavbarGlobalContainer = styled.div`
 
 export const NavbarGlobalWrap = styled.div`
   margin: 0 auto;
-  // background: red;
   @media (max-width: 602px) {
     width: 100%;
   }
-`
+`;
 
 export const MarketData1 = styled.div`
   margin-right: 21px;

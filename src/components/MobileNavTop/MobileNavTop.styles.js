@@ -14,3 +14,9 @@ export const PageName = styled.div`
   font-size: 26px;
   font-weight: 900;
 `;
+
+export const NavLeft = styled.div``;
+export const NavRight = styled.div`
+  display: flex;
+  gap: 12px;
+`;

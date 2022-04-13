@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { formatNumber, getCurrencySymbol } from "utils";
 import { useSelector, useDispatch } from "react-redux";
+import Bitcoin from "icons/Bitcoin.svg";
+import Bullet from "icons/Bullet.svg";
+import Ethereum from "icons/Eth.svg";
+import Uptick from "icons/Uptick.svg";
+import { getGlobalData } from "store/globalData/actions";
 import {
   StyledNavbarGlobal,
   MarketData1,
@@ -13,13 +18,8 @@ import {
   ProgressBar,
   NavbarGlobalWrap,
 } from "./NavbarGlobal.styles";
-import Bitcoin from "icons/Bitcoin.svg";
-import Bullet from "icons/Bullet.svg";
-import Ethereum from "icons/Eth.svg";
-import Uptick from "icons/Uptick.svg";
-import { getGlobalData } from "store/globalData/actions";
 
-export default function NavbarGlobal(props) {
+export default function NavbarGlobal() {
   const dispatch = useDispatch()
   const globalData = useSelector( (state) => state.globalData.data )
   const currency = useSelector( (state) => state.universalVariables.currency )

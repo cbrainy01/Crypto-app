@@ -1,5 +1,5 @@
 import React from "react";
-import { NavbarGlobal, CoinSearch, MobileNavTop } from "components";
+import { NavbarGlobal, CoinSearch, MobileNavTop, MobileNavBottom } from "components";
 import { getCurrencySymbol } from "utils";
 import { useSelector, useDispatch } from "react-redux";
 import { changeCurrency } from "store/universalVariables/actions"
@@ -20,7 +20,7 @@ import {
   NavbarContainer,
 } from "./Navbar.styles";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const dispatch = useDispatch()
   
   const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
@@ -61,7 +61,7 @@ export default function Navbar(props) {
         <MobileNavTop/>  
       </StyledNavbar>
       <NavbarGlobal/>
-      {/* <MobileNavBottom/> */}
+      <MobileNavBottom/>
     </NavbarContainer>
   );
 }
