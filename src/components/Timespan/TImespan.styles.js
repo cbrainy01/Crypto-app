@@ -6,9 +6,10 @@ export const StyledTimespan = styled.div`
   max-width: 350px;
   height: 50px;
   overflow: hidden;
-  margin: 0 auto 60px auto;
+  margin: 8px auto 60px auto;
   @media (max-width: 620px) {
-    margin-top: 30px;
+    max-width: 100%;
+    margin-top: 0px;
   }
 `;
 export const TimespanContainer = styled.div`
@@ -37,7 +38,6 @@ export const TimespanButton = styled.div`
   @media (max-width: 602px) {
     height: 100%;
     background: ${(props) => (props.selected ? "#00FF5F" : "")};
-
   }
   &:hover {
     background: #00ff5f;
@@ -51,11 +51,3 @@ export const TimespanButton = styled.div`
   }
 `;
 
-export const TimespanWrap = styled.div`
-  display: flex;
-
-  @media (max-width: 588px) {
-    width: 100%;
-  }
-  background: blue;
-`;

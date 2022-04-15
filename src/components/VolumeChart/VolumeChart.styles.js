@@ -5,33 +5,34 @@ export const CarouselComponent = styled(Carousel)`
   button {
     background: #00FF5F;
   }
-  height: 250px;
-  margin-bottom: 50px;
-  flex-shrink: 2;
 `;
 
 export const StyledVolumeChart = styled.div`
   width: ${(props) => (props.width < 602 ? 416 : props.width / 2.5)}px;
   background: ${(props) => props.theme.main};
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-shrink: 2;
 `;
 
 export const CarouselVolumeChart = styled.div`
   max-width: 416px;
-  max-height: 225px;
+  max-height: 250px;
   background: ${(props) => props.theme.main};
   border-radius: 5px;
   @media (max-width: 602px) {
     background: ${(props) => props.theme.inner};
+    width: 100%;
   }
 `;
 
 export const BarChartContainer = styled.div`
   max-width: 326px;
-  max-height: 147px;
   margin-left: 30px;
   margin-right: 30px;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 `;
 
 export const OverviewInfo = styled.div`

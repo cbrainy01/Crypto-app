@@ -65,6 +65,7 @@ export function PriceChart(props) {
   return (
     <>
       {width > 602 ? (
+      // {width > 827 ? (
         <StyledPriceChart width={width} height={height}>
           {isLoading && <LoaderComponent />}
           <OverviewInfo>

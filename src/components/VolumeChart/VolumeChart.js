@@ -72,6 +72,7 @@ export function VolumeChart(props) {
   return (
     <>
     {width > 602 ? 
+    // {width > 827 ? 
     <StyledVolumeChart width={width} height={height} >
         {isLoading && <LoaderComponent />}
         <OverviewInfo>
