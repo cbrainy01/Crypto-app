@@ -27,6 +27,7 @@ export const CoinId = styled.div`
   img {
     width: 20px;
     height: 20px;
+    margin-right: 7px;
   }
 `;
 

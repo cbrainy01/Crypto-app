@@ -41,6 +41,9 @@ import {
   RightPct,
   Description,
   DescriptionContainer,
+  StackWrapB,
+  DescriptionWrap,
+  DescriptionText,
 } from "./CoinPage.styles";
 
 export default function CoinPage(props) {
@@ -280,14 +283,12 @@ export default function CoinPage(props) {
             </CoinSummary>
             <Description>Description</Description>
             <DescriptionContainer>
-              <CoinDescription>
-                <StackWrap>
+                <StackWrapB>
                   <img alt="stack icon" src={Stack} />
-                </StackWrap>
-                <div
+                </StackWrapB>
+                <DescriptionText
                   dangerouslySetInnerHTML={{ __html: coinData.description.en }}
-                ></div>
-              </CoinDescription>
+                ></DescriptionText>
             </DescriptionContainer>
             <CoinLinks>{renderLinks()}</CoinLinks>
           </CoinPageContainer>

@@ -29,7 +29,6 @@ export const YourSummary = styled.p`
 
 export const CoinSummary = styled.div`
   max-width: 712px;
-  display: flex;
   flex-flow: row;
   font-size: 9px;
   display: flex;
@@ -53,6 +52,7 @@ export const SummaryWrap = styled.div`
 
 export const SummaryA = styled.div`
   margin-right: 36px;
+  width: 129px;
   @media (max-width: 588px) {
     align-self: center;
     width: 100%;
@@ -62,10 +62,12 @@ export const SummaryA = styled.div`
 `;
 export const SummaryATop = styled.div`
   height: 147px;
+  width: 100%;
   background: ${(props) => props.theme.main};
   display: flex;
   flex-direction: column;
   justify-content: center;
+  word-break: break-all;
   align-items: center;
   border-radius: 6px;
   @media (max-width: 588px) {
@@ -78,15 +80,16 @@ export const SummaryATop = styled.div`
 `;
 export const SummaryABottom = styled.div`
   height: 32px;
-  width: 129px;
+  width: 100%;
   border-radius: 6px;
   background: ${(props) => props.theme.main};
   margin-top: 10px;
-  padding: 11px 36px;
   padding-left: 11px;
-  padding-right: 11px;
+  display: flex;
+  align-items: center;
   span {
     word-break: break-all;
+    font-size: 5px;
   }
   img {
     height: 6px;
@@ -332,39 +335,43 @@ export const RightPct = styled.div`
 export const DescriptionContainer = styled.div`
   max-width: 712px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   margin: 0 auto;
-`;
-
-export const CoinDescription = styled.div`
   background: ${(props) => props.theme.main};
   border-radius: 12px;
-  div:nth-child(1) {
-    margin: 0 auto;
-  }
-  div {
-    padding: 0px 36px 25px 36px;
-  }
+
   a:link {
     color: blue;
     background: ${(props) => props.theme.inner};
   }
-  img {
-    margin-top: 15px;
-  }
+
   @media (max-width: 588px) {
     background: ${(props) => props.theme.inner};
   }
 `;
 
+export const StackWrapB = styled.div`
+  display: flex;
+  jusify-content: center;
+  margin: 15px auto;
+  img {
+    margin-top: 15px;
+    height: 11px;
+    width: 11px;
+    margin: 0 auto;
+  }
+`;
+
+export const DescriptionText = styled.div`
+  padding: 0px 36px 25px 36px;
+`;
+
 export const Description = styled.div`
   font-size: 11px;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 25px auto;
   justify-content: left;
   font-weight: 600;
-  margin-top: 25px;
-  margin-bottom: 25px;
   max-width: 712px;
   @media (max-width: 588px) {
     background: ${(props) => props.theme.main};
@@ -395,20 +402,25 @@ export const CoinLinks = styled.div`
 
 export const CoinLink = styled.div`
   display: flex;
+  align-items: center;
   min-width: 230px;
+  min-width: 35%;
   background: ${(props) => props.theme.main};
   border-radius: 12px;
-  padding: 10px 0px 10px 0px;
+  padding: 10px 11px 10px 11px;
   margin-right: 10px;
   margin-top: 8px;
 
-  font-size: 7px;
+  font-size: 5px;
   div {
     height: 32px;
     width: 100%;
   }
   p {
-    margin: auto 2px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    align-self: center;
   }
   a {
     margin: auto 0;

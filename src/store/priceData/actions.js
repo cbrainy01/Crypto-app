@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createDarkGradient, startDate, getPreviousDates } from "utils";
+import { createDarkGradient, startDate, getPreviousDates, createLightGradient } from "utils";
 import {
   GET_PRICE_CHART_DATA_SUCCESS,
   GET_PRICE_CHART_DATA_PENDING,

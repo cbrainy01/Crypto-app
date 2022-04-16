@@ -32,7 +32,7 @@ export const TimespanButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 8px;
+  width: 30px;
   height: 100%;
   border-radius: 6px;
   @media (max-width: 602px) {

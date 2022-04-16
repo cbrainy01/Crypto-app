@@ -17,8 +17,9 @@ export const CoinContainer = styled.div`
   background: ${(props) => props.theme.inner};
   display: flex;
   gap: 12px;
-  @media (max-width: 588px) {
+  @media (max-width: 602px) {
     flex-direction: column;
+    background: ${(props) => props.theme.main};
   }
 `;
 
@@ -30,7 +31,7 @@ export const CoinId = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  @media (max-width: 588px) {
+  @media (max-width: 602px) {
     width: 100%;
   }
 `;
@@ -57,7 +58,7 @@ export const CoinImgContainer = styled.div`
 
 export const CoinName = styled.div`
   font-size: 12px;
-  overflow-wrap: break-word;
+  word-break: break-all;
   margin-top: 4px;
   margin-bottom: 4px;
 `;
@@ -74,8 +75,9 @@ export const StatisticInfo = styled.div`
 `;
 
 export const MarketPriceHeader = styled.div`
-  font-size: 9px;
+  font-size: 8px;
   margin-bottom: 6px;
+  font-weight: 700;
 `;
 export const MarketPriceStatistics = styled.div`
   height: 50px;
@@ -83,20 +85,32 @@ export const MarketPriceStatistics = styled.div`
   background: ${(props) => props.theme.main};
   margin-bottom: 9px;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  @media (max-width: 292px) {
+  @media (max-width: 602px) {
     flex-direction: column;
+    height: 100%;
+    gap: 7px;
   }
 `;
 
 export const CurrentPrice = styled.div`
   display: flex;
   gap: 4px;
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
 `;
 export const PriceChange24H = styled.div`
   display: flex;
@@ -110,6 +124,16 @@ export const PriceChange24H = styled.div`
   p {
     color: ${(props) => (props.value >= 0 ? "#06D554" : "red")};
   }
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
 `;
 export const MarketCapVsVolume = styled.div`
   display: flex;
@@ -119,6 +143,16 @@ export const MarketCapVsVolume = styled.div`
   p {
     color: ${(props) => (props.value >= 0 ? "#06D554" : "red")};
   }
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
 `;
 export const CircVsMax = styled.div`
   display: flex;
@@ -127,36 +161,95 @@ export const CircVsMax = styled.div`
   p {
     color: ${(props) => (props.value >= 0 ? "#06D554" : "red")};
   }
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
 `;
 
 export const YourCoinHeader = styled.div`
-  font-size: 9px;
+  font-size: 8px;
   margin-bottom: 6px;
+  font-weight: 700;
 `;
 export const YourCoinStatistics = styled.div`
   height: 50px;
   width: 100%;
   background: ${(props) => props.theme.main};
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
-  @media (max-width: 292px) {
+  @media (max-width: 602px) {
     flex-direction: column;
+    height: 100%;
+    gap: 7px;
   }
 `;
 
-export const CoinAmt = styled.div``;
-export const AmtValue = styled.div``;
+export const CoinAmt = styled.div`
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
+`;
+export const AmtValue = styled.div`
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
+`;
 export const AmtPriceChange = styled.div`
   span {
     color: ${(props) => (props.value >= 0 ? "#06d554" : "red")};
   }
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+    span {
+      margin-left: 2px;
+    }
+  }
 `;
-export const PurchaseDate = styled.div``;
+export const PurchaseDate = styled.div`
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
+    height: 28px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding-left: 10px;
+    border-radius: 6px;
+  }
+`;
 
 export const ProgressBar = styled.div`
   width: 28px;
