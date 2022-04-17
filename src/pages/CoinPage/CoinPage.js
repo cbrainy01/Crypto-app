@@ -12,6 +12,8 @@ import Downtick from "icons/Downtick.svg";
 import Plus from "icons/Plus.svg";
 import Copy from "icons/Copy.svg";
 import Bullet from "icons/Bullet.svg";
+import LinkLight from "icons/LinkLight.svg";
+import CopyLight from "icons/CopyLight.svg";
 import {
   CoinDescription,
   CoinLinks,
@@ -44,6 +46,7 @@ import {
   StackWrapB,
   DescriptionWrap,
   DescriptionText,
+  CopyIcon,
 } from "./CoinPage.styles";
 
 export default function CoinPage(props) {
@@ -51,9 +54,11 @@ export default function CoinPage(props) {
   const coinId = props.match.params.coin;
 
   const currency = useSelector((state) => state.universalVariables.currency);
+  const isBlacked = useSelector((state) => state.universalVariables.isBlacked);
   const isLoading = useSelector((state) => state.coinData.isLoading);
   const error = useSelector((state) => state.coinData.error);
   const coinData = useSelector((state) => state.coinData.data);
+  
 
   const currencySymbol = getCurrencySymbol(currency);
   const circulating = Math.round(
@@ -93,13 +98,13 @@ export default function CoinPage(props) {
         <CoinLink key={uuid()}>
           <div>
             <a href={siteLink} target="_blank">
-              <img src={Link} alt="link" />
+              <img src={isBlacked ? Link : LinkLight} alt="link" />
             </a>
             <p>{siteLink}</p>
             <img
               onClick={handleClipboardCopy}
               data-value={siteLink}
-              src={Copy}
+              src={isBlacked ? Copy : CopyLight}
               alt="copy"
             />
           </div>
@@ -133,7 +138,7 @@ export default function CoinPage(props) {
                 </SummaryATop>
                 <SummaryABottom>
                   <a href={coinData.links.homepage[0]} target="_blank">
-                    <img src={Link} alt="link icon" />
+                    <img src={isBlacked ? Link : LinkLight} alt="link icon" />
                   </a>
                   <span>
                     {coinData.links.homepage[0]}

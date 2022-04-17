@@ -26,6 +26,8 @@ export function VolumeChart(props) {
 
   const dispatch = useDispatch();
   const currency = useSelector( (state) => state.universalVariables.currency )
+  const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
+
   const currencySymbol = getCurrencySymbol(currency);
   const { timeSpan } = props;
   let span;
@@ -90,8 +92,8 @@ export function VolumeChart(props) {
               datasets: [
                 {
                   data: volumeDatapoints,
-                  borderColor: "#2172E5",
-                  backgroundColor: "#2172E5",
+                  borderColor: isBlacked ? "#2172E5" : "#1AD761",
+                  backgroundColor: isBlacked ? "#2172E5" : "#1AD761",
                   borderRadius: 2,
                 },
               ],
@@ -160,8 +162,8 @@ export function VolumeChart(props) {
           datasets: [
             {
               data: volumeDatapoints,
-              borderColor: "#2172E5",
-              backgroundColor: "#2172E5",
+              borderColor: isBlacked ? "#2172E5" : "#1AD761",
+              backgroundColor: isBlacked ? "#2172E5" : "#1AD761",
               borderRadius: 2,
             },
           ],
