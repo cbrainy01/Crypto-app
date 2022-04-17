@@ -21,12 +21,11 @@ import {
 } from "./VolumeChart.styles";
 
 export function VolumeChart(props) {
-
   const [width, height] = useWindowSizeD({ width: 200 });
 
   const dispatch = useDispatch();
-  const currency = useSelector( (state) => state.universalVariables.currency )
-  const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
+  const currency = useSelector((state) => state.universalVariables.currency);
+  const isBlacked = useSelector((state) => state.universalVariables.isBlacked);
 
   const currencySymbol = getCurrencySymbol(currency);
   const { timeSpan } = props;
@@ -51,7 +50,7 @@ export function VolumeChart(props) {
 
   const error = useSelector((state) => state.volumeData.error);
   const isLoading = useSelector((state) => state.volumeData.isLoading);
-  
+
   const volumeDatapoints = useSelector(
     (state) => state.volumeData.data?.volumeDatapoints
   );
@@ -63,6 +62,65 @@ export function VolumeChart(props) {
     dispatch(getVolumeChartData(span));
   }, [currency, props.timeSpan]);
 
+  const barChart = (
+    <Bar
+      data={{
+        labels: getPreviousDates(startDate(), props.timeSpan),
+        datasets: [
+          {
+            data: volumeDatapoints,
+            borderColor: isBlacked ? "#2172E5" : "#1AD761",
+            backgroundColor: isBlacked ? "#2172E5" : "#1AD761",
+            borderRadius: 2,
+          },
+        ],
+      }}
+      options={{
+        scales: {
+          y: {
+            display: false,
+            grid: {
+              display: false,
+            },
+            ticks: {
+              callback: function (value, index, ticks) {
+                return value;
+              },
+            },
+          },
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              callback: function (val, index) {
+                const day = this.getLabelForValue(val).split("-")[1];
+                return day;
+              },
+              font: {
+                size: 6,
+              },
+              maxRotation: 0,
+            },
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: function (context) {
+                return `Price: ${currencySymbol}${context[0].formattedValue}`;
+              },
+              label: function (context) {
+                return `date: ${context.label}`;
+              },
+            },
+          },
+          legend: { display: false },
+        },
+      }}
+    />
+  );
+
   if (error) {
     return (
       <StyledVolumeChart>
@@ -73,149 +131,33 @@ export function VolumeChart(props) {
 
   return (
     <>
-    {width > 602 ? 
-    // {width > 827 ? 
-    <StyledVolumeChart width={width} height={height} >
-        {isLoading && <LoaderComponent />}
-        <OverviewInfo>
-          <p>Volume 24h</p>
-          <div>
-            {currencySymbol}
-            {formatOverviewNumber(todaysVolume)}
-          </div>
-          <p>{wordedDate(new Date())}</p>
-        </OverviewInfo>
-        <BarChartContainer>
-          <Bar
-            data={{
-              labels: getPreviousDates(startDate(), props.timeSpan),
-              datasets: [
-                {
-                  data: volumeDatapoints,
-                  borderColor: isBlacked ? "#2172E5" : "#1AD761",
-                  backgroundColor: isBlacked ? "#2172E5" : "#1AD761",
-                  borderRadius: 2,
-                },
-              ],
-            }}
-            options={{
-              scales: {
-                y: {
-                  display: false,
-                  grid: {
-                    display: false,
-                  },
-                  ticks: {
-                    callback: function (value, index, ticks) {
-                      return value;
-                    },
-                  },
-                },
-                x: {
-                  grid: {
-                    display: false,
-                  },
-                  ticks: {
-                    callback: function (val, index) {
-                      const day = this.getLabelForValue(val).split("-")[1];
-                      return day;
-                    },
-                    font: {
-                      size: 6,
-                    },
-                    maxRotation: 0,
-                  },
-                },
-              },
-              plugins: {
-                tooltip: {
-                  callbacks: {
-                    title: function (context) {
-                      return `Price: ${currencySymbol}${context[0].formattedValue}`;
-                    },
-                    label: function (context) {
-                      return `date: ${context.label}`;
-                    },
-                  },
-                },
-                legend: { display: false },
-              },
-            }}
-          />
-        </BarChartContainer>
-      </StyledVolumeChart>
-    :
-    <CarouselVolumeChart width={width} height={height} >
-    {isLoading && <LoaderComponent />}
-    <OverviewInfo>
-      <p>Volume 24h</p>
-      <div>
-        {currencySymbol}
-        {formatOverviewNumber(todaysVolume)}
-      </div>
-      <p>{wordedDate(new Date())}</p>
-    </OverviewInfo>
-    <BarChartContainer>
-      <Bar
-        data={{
-          labels: getPreviousDates(startDate(), props.timeSpan),
-          datasets: [
-            {
-              data: volumeDatapoints,
-              borderColor: isBlacked ? "#2172E5" : "#1AD761",
-              backgroundColor: isBlacked ? "#2172E5" : "#1AD761",
-              borderRadius: 2,
-            },
-          ],
-        }}
-        options={{
-          scales: {
-            y: {
-              display: false,
-              grid: {
-                display: false,
-              },
-              ticks: {
-                callback: function (value, index, ticks) {
-                  return value;
-                },
-              },
-            },
-            x: {
-              grid: {
-                display: false,
-              },
-              ticks: {
-                callback: function (val, index) {
-                  const day = this.getLabelForValue(val).split("-")[1];
-                  return day;
-                },
-                font: {
-                  size: 6,
-                },
-                maxRotation: 0,
-              },
-            },
-          },
-          plugins: {
-            tooltip: {
-              callbacks: {
-                title: function (context) {
-                  return `Price: ${currencySymbol}${context[0].formattedValue}`;
-                },
-                label: function (context) {
-                  return `date: ${context.label}`;
-                },
-              },
-            },
-            legend: { display: false },
-          },
-        }}
-      />
-    </BarChartContainer>
-  </CarouselVolumeChart>
-  }
-      
+      {width > 602 ? (
+        <StyledVolumeChart>
+          {isLoading && <LoaderComponent />}
+          <OverviewInfo>
+            <p>Volume 24h</p>
+            <div>
+              {currencySymbol}
+              {formatOverviewNumber(todaysVolume)}
+            </div>
+            <p>{wordedDate(new Date())}</p>
+          </OverviewInfo>
+          <BarChartContainer>{barChart}</BarChartContainer>
+        </StyledVolumeChart>
+      ) : (
+        <CarouselVolumeChart>
+          {isLoading && <LoaderComponent />}
+          <OverviewInfo>
+            <p>Volume 24h</p>
+            <div>
+              {currencySymbol}
+              {formatOverviewNumber(todaysVolume)}
+            </div>
+            <p>{wordedDate(new Date())}</p>
+          </OverviewInfo>
+          <BarChartContainer>{barChart}</BarChartContainer>
+        </CarouselVolumeChart>
+      )}
     </>
   );
 }

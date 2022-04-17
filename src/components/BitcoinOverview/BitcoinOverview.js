@@ -26,7 +26,6 @@ export function BitcoinOverview() {
       <YourOverview>Your overview</YourOverview>
       <ChartContainer>
         {width > 602 ? (
-          // {width > 827 ?
           <>
             <PriceChart timeSpan={timeSpan} />
             <VolumeChart timeSpan={timeSpan} />

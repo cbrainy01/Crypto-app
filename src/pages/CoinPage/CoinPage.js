@@ -7,6 +7,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCoinData } from "store/coinData/actions";
 import Link from "icons/Link.svg";
 import Stack from "icons/Stack.svg";
+import StackLight from "icons/StackLight.svg";
 import Uptick from "icons/Uptick.svg";
 import Downtick from "icons/Downtick.svg";
 import Plus from "icons/Plus.svg";
@@ -15,7 +16,6 @@ import Bullet from "icons/Bullet.svg";
 import LinkLight from "icons/LinkLight.svg";
 import CopyLight from "icons/CopyLight.svg";
 import {
-  CoinDescription,
   CoinLinks,
   CoinLink,
   CoinSummary,
@@ -44,9 +44,7 @@ import {
   Description,
   DescriptionContainer,
   StackWrapB,
-  DescriptionWrap,
   DescriptionText,
-  CopyIcon,
 } from "./CoinPage.styles";
 
 export default function CoinPage(props) {
@@ -289,7 +287,7 @@ export default function CoinPage(props) {
             <Description>Description</Description>
             <DescriptionContainer>
                 <StackWrapB>
-                  <img alt="stack icon" src={Stack} />
+                  <img alt="stack icon" src={isBlacked ? Stack : StackLight} />
                 </StackWrapB>
                 <DescriptionText
                   dangerouslySetInnerHTML={{ __html: coinData.description.en }}

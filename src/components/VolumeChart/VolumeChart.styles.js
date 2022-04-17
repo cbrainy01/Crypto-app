@@ -8,31 +8,11 @@ export const CarouselComponent = styled(Carousel)`
 `;
 
 export const StyledVolumeChart = styled.div`
-  width: ${(props) => (props.width < 602 ? 416 : props.width / 2.5)}px;
+  width: calc(50% - 12px);
+  margin-left: 12px;
   background: ${(props) => props.theme.main};
   border-radius: 5px;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  flex-shrink: 2;
-`;
-
-export const CarouselVolumeChart = styled.div`
-  max-width: 416px;
-  max-height: 250px;
-  background: ${(props) => props.theme.main};
-  border-radius: 5px;
-  @media (max-width: 602px) {
-    background: ${(props) => props.theme.inner};
-    width: 100%;
-  }
-`;
-
-export const BarChartContainer = styled.div`
-  max-width: 326px;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 12px;
+  flex: 1;
 `;
 
 export const OverviewInfo = styled.div`
@@ -45,7 +25,21 @@ export const OverviewInfo = styled.div`
     font-size: 22px;
     font-weight: 700;
   }
-  @media (max-width: 588px) {
-    margin-left: 35px;
+  align-self: start;
+`;
+
+export const CarouselVolumeChart = styled.div`
+  background: ${(props) => props.theme.main};
+  border-radius: 5px;
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
   }
+`;
+
+export const BarChartContainer = styled.div`
+  padding-left: 30px;
+  padding-right: 30px;
+  width: 100%;
+  padding-bottom: 12px;
 `;
