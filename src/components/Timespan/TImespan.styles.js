@@ -6,7 +6,7 @@ export const StyledTimespan = styled.div`
   max-width: 350px;
   height: 50px;
   overflow: hidden;
-  margin: 8px auto 60px auto;
+  margin: 8px auto 35px auto;
   @media (max-width: 620px) {
     max-width: 100%;
     margin-top: 0px;
@@ -21,7 +21,7 @@ export const TimespanContainer = styled.div`
   justify-content: space-evenly;
   background: ${(props) => props.theme.main};
   border-radius: 10px;
-  color: white;
+  color: ${(props) => props.theme.color};
   @media (max-width: 602px) {
     background: ${(props) => props.theme.inner};
   }
