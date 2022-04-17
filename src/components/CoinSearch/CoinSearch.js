@@ -7,6 +7,7 @@ import {
   SearchResults,
   ResultLink,
   Loading,
+  StyledCoinSearch,
 } from "./CoinSearch.styles";
 
 function CoinSearch() {
@@ -33,32 +34,29 @@ function CoinSearch() {
   };
 
   return (
-    <div>
+    <StyledCoinSearch>
       <InputField
         ref={inputField}
         onChange={debounce(handleChange, 150)}
         placeholder="Search..."
       />
-      {isLoading ? (
-        <Loading>...Loading</Loading>
-      ) : (
-        <SearchResults>
-          {searchResults?.map((result) => {
-            return (
-              <ResultLink
-                key={result.id}
-                onClick={() => {
-                  cleanupSearch();
-                }}
-                to={`/coinpage/${result.id}`}
-              >
-                {result.name}
-              </ResultLink>
-            );
-          })}
-        </SearchResults>
-      )}
-    </div>
+      {isLoading && <Loading>...Loading</Loading>}
+      <SearchResults>
+        {searchResults?.map((result) => {
+          return (
+            <ResultLink
+              key={result.id}
+              onClick={() => {
+                cleanupSearch();
+              }}
+              to={`/coinpage/${result.id}`}
+            >
+              {result.name}
+            </ResultLink>
+          );
+        })}
+      </SearchResults>
+    </StyledCoinSearch>
   );
 }
 
