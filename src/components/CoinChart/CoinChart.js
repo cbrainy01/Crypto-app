@@ -9,7 +9,7 @@ export class CoinChart extends React.Component {
     const initial = this.props.prices[0];
     const recent = this.props.prices[last];
     if (recent > initial) {
-      return "green";
+      return "#00FF5F8F";
     } else {
       return "red";
     }

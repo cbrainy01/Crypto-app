@@ -6,9 +6,10 @@ export const StyledTimespan = styled.div`
   max-width: 350px;
   height: 50px;
   overflow: hidden;
-  margin: 0 auto 60px auto;
+  margin: 8px auto 35px auto;
   @media (max-width: 620px) {
-    margin-top: 30px;
+    max-width: 100%;
+    margin-top: 0px;
   }
 `;
 export const TimespanContainer = styled.div`
@@ -20,7 +21,7 @@ export const TimespanContainer = styled.div`
   justify-content: space-evenly;
   background: ${(props) => props.theme.main};
   border-radius: 10px;
-  color: white;
+  color: ${(props) => props.theme.color};
   @media (max-width: 602px) {
     background: ${(props) => props.theme.inner};
   }
@@ -33,7 +34,7 @@ export const TimespanButton = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 8px;
+  width: 30px;
   height: 100%;
   border-radius: 6px;
   @media (max-width: 602px) {
@@ -52,11 +53,3 @@ export const TimespanButton = styled.div`
   }
 `;
 
-export const TimespanWrap = styled.div`
-  display: flex;
-
-  @media (max-width: 588px) {
-    width: 100%;
-  }
-  background: blue;
-`;

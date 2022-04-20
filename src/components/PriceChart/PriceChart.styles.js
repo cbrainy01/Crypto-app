@@ -1,28 +1,13 @@
 import styled from "styled-components";
 
 export const StyledPriceChart = styled.div`
-  width: ${(props) => (props.width < 602 ? 416 : props.width / 2.5)}px;
-  margin-right: 23px;
+  width: calc(50% - 12px);
+  margin-right: 12px;
   background: ${(props) => props.theme.main};
   border-radius: 5px;
-`;
-
-export const CarouselPriceChart = styled.div`
-  max-width: 416px;
-  max-height: 225px;
-  background: ${(props) => props.theme.main};
-  border-radius: 5px;
-  @media (max-width: 602px) {
-    background: ${(props) => props.theme.inner};
-  }
-`;
-
-export const LineChartContainer = styled.div`
-  max-width: 326px;
-  max-height: 147px;
-  margin-left: 30px;
-  margin-right: 30px;
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 `;
 
 export const OverviewInfo = styled.div`
@@ -35,7 +20,21 @@ export const OverviewInfo = styled.div`
     font-size: 22px;
     font-weight: 700;
   }
-  @media (max-width: 588px) {
-    margin-left: 35px;
+`;
+
+export const CarouselPriceChart = styled.div`
+  background: ${(props) => props.theme.main};
+  border-radius: 5px;
+  @media (max-width: 602px) {
+    background: ${(props) => props.theme.inner};
+    width: 100%;
   }
 `;
+
+export const LineChartContainer = styled.div`
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 12px;
+`;
+

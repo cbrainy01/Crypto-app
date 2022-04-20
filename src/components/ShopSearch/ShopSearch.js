@@ -3,10 +3,7 @@ import debounce from "lodash.debounce";
 import { useSelector, useDispatch } from "react-redux";
 import { SearchInput } from "components/CoinShop/CoinShop.styles";
 import {
-  SearchResults,
   Result,
-  Loading,
-  ResultLink,
   InputField,
 } from "components/CoinSearch/CoinSearch.styles";
 import {
@@ -14,6 +11,7 @@ import {
   getShopQueryMatches,
 } from "store/shopSearch/actions";
 import { setDisplayData, validateInputs } from "store/shopForm/actions";
+import { ShopLoading, ShopSearchResults } from "./ShopSearch.styles";
 
 function ShopSearch() {
   const dispatch = useDispatch();
@@ -35,7 +33,6 @@ function ShopSearch() {
     inputField.current.value = "";
     dispatch(shopSearchCleanup());
   };
-
   return (
     <SearchInput>
       <InputField
@@ -43,26 +40,23 @@ function ShopSearch() {
         onChange={debounce(handleChange, 150)}
         placeholder="Search coin"
       />
-      {isLoading ? (
-        <Loading>...Loading</Loading>
-      ) : (
-        <SearchResults>
-          {searchResults?.map((result) => {
-            return (
-              <Result
-                key={result.id}
-                onClick={() => {
-                  dispatch(setDisplayData(result));
-                  dispatch(validateInputs());
-                  cleanupSearch();
-                }}
-              >
-                {result.name}
-              </Result>
-            );
-          })}
-        </SearchResults>
-      )}
+      {isLoading && <ShopLoading>...Loading</ShopLoading>}
+      <ShopSearchResults>
+        {searchResults?.map((result) => {
+          return (
+            <Result
+              key={result.id}
+              onClick={() => {
+                dispatch(setDisplayData(result));
+                dispatch(validateInputs());
+                cleanupSearch();
+              }}
+            >
+              {result.name}
+            </Result>
+          );
+        })}
+      </ShopSearchResults>
     </SearchInput>
   );
 }

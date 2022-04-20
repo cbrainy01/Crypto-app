@@ -1,6 +1,6 @@
 import React from "react";
 import { PriceChart, VolumeChart } from "components";
-import Carousel from "react-elastic-carousel";
+import Carousel, { consts } from "react-elastic-carousel";
 import { useSelector } from "react-redux";
 import { CarouselComponent } from "components/VolumeChart/VolumeChart.styles";
 import { useWindowSize as useWindowSizeD } from "@react-hook/window-size";
@@ -19,32 +19,23 @@ const breakPoints = [
 export function BitcoinOverview() {
   const [width] = useWindowSizeD({ wait: 200 });
 
-  const timeSpan = useSelector((state) => state.universalVariables.timeSpan)
-  
+  const timeSpan = useSelector((state) => state.universalVariables.timeSpan);
+
   return (
     <StyledBitcoinOverview>
       <YourOverview>Your overview</YourOverview>
       <ChartContainer>
-        {width > 602 ?
-      <>
-      <PriceChart
-            timeSpan={timeSpan}
-          />
-          <VolumeChart
-            timeSpan={timeSpan}
-          />
-      </>
-      :
+        {width > 602 ? (
+          <>
+            <PriceChart timeSpan={timeSpan} />
+            <VolumeChart timeSpan={timeSpan} />
+          </>
+        ) : (
           <CarouselComponent breakPoints={breakPoints}>
-          <PriceChart
-            timeSpan={timeSpan}
-          />
-          <VolumeChart
-            timeSpan={timeSpan}
-          />
+            <PriceChart timeSpan={timeSpan} />
+            <VolumeChart timeSpan={timeSpan} />
           </CarouselComponent>
-      
-      }
+        )}
       </ChartContainer>
     </StyledBitcoinOverview>
   );

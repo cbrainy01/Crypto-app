@@ -15,23 +15,20 @@ export const InputField = styled.input`
 `;
 
 export const SearchResults = styled.div`
-  background: #2c2f36;
+  background: ${(props) => props.theme.inner};
   display: flex;
   flex-direction: column;
   position: absolute;
   border-radius: 6px;
   overflow: hidden;
   z-index: 4100;
-  margin-top: 5px;
+  margin-top: 27px;
 `;
 
 export const Loading = styled.div`
-  margin-top: 5px;
-  &:hover {
-    opacity: 0.5;
-    background: ${(props) => props.theme.main};
-  }
- 
+  background: ${(props) => props.theme.inner};
+  position: absolute;
+  margin-top: 27px;
 `;
 
 export const ResultLink = styled(Link)`

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createDarkGradient, startDate, getPreviousDates } from "utils";
+import { createDarkGradient, startDate, getPreviousDates, createLightGradient } from "utils";
 import {
   GET_PRICE_CHART_DATA_SUCCESS,
   GET_PRICE_CHART_DATA_PENDING,
@@ -13,6 +13,7 @@ export const getPriceChartData =
 
       const state = getState();
       const currency = state.universalVariables.currency
+      const isBlacked = state.universalVariables.isBlacked
 
       const response = await axios(
         `https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=${currency}&days=${span}&interval=daily`
@@ -29,8 +30,8 @@ export const getPriceChartData =
           datasets: [
             {
               data: priceData,
-              borderColor: "#00FF5F8F",
-              backgroundColor: createDarkGradient(chart.ctx),
+              borderColor: isBlacked ? "#00FF5F8F" : "#2172E5",
+              backgroundColor: isBlacked ? createDarkGradient(chart.ctx) : createLightGradient(chart.ctx),
               fill: {
                 target: "origin",
               },

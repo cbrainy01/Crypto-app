@@ -6,7 +6,7 @@ export default function renderPercentChange(n) {
   const num = numeral(n).format("0.00");
   if (num >= 0) {
     return (
-      <div style={{ color: "green" }}>
+      <div style={{ color: "#00FF5F8F" }}>
         <img src={Uptick} alt="uptick" /> {Math.abs(num)}%
       </div>
     );

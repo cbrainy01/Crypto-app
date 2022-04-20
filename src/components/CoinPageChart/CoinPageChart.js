@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Line } from "react-chartjs-2";
-import { getPreviousHours } from "utils";
+import { createDarkGradient, createLightGradient, getPreviousHours } from "utils";
 import { useSelector } from "react-redux";
 import CurrencyExchange from "components/CurrencyExchange";
 import {
@@ -23,18 +23,11 @@ export function CoinPageChart(props) {
   const labels = getPreviousHours(timespan).reverse();
 
   const currency = useSelector( (state) => state.universalVariables.currency )
+  const isBlacked = useSelector( (state) => state.universalVariables.isBlacked )
 
   const handleTimespanChange = (e) => {
     setTimespan(e.target.value);
   };
-
-  function createGradient(ctx) {
-    const gradient = ctx.createLinearGradient(0, 0, 0, 100);
-    gradient.addColorStop(0, "#00FF5F8F");
-    gradient.addColorStop(0.15, "#FFFFFF32");
-    gradient.addColorStop(1, "#00FF5F00 ");
-    return gradient;
-  }
 
   useEffect(() => {
     const chart = chartRef.current;
@@ -44,8 +37,8 @@ export function CoinPageChart(props) {
         datasets: [
           {
             data: lineData,
-            borderColor: "gray",
-            backgroundColor: createGradient(chart.ctx),
+            borderColor: isBlacked ? "gray" : "white",
+            backgroundColor: isBlacked ? createDarkGradient(chart.ctx) : createLightGradient(chart.ctx),
             fill: { target: "origin", },
           },
         ],

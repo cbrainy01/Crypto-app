@@ -24,6 +24,8 @@ export const SearchIcon = styled(SVG)`
   cursor: pointer;
   height: 15px;
   width: 15px;
+  margin-bottom: 15px;
+  position: absolute;
   & path {
     fill: ${(props) => (props.selected ? "#00FF5F" : "")};
   }
@@ -63,4 +65,11 @@ export const NavIcon = styled.div`
     font-size: 9px;
     font-weight: 650;
   }
+`;
+
+export const SearchWord = styled.p`
+  font-size: 9px;
+  font-weight: 650;
+  position: absolute;
+  margin-top: 25px;
 `;

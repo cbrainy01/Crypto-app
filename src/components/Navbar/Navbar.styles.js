@@ -132,11 +132,15 @@ export const DropdownContainer = styled.div`
     color: limegreen;
     display: flex;
     justify-content: center;
+    align-items: center;
     font-weight: 600;
   }
-  span p {
-    margin-top: 1.5px;
-  }
+`;
+
+export const CurrencyDropdown = styled.div`
+  display: flex;
+  width: 26px;
+  margin-left: 6px;
 `;
 
 export const ThemeToggleContainer = styled.div`
@@ -153,9 +157,5 @@ export const ThemeToggleContainer = styled.div`
   }
 `;
 
-export const CurrencyDropdown = styled.div`
-  display: flex;
-  width: 26px;
-  margin-left: 6px;
-`;
+
 

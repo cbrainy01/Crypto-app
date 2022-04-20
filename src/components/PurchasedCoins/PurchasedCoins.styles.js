@@ -3,6 +3,12 @@ import styled from "styled-components";
 export const StyledPurchasedCoins = styled.div`
 `;
 
+export const YourStatisticsHeader = styled.div`
+  display: flex;
+  margin-bottom: 25px;
+  justify-content: start;
+`;
+
 export const StatisticsContainer = styled.div`
   max-width: 857px;
   display: flex;
@@ -13,8 +19,3 @@ export const StatisticsContainer = styled.div`
   flex-wrap: wrap;
 `;
 
-export const YourStatisticsHeader = styled.div`
-  display: flex;
-  margin-bottom: 25px;
-  justify-content: start;
-`;

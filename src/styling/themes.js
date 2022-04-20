@@ -8,6 +8,6 @@ export const darkTheme = {
 export const lightTheme = {
     main: "#FFFFFF", 
     color: "black", 
-    inner: "grey", 
+    inner: "#ebeae6", 
     secondary: "#FCFCFC",
 }

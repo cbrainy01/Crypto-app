@@ -14,6 +14,7 @@ import {
   SearchIcon,
   PortfolioIcon,
   StyledMobileNavBottom,
+  SearchWord,
 } from "./MobileNavBottom.styles";
 
 function MobileNavBottom() {
@@ -65,7 +66,7 @@ function MobileNavBottom() {
             src={Search}
             alt="search button"
           />
-          <div>Search</div>
+          <SearchWord>Search</SearchWord>
         </NavIcon>
         {searchIsActive ? <MobileSearch /> : ""}
       </IconsContainer>

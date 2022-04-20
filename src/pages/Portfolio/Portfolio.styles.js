@@ -6,17 +6,21 @@ export const StyledPortfolioPage = styled.div`
 export const AssetButtonContainer = styled.div`
     display: flex;
     justify-content: center;
+    align-items: center;
     margin: 37px auto 17px auto;
 `
 
 export const AssetButtonWrap = styled.div`
     background: #06D554;
-    max-width: 253px;
-    padding: 12px 101px;
+    width: 253px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-radius: 6px;
     cursor: pointer;
-    @media (max-width: 292px) {
-        padding: 10px 50px;
+    @media (max-width: 602px) {
+        width: 100%;
     }
 `
 

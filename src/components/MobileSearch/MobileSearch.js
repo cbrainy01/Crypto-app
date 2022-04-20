@@ -14,7 +14,7 @@ import {
   MobileSearchBackground,
   MobileSearchResult,
   MobileSearchResults,
-  WhiteCross,
+  CrossIcon,
 } from "./MobileSearch.styles";
 
 function MobileSearch() {
@@ -51,7 +51,7 @@ function MobileSearch() {
   return (
     <MobileSearchBackground>
       <CloseContainer>
-        <WhiteCross onClick={handleSearchClose} src={Cross} />
+        <CrossIcon onClick={handleSearchClose} src={Cross} />
         <p>Close</p>
       </CloseContainer>
       <MobileInputContainer>

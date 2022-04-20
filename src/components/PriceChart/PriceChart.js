@@ -54,6 +54,64 @@ export function PriceChart(props) {
     dispatch(getPriceChartData(span, chartRef, timeSpan));
   }, [currency, props.timeSpan]);
 
+  const lineChart = (
+    <Line
+      ref={chartRef}
+      data={priceDatapoints || { datasets: [] }}
+      options={{
+        elements: {
+          point: {
+            radius: 0,
+            hitRadius: 8,
+            backgroundColor: "#00FF5F8F",
+          },
+          line: { tension: 0.2 },
+        },
+        scales: {
+          y: {
+            display: false,
+            grid: {
+              display: false,
+            },
+            ticks: {
+              callback: function (value, index, ticks) {
+                return;
+              },
+            },
+          },
+          x: {
+            grid: {
+              display: false,
+            },
+            ticks: {
+              callback: function (val, index) {
+                const day = this.getLabelForValue(val).split("-")[1];
+                return day;
+              },
+              font: {
+                size: 8,
+              },
+              maxRotation: 0,
+            },
+          },
+        },
+        plugins: {
+          tooltip: {
+            callbacks: {
+              title: function (context) {
+                return `Price: ${currencySymbol}${context[0].formattedValue}`;
+              },
+              label: function (context) {
+                return `date: ${context.label}`;
+              },
+            },
+          },
+          legend: { display: false },
+        },
+      }}
+    />
+  );
+
   if (error) {
     return (
       <StyledPriceChart>
@@ -65,7 +123,7 @@ export function PriceChart(props) {
   return (
     <>
       {width > 602 ? (
-        <StyledPriceChart width={width} height={height}>
+        <StyledPriceChart>
           {isLoading && <LoaderComponent />}
           <OverviewInfo>
             <p>BTC</p>
@@ -75,66 +133,10 @@ export function PriceChart(props) {
             </div>
             <p>{wordedDate(new Date())}</p>
           </OverviewInfo>
-          <LineChartContainer>
-            <Line
-              ref={chartRef}
-              data={priceDatapoints || { datasets: [] }}
-              options={{
-                elements: {
-                  point: {
-                    radius: 0,
-                    hitRadius: 8,
-                    backgroundColor: "#00FF5F8F",
-                  },
-                  line: { tension: 0.2 },
-                },
-                scales: {
-                  y: {
-                    display: false,
-                    grid: {
-                      display: false,
-                    },
-                    ticks: {
-                      callback: function (value, index, ticks) {
-                        return;
-                      },
-                    },
-                  },
-                  x: {
-                    grid: {
-                      display: false,
-                    },
-                    ticks: {
-                      callback: function (val, index) {
-                        const day = this.getLabelForValue(val).split("-")[1];
-                        return day;
-                      },
-                      font: {
-                        size: 8,
-                      },
-                      maxRotation: 0,
-                    },
-                  },
-                },
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      title: function (context) {
-                        return `Price: ${currencySymbol}${context[0].formattedValue}`;
-                      },
-                      label: function (context) {
-                        return `date: ${context.label}`;
-                      },
-                    },
-                  },
-                  legend: { display: false },
-                },
-              }}
-            />
-          </LineChartContainer>
+          <LineChartContainer>{lineChart}</LineChartContainer>
         </StyledPriceChart>
       ) : (
-        <CarouselPriceChart width={width} height={height}>
+        <CarouselPriceChart>
           {isLoading && <LoaderComponent />}
           <OverviewInfo>
             <p>BTC</p>
@@ -144,63 +146,7 @@ export function PriceChart(props) {
             </div>
             <p>{wordedDate(new Date())}</p>
           </OverviewInfo>
-          <LineChartContainer>
-            <Line
-              ref={chartRef}
-              data={priceDatapoints || { datasets: [] }}
-              options={{
-                elements: {
-                  point: {
-                    radius: 0,
-                    hitRadius: 8,
-                    backgroundColor: "#00FF5F8F",
-                  },
-                  line: { tension: 0.2 },
-                },
-                scales: {
-                  y: {
-                    display: false,
-                    grid: {
-                      display: false,
-                    },
-                    ticks: {
-                      callback: function (value, index, ticks) {
-                        return;
-                      },
-                    },
-                  },
-                  x: {
-                    grid: {
-                      display: false,
-                    },
-                    ticks: {
-                      callback: function (val, index) {
-                        const day = this.getLabelForValue(val).split("-")[1];
-                        return day;
-                      },
-                      font: {
-                        size: 8,
-                      },
-                      maxRotation: 0,
-                    },
-                  },
-                },
-                plugins: {
-                  tooltip: {
-                    callbacks: {
-                      title: function (context) {
-                        return `Price: ${currencySymbol}${context[0].formattedValue}`;
-                      },
-                      label: function (context) {
-                        return `date: ${context.label}`;
-                      },
-                    },
-                  },
-                  legend: { display: false },
-                },
-              }}
-            />
-          </LineChartContainer>
+          <LineChartContainer>{lineChart}</LineChartContainer>
         </CarouselPriceChart>
       )}
     </>

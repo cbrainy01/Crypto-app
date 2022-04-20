@@ -69,13 +69,13 @@ export const MobileSearchResult = styled(Link)`
   }
 `;
 
-export const WhiteCross = styled(SVG)`
+export const CrossIcon = styled(SVG)`
   cursor: pointer;
   height: 18px;
   width: 18px;
   align-self: center;
   & path {
-    fill: white;
+    fill: ${(props) => props.theme.color};
   }
   margin-right: 14px;
 `;

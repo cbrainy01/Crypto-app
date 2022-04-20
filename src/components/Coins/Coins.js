@@ -35,17 +35,7 @@ export function Coins() {
   const [sortDirection, setSortDirection] = useState("desc");
   const [sortType, setSortType] = useState("volume");
 
-  const sortCoins = () => {
-    if (sortDirection === "asc") {
-      return coinsData.sort((a, b) => a[sortType] - b[sortType]);
-    } else if (sortDirection === "desc") {
-      return coinsData.sort((a, b) => b[sortType] - a[sortType]);
-    } else {
-      return coinsData;
-    }
-  };
-  
-  const currency = useSelector( (state) => state.universalVariables.currency )
+  const currency = useSelector((state) => state.universalVariables.currency);
   const isLoading = useSelector((state) => state.coinsData.isLoading);
   const error = useSelector((state) => state.coinsData.error);
   const hasMore = useSelector((state) => state.coinsData.hasMore);
@@ -53,7 +43,9 @@ export function Coins() {
   const currentPage = useSelector((state) => state.coinsData.data?.currentPage);
 
   useEffect(() => {
-    if(coinsData.length >= 30) {return}
+    if (coinsData.length >= 30) {
+      return;
+    }
     dispatch(getCoinsData());
   }, [currency]);
 
@@ -63,47 +55,28 @@ export function Coins() {
     }, 500);
   };
 
-  const handleSortChange = (e) => {
-    const att = e.target.getAttribute("data-value");
-    setSortType(att);
-  };
-
-  if(error) {return <ErrorDisplay errorMessage={error.message}/>}
+  if (error) {
+    return <ErrorDisplay errorMessage={error.message} />;
+  }
 
   return (
     <CoinsContainer>
-        <SortingContainer>
-          <SortControl>
-            <img src={topDownArrow} alt="ethereum" />
-            <RankingSort>Top/bot #</RankingSort>
-            <SortBy>By Volume</SortBy>
-            <img src={ArrowDown} alt="arrowdown" />
-          </SortControl>
-          <DisplayCountControl>
-            <div>Show: /select tag/</div>
-            <div>PAGE</div>
-            <img src={ArrowLeft} />
-            <div>/current page/</div>
-            <img src={ArrowRight} />
-          </DisplayCountControl>
-        </SortingContainer>
-        <CoinsBox>
-            <InfiniteScroll
-              dataLength={coinsData.length}
-              next={fetchMoreCoins}
-              hasMore={hasMore}
-              loader={<h3>Loading...</h3>}
-              scrollThreshold={1.0}
-            >
-              <ScrollContainer>
-                <TableHead>
+      <CoinsBox>
+        <InfiniteScroll
+          dataLength={coinsData.length}
+          next={fetchMoreCoins}
+          hasMore={hasMore}
+          loader={<h3>Loading...</h3>}
+          scrollThreshold={1.0}
+        >
+          <ScrollContainer>
+            <TableHead>
               <IndexHeader>#</IndexHeader>
               <IdHeader>
                 <span>Name</span>
                 <TornadoIcon
                   alt="sortname"
                   data-value={"name"}
-                  onClick={handleSortChange}
                   src={TornadoSort}
                 />
               </IdHeader>
@@ -112,7 +85,6 @@ export function Coins() {
                 <TornadoIcon
                   alt="sortprice"
                   data-value={"current_price"}
-                  onClick={handleSortChange}
                   src={TornadoSort}
                 />
               </PriceHeader>
@@ -121,7 +93,6 @@ export function Coins() {
                 <TornadoIcon
                   alt="sorthour"
                   data-value={"price_change_percentage_1h_in_currency"}
-                  onClick={handleSortChange}
                   src={TornadoSort}
                 />
               </HourHeader>
@@ -130,7 +101,6 @@ export function Coins() {
                 <TornadoIcon
                   alt="sortday"
                   data-value={"price_change_percentage_24h_in_currency"}
-                  onClick={handleSortChange}
                   src={TornadoSort}
                 />
               </DayHeader>
@@ -139,25 +109,24 @@ export function Coins() {
                 <TornadoIcon
                   alt="sortweek"
                   data-value={"price_change_percentage_7d_in_currency"}
-                  onClick={handleSortChange}
                   src={TornadoSort}
                 />
               </WeekHeader>
               <VolumeHeader>24h Vol / Market Cap</VolumeHeader>
               <CirculatingHeader>Circulating /Total Sup</CirculatingHeader>
               <SparklineHeader>Last 7d</SparklineHeader>
-            </TableHead> 
-              {coinsData?.map((coinData, index) => (
-                <Coin
-                  key={`${coinData.id} +${Math.random(20)}`}
-                  coinData={coinData}
-                  index={index + 1}
-                  currency={currency}
-                />
-              ))}
-              </ScrollContainer>
-            </InfiniteScroll>
-        </CoinsBox>
+            </TableHead>
+            {coinsData?.map((coinData, index) => (
+              <Coin
+                key={`${coinData.id} +${Math.random(20)}`}
+                coinData={coinData}
+                index={index + 1}
+                currency={currency}
+              />
+            ))}
+          </ScrollContainer>
+        </InfiniteScroll>
+      </CoinsBox>
     </CoinsContainer>
   );
 }
