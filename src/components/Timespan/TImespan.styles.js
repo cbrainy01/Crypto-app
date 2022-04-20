@@ -25,6 +25,8 @@ export const TimespanContainer = styled.div`
   @media (max-width: 602px) {
     background: ${(props) => props.theme.inner};
   }
+
+
 `;
 
 export const TimespanButton = styled.div`
