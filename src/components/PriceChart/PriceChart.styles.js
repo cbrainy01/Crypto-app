@@ -11,8 +11,8 @@ export const StyledPriceChart = styled.div`
 `;
 
 export const OverviewInfo = styled.div`
-  margin-left: 10px;
-  margin-top: 8px;
+  padding-left: 10px;
+  padding-top: 8px;
   p {
     font-size: 11px;
   }
@@ -33,8 +33,8 @@ export const CarouselPriceChart = styled.div`
 
 export const LineChartContainer = styled.div`
   width: 100%;
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
   padding-bottom: 12px;
 `;
 
