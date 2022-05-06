@@ -16,8 +16,8 @@ export const StyledVolumeChart = styled.div`
 `;
 
 export const OverviewInfo = styled.div`
-  margin-left: 10px;
-  margin-top: 8px;
+  padding-left: 10px;
+  padding-top: 8px;
   p {
     font-size: 11px;
   }
@@ -38,8 +38,8 @@ export const CarouselVolumeChart = styled.div`
 `;
 
 export const BarChartContainer = styled.div`
-  padding-left: 30px;
-  padding-right: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
   width: 100%;
   padding-bottom: 12px;
 `;
