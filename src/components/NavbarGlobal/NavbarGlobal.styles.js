@@ -70,7 +70,6 @@ export const MarketData3 = styled.div`
         height: 2px;
         margin auto 0px auto 3px;
     }
-
 `;
 
 export const MarketData4 = styled.div`

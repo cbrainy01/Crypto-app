@@ -14,6 +14,8 @@ function Portfolio() {
   const dispatch = useDispatch();
   const showCoinShop = useSelector((state) => state.portfolioInfo.showCoinShop);
 
+  const purchasedCs = useSelector((state) => state.portfolioInfo.purchasedCoins);
+  console.log("portfolioINfo: ", purchasedCs)
   return (
     <StyledPortfolioPage>
       <AssetButtonContainer>
