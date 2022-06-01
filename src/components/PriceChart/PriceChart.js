@@ -49,7 +49,7 @@ export function PriceChart(props) {
     (state) => state.priceData.data?.priceDatapoints
   );
   const todaysPrice = useSelector((state) => state.priceData.data?.todaysPrice);
-
+  
   useEffect(() => {
     dispatch(getPriceChartData(span, chartRef, timeSpan));
   }, [currency, props.timeSpan]);

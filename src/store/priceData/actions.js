@@ -21,7 +21,7 @@ export const getPriceChartData =
       const priceData = response.data.prices
         .map((price) => price[1])
         .slice(1, span + 1);
-      const todaysPrice = response.data.prices[0][1];
+      const todaysPrice = response.data.prices[priceData.length - 1][1];
       const chart = chartRef?.current;
       let priceDatapoints = { datasets: [] };
       if (chart) {
